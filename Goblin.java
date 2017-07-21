@@ -30,7 +30,9 @@ public class Goblin extends Actor {
 		//approach(PC);
 		
 		if (xPos == PC.xPos && yPos == PC.yPos){
-			pushBack(PC);
+			attack(PC);
+			GM.setMessage("The goblin hits you!");
+			pushBack(this);
 			}
 		
 
@@ -84,6 +86,12 @@ public class Goblin extends Actor {
 			}
 			
 		} //else this.moveRandom();
+	
+	//Attack
+	void attack(Player PC){
+		int harm = 1;
+		PC.damage(harm);
+		}
 	
 	
 	//Damage 

@@ -139,33 +139,19 @@ void trainStat (String desStat){
 }
 
 //Attack
-
-//TODO fix problems - always announces "You hurt the generic actor" 
-//void attack(int harm, Actor mob){
-//	Random rand = new Random();
-//	int D20 = rand.nextInt(20) + 1;
-//	int luckFactor = D20 + vision;
-//	
-//	if ((xPos == mob.xPos) && (yPos == mob.yPos) && (luckFactor >= 20)){
-//		mob.damage(harm);
-//		message = "You hurt the " + mob.name + "!";
-//	} else if ((xPos == mob.xPos) && (yPos == mob.yPos) && (luckFactor < 20)){
-//		message = "You miss the " + mob.name + ".";
-//	}
-//}
-
-
-//TODO get generic version running. Hopefully I'll be able to introduce more than just goblins!
 void attack(Actor mob){
 	Random rand = new Random();
 	int D20 = rand.nextInt(20) + 1;
 	int luckFactor = D20 + vision;
-	int harm = 1;
+	int harm;
+	if (strength/5 > 1){
+		harm = strength/5;
+	} else harm = 1;
 	
 	if ((xPos == mob.xPos) && (yPos == mob.yPos) && (luckFactor > 5)){
 		mob.damage(harm);
 		mob.pushBack(this);
-		GM.setMessage("You hurt the " + mob.name + "!");
+		GM.setMessage("You hit the " + mob.name + "!");
 	} else if ((xPos == mob.xPos) && (yPos == mob.yPos) && (luckFactor < 5)){
 		mob.pushBack(this);
 		GM.setMessage("You miss the " + mob.name + ".");
