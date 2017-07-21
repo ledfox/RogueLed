@@ -7,8 +7,16 @@ Added Player Class
 Added Boulder Class
 Core functionality is stable.
 
+Version 0.0.1
+Added Actor Class
+Added Announcer Class
+Added DartTrap Class
+Added Goblin Class
+Core functionality is stable
+
 Development path:
-Needs polymorphism
+Needs polymorphism (Integrate more actors as sub)
 Needs more robust features (Other actors)
 Needs inventory
-Should be ready for 0.0.1 update
+Needs map outside of main class
+Needs levels
