@@ -1,6 +1,7 @@
 package primary;
 
 
+import java.util.ArrayList;
 import java.util.Random;
 
 //Imported modules to generate gamespace
@@ -37,92 +38,15 @@ public class ObjectRogueTinker {
   	Random rand = new Random();
   	int randX = rand.nextInt(45) + 3;
   	int randY = rand.nextInt(20) + 3;
-  	
-  //Generates Boulders
-  	
-   	Boulder rock1 = new Boulder(65,7);
-	Boulder rock2 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);	
-	Boulder rock3 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	Boulder rock4 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	Boulder rock5 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	Boulder rock6 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	Boulder rock7 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	Boulder rock8 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	Boulder rock9 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	Boulder rock10 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	Boulder rock11 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	Boulder rock12 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	Boulder rock13 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	Boulder rock14 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	Boulder rock15 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	Boulder rock16 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	Boulder rock17 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	Boulder rock18 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	Boulder rock19 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	Boulder rock20 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	Boulder rock21 = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	
-	
+  		
 	//Generates BoulderList
-	Boulder[] boulderList = {rock1, rock2, rock3, rock4, rock5, rock6, rock7, rock8, rock9,
-			rock10, rock11, rock12, rock13, rock14, rock15, rock16, rock17, rock18, rock19,
-			rock17, rock21};
-	
-	//Generate dart traps
-	DartTrap trap1 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	DartTrap trap2 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	DartTrap trap3 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	DartTrap trap4 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	DartTrap trap5 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	DartTrap trap6 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	DartTrap trap7 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	DartTrap trap8 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	DartTrap trap9 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	DartTrap trap10 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	DartTrap trap11 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	DartTrap trap12 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	DartTrap trap13 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	DartTrap trap14 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	DartTrap trap15 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	DartTrap trap16 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	DartTrap trap17 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	DartTrap trap18 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	DartTrap trap19 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-	DartTrap trap20 = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
+	ArrayList<Boulder> boulderList = new ArrayList<Boulder>();
 	
 	//Generates TrapList
-	DartTrap[] trapList = {trap1, trap2, trap3, trap4, trap5, trap6, trap7, trap8, trap9,
-			trap10, trap11, trap12, trap13, trap14, trap15, trap16, trap17, trap18, trap19,
-			trap20};
-	
-	//Generate goblins
-	
-	
-	Goblin gob1 = new Goblin(3,3,'g', GM, "UrSatz");
-	Goblin gob2 = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-	Goblin gob3 = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-	Goblin gob4 = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-	Goblin gob5 = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-	Goblin gob6 = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-	Goblin gob7 = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-	Goblin gob8 = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-	Goblin gob9 = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-	Goblin gob10= new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-	Goblin gob11= new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-	Goblin gob12= new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-	Goblin gob13= new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-	Goblin gob14= new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-	Goblin gob15= new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-	Goblin gob16= new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-	Goblin gob17= new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-	Goblin gob18= new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-	Goblin gob19= new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-	Goblin gob20= new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-	
-	
+	ArrayList<DartTrap> trapList = new ArrayList<DartTrap>();
 	
 	//Generate goblinList
-	Goblin[] gobList = {gob1, gob2, gob3, gob4, gob5};
+	ArrayList<Goblin> gobList = new ArrayList<Goblin>();
 	
 	
 	public static void main(String[] args) {
@@ -139,7 +63,7 @@ public class ObjectRogueTinker {
 		csi.cls();
 		
 		//Generate Map
-		genMap();
+		Map.drawMap(csi);
 		
 		String statmes = "Welcome";
 		
@@ -154,14 +78,24 @@ public class ObjectRogueTinker {
 		PC.setHP(PC.maxHealth);
 		
 		//Generate a bunch of goblins all at once
+		for(int i = 0; i < 20; i++){
+			Goblin gob = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
+		gobList.add(gob);	
+		}
 		
-		//Goblin gob2 = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
+		//Generate a bunch of boulders all at once
+		for(int i = 0; i < 100; i++){
+			Boulder rock = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
+			
+			boulderList.add(rock);	
+			}
 		
-//		for(int i = 0; i < 20; i++){
-//			Goblin gob = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-//			
-//			
-//		}
+		//Generate a bunch of traps all at once
+		for(int i = 0; i < 20; i++){
+			DartTrap trap = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
+			
+			trapList.add(trap);	
+			}
 				
 		//This is cool - allows while loop to run. Once "Exit" is true, game quits.
 		boolean exit = false;
@@ -192,14 +126,8 @@ public class ObjectRogueTinker {
 					csi.print(gob.xPos, gob.yPos, gob.symbol, CSIColor.GREEN);
 				}
 				
-				//Displays statmes
-				csi.print(1, 21, statmes, CSIColor.BABY_BLUE );
-					
-				//Displays player statistics
-				csi.print(1, 22, "Strength " + PC.strength + "  " + "Vision " + PC.vision + "   " + "Health " + PC.currentHealth + "/" + PC.maxHealth, CSIColor.BABY_BLUE);
-				
-				//Prints the number of turns passed
-				csi.print(1, 23, "Turns " + timeStr, CSIColor.BABY_BLUE);
+				//Setup misc. map elements
+				Map.setUp(csi, statmes, PC, timeStr);
 				
 				csi.refresh();
 				int key = csi.inkey().code;
@@ -259,6 +187,7 @@ public class ObjectRogueTinker {
 					
 				}
 				
+				//essentially the ".run" mechanic
 				if (timestep = true){
 					for (Boulder rock : boulderList){
 					rock.checkPush(GM, PC); }
@@ -275,6 +204,7 @@ public class ObjectRogueTinker {
 						
 						for(DartTrap trap: trapList)
 						trap.checkTrigger(GM, gob);
+						PC.checkXP();
 					}
 					
 					statmes = GM.getMessage();
@@ -302,34 +232,5 @@ public class ObjectRogueTinker {
 					
 				}
 	
-	//Methods
 
-	
-	//GenMap should generate a basic map to play on
-	void genMap() {
-		
-		//Hardcoded basic map
-		csi.print(1,  2, "##############################################################################", ConsoleSystemInterface.GRAY);
-		csi.print(1,  3, "#............................................................................#", ConsoleSystemInterface.GRAY);
-		csi.print(1,  4, "#............................................................................#", ConsoleSystemInterface.GRAY);
-		csi.print(1,  5, "#............................................................................#", ConsoleSystemInterface.GRAY);
-		csi.print(1,  6, "#............................................................................#", ConsoleSystemInterface.GRAY);
-		csi.print(1,  7, "#............................................................................#", ConsoleSystemInterface.GRAY);
-		csi.print(1,  8, "#............................................................................#", ConsoleSystemInterface.GRAY);
-		csi.print(1,  9, "#............................................................................#", ConsoleSystemInterface.GRAY);
-		csi.print(1, 10, "#............................................................................#", ConsoleSystemInterface.GRAY);
-		csi.print(1, 11, "#............................................................................#", ConsoleSystemInterface.GRAY);
-		csi.print(1, 12, "#............................................................................#", ConsoleSystemInterface.GRAY);
-		csi.print(1, 13, "#............................................................................#", ConsoleSystemInterface.GRAY);
-		csi.print(1, 14, "#............................................................................#", ConsoleSystemInterface.GRAY);
-		csi.print(1, 15, "#............................................................................#", ConsoleSystemInterface.GRAY);
-		csi.print(1, 16, "#............................................................................#", ConsoleSystemInterface.GRAY);
-		csi.print(1, 17, "#............................................................................#", ConsoleSystemInterface.GRAY);
-		csi.print(1, 18, "#............................................................................#", ConsoleSystemInterface.GRAY);
-		csi.print(1, 19, "#............................................................................#", ConsoleSystemInterface.GRAY);
-		csi.print(1, 20, "##############################################################################", ConsoleSystemInterface.GRAY);
-		
-	}
-	
-	
 	}

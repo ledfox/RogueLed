@@ -19,6 +19,9 @@ public class Player {
 	
 	public Announcer GM;
 
+	public int experience = 0;
+	
+	
 //Player Methods
     
     //Object Movement
@@ -119,6 +122,8 @@ void rollStat (String desStat){
 void trainStat (String desStat){
 	Random rand = new Random();
 	int d100 = rand.nextInt(100) + 1;
+	int d20 = rand.nextInt(20) + 1;
+	int d50 = rand.nextInt(50) + 1;
 	
 	switch(desStat){
 	case "Strength":
@@ -129,43 +134,63 @@ void trainStat (String desStat){
 		
 		
 	case "Vision":
+		if ((d50 - this.vision) > 5){
+			this.vision += 1;
+			GM.setMessage("You feel like a visionary!");
+		}
 	break;
 		
 	case "Health":
+		if ((d100 - this.maxHealth) > 50){
+			this.maxHealth += 5;
+			GM.setMessage("You feel more robust!");
+		}
+		
 	break;
 	
 	}
+}
+
+
+void gainXP(Actor mob){
+	
+	this.experience += mob.experience;
 	
 }
 
+void gainXP(int gain){
+	this.experience += gain;
+}
+
+void checkXP(){
+	if (this.experience >= 100){
+		gainLevel();
+	} 
+}
+
+void gainLevel(){
+	trainStat("Strength");
+	trainStat("Vision");
+	trainStat("Health");
+	this.experience = 0;
+	setHP(maxHealth);
+	GM.setMessage("You've gained a level! You feel fantastic!");
+}
+
 //Attack
-
-//TODO fix problems - always announces "You hurt the generic actor" 
-//void attack(int harm, Actor mob){
-//	Random rand = new Random();
-//	int D20 = rand.nextInt(20) + 1;
-//	int luckFactor = D20 + vision;
-//	
-//	if ((xPos == mob.xPos) && (yPos == mob.yPos) && (luckFactor >= 20)){
-//		mob.damage(harm);
-//		message = "You hurt the " + mob.name + "!";
-//	} else if ((xPos == mob.xPos) && (yPos == mob.yPos) && (luckFactor < 20)){
-//		message = "You miss the " + mob.name + ".";
-//	}
-//}
-
-
-//TODO get generic version running. Hopefully I'll be able to introduce more than just goblins!
 void attack(Actor mob){
 	Random rand = new Random();
 	int D20 = rand.nextInt(20) + 1;
 	int luckFactor = D20 + vision;
-	int harm = 1;
+	int harm;
+	if (strength/5 > 1){
+		harm = strength/5;
+	} else harm = 1;
 	
 	if ((xPos == mob.xPos) && (yPos == mob.yPos) && (luckFactor > 5)){
 		mob.damage(harm);
 		mob.pushBack(this);
-		GM.setMessage("You hurt the " + mob.name + "!");
+		GM.setMessage("You hit the " + mob.name + "!");
 	} else if ((xPos == mob.xPos) && (yPos == mob.yPos) && (luckFactor < 5)){
 		mob.pushBack(this);
 		GM.setMessage("You miss the " + mob.name + ".");

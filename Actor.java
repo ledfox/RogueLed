@@ -15,6 +15,8 @@ public class Actor {
 	String name = "generic actor";
 	
 	String direction = "None";
+
+	int experience = 1;
 	
     //Constructor
     
