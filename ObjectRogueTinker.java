@@ -201,20 +201,9 @@ public class ObjectRogueTinker {
 					}
 					
 					for (Goblin gob : gobList){
-						PC.attack(gob);
-						gob.decide(PC); 
+												
+						gob.run(GM, PC, wallList, boulderList, trapList);
 						
-						for (Wall wall: wallList){
-							wall.bounceActor(gob);
-						}
-						
-						for (Boulder rock: boulderList)
-						rock.bounceActor(gob);
-						
-						for(DartTrap trap: trapList)
-						trap.checkTrigger(GM, gob);
-						
-						PC.checkXP();
 					}
 					
 					statmes = GM.getMessage();

@@ -1,5 +1,7 @@
 package primary;
 
+import java.util.ArrayList;
+
 public class Goblin extends Actor {
 
 	public int health = 5;
@@ -92,6 +94,25 @@ public class Goblin extends Actor {
 			}
 			
 		} //else this.moveRandom();
+	
+	
+	void run(Announcer GM, Player PC, ArrayList<Wall> wallList, ArrayList<Boulder> boulderList, ArrayList<DartTrap> trapList){
+		PC.attack(this);
+		this.decide(PC); 
+		
+		for (Wall wall: wallList){
+			wall.bounceActor(this);
+		}
+		
+		for (Boulder rock: boulderList)
+		rock.bounceActor(this);
+		
+		for(DartTrap trap: trapList)
+		trap.checkTrigger(GM, this);
+		
+		PC.checkXP();
+	}
+	
 	
 	//Attack
 	void attack(Player PC){
