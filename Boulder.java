@@ -16,6 +16,8 @@ public class Boulder extends Actor {
     public char symbol = 'o';
     String message = "You push the boulder.";
     
+    int health = 1000;
+    
     //Constructor
     
     public Boulder(int a, int b, char c) {
@@ -102,6 +104,7 @@ public class Boulder extends Actor {
     void bounceActor(Actor mob){
 		if (mob.xPos == this.xPos && mob.yPos == this.yPos){
 			pushBack(mob);
+			mob.moveRandom();
 		}
 	}
 

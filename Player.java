@@ -21,9 +21,13 @@ public class Player {
 
 	public int experience = 0;
 	
-	public Armor armor;
-	public Weapon weapon;
-	public Bow bow;
+	public Armor armor = new Armor();
+	public Weapon weapon = new Weapon();
+	public Bow bow = new Bow();
+	
+	public int ingots = 0;
+	public int arrows = 0;
+	public int berries = 0;
 	
 	
 	
@@ -177,6 +181,7 @@ void gainLevel(){
 	trainStat("Strength");
 	trainStat("Vision");
 	trainStat("Health");
+	this.maxHealth += 3;
 	this.experience = 0;
 	setHP(maxHealth);
 	GM.setMessage("You've gained a level! You feel fantastic!");
@@ -228,6 +233,12 @@ void setHP(int value){
   	GM = vGM;
   }
 
-
+//Getters
+  
+  public void getPosition(){
+	  System.out.println("xPos " + xPos);
+	  System.out.println("yPos " + yPos);
+	  System.out.println("");
+  }
 
 }

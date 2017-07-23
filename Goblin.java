@@ -29,13 +29,25 @@ public class Goblin extends Actor {
 				PC.gainXP(experience);
 			}
 			depop();
-		} else {	
+			
+		}  if (health == 1) {	
 		
-			//Goblin will roam about IF its not dead
-			moveRandom();		
+			//Critically wounded goblins panic and flee
+			flee(PC);
+		
+		} else if (((xPos - PC.xPos) < 10) && ((yPos - PC.yPos) < 10)){
+		
+		//Goblin will approach PC IF its not dead
+		approach(PC);
+		
+		} else {
+		
+			//If they can't think of anything better to do, they'll move randomly
+			moveRandom();
+			
+			
 		}
 		
-		//approach(PC);
 		
 		if (xPos == PC.xPos && yPos == PC.yPos){
 			attack(PC);
@@ -48,21 +60,26 @@ public class Goblin extends Actor {
 		
 	}
 	
+	//move towards the player
 	void approach (Player PC){
 		
-			if ((PC.xPos < this.xPos)){
+		 if(PC.yPos < this.yPos){
 				this.moveNorth();
 				return;
-			
-			} if(PC.yPos < this.yPos) {
-				this.moveEast();
-				return;
-			} if (PC.xPos > this.xPos){
-				this.moveSouth();
-				return;
-			} if(PC.yPos > this.yPos){
+			}
+		
+			if ((PC.xPos < this.xPos)){
 				this.moveWest();
 				return;
+			
+			} if(PC.yPos > this.yPos) {
+				this.moveSouth();
+				return;
+				
+			} if (PC.xPos > this.xPos){
+				this.moveEast();
+				return;
+				
 			}
 			
 			
@@ -70,33 +87,32 @@ public class Goblin extends Actor {
 		}  //else this.moveRandom();
 	
 	
-	
+	//move away from the player
 	void flee (Player PC){
 		
-			if ((PC.xPos > this.xPos)){
-				this.moveNorth();
-				return;
-			}
+		if(PC.yPos > this.yPos){
+			this.moveNorth();
+			return;
+		}
+	
+		if ((PC.xPos > this.xPos)){
+			this.moveWest();
+			return;
+		
+		} if(PC.yPos < this.yPos) {
+			this.moveSouth();
+			return;
 			
-			else if (PC.xPos < this.xPos){
-				this.moveSouth();
-				return;
-			}
+		} if (PC.xPos < this.xPos){
+			this.moveEast();
+			return;
 			
-			if(PC.yPos < this.yPos){
-				this.moveWest();
-				return;
-			}
-			
-			else if(PC.yPos > this.yPos) {
-				this.moveEast();
-				return;
-			}
-			
+		}
+		
 		} //else this.moveRandom();
 	
 	
-	void run(Announcer GM, Player PC, ArrayList<Wall> wallList, ArrayList<Boulder> boulderList, ArrayList<DartTrap> trapList){
+	void run(Announcer GM, Player PC, ArrayList<Wall> wallList, ArrayList<Boulder> boulderList, ArrayList<DartTrap> trapList, ArrayList<Goblin> gobList){
 		PC.attack(this);
 		this.decide(PC); 
 		
@@ -110,8 +126,20 @@ public class Goblin extends Actor {
 		for(DartTrap trap: trapList)
 		trap.checkTrigger(GM, this);
 		
+		for(Goblin gob: gobList)
+			if (gob != this){
+		gob.bounceActor(this);
+			}
+		
 		PC.checkXP();
 	}
+	
+	
+    void bounceActor(Actor mob){
+		if (mob.xPos == this.xPos && mob.yPos == this.yPos){
+			pushBack(mob);
+		}
+    }
 	
 	
 	//Attack

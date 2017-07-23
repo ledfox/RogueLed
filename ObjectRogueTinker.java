@@ -54,6 +54,9 @@ public class ObjectRogueTinker {
 	//Generate wallList
 	ArrayList<Wall> wallList = new ArrayList<Wall>();
 	
+	//Generate actorList
+	ArrayList<Actor> actorList = new ArrayList<Actor>();
+	
 	
 	public static void main(String[] args) {
 		
@@ -84,13 +87,24 @@ public class ObjectRogueTinker {
 		PC.setHP(PC.maxHealth);
 		
 		//Feeds the required lists into the level generator
-		//level.genLevel(0);
+		level.genLevel(0);
+		//level.genLevel(GM, actorList, trapList);
+		
 		
 		level.genLevel(1, GM, boulderList, gobList, trapList, wallList);
 		
-		Wall wall1 = new Wall(7,7);
-		wallList.add(wall1);
-				
+		
+		//Generate wall for a test
+		//Wall wall1 = new Wall(7,7);
+		//wallList.add(wall1);
+		//Add wall1 to actor list for a test
+		//actorList.add(wall1);
+		
+		//Bring Ursatz to life for testing
+//		Goblin Ursatz = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "Ursatz");
+//		gobList.add(Ursatz);	
+//		
+		
 		//This is cool - allows while loop to run. Once "Exit" is true, game quits.
 		boolean exit = false;
 				
@@ -213,9 +227,11 @@ public class ObjectRogueTinker {
 					
 					for (Goblin gob : gobList){
 						//Goblin.run does a bunch of stuff. Check goblin class for more info.
-						gob.run(GM, PC, wallList, boulderList, trapList);
+						gob.run(GM, PC, wallList, boulderList, trapList, gobList);
 						
 					}
+					
+					PC.getPosition();
 					
 					statmes = GM.getMessage();
 					
@@ -226,7 +242,7 @@ public class ObjectRogueTinker {
 				
 
 				//Code to kill player if they deserve it
-				if (PC.currentHealth == 0){
+				if (PC.currentHealth <= 0){
 					csi.print(1, 1, "You've perished! Better luck next time.");
 					exit = true;
 				}

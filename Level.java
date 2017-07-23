@@ -42,5 +42,29 @@ public void genLevel(int number, Announcer GM, ArrayList<Boulder> boulderList, A
 	
 }
 	
+public void genLevel(Announcer GM, ArrayList<Actor> actorList, ArrayList<DartTrap> trapList){
+	
+	Random rand = new Random();
+	
+	for(int i = 0; i < 20; i++){
+		Goblin gob = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
+	actorList.add(gob);	
+	}
+	
+	//Generate a bunch of boulders all at once
+	for(int i = 0; i < 100; i++){
+		Boulder rock = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
+		
+		actorList.add(rock);	
+		}
+	
+	//Generate a bunch of traps all at once
+	for(int i = 0; i < 20; i++){
+		DartTrap trap = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
+		
+		trapList.add(trap);	
+		}
+}
+
 	
 }
