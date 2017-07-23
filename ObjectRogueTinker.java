@@ -34,6 +34,9 @@ public class ObjectRogueTinker {
   	
     //Generate Player
   	Player PC = new Player (5, 5, GM);
+  	
+  	//Generates a level object
+  	Level level = new Level();
     
   	Random rand = new Random();
   	int randX = rand.nextInt(45) + 3;
@@ -47,6 +50,9 @@ public class ObjectRogueTinker {
 	
 	//Generate goblinList
 	ArrayList<Goblin> gobList = new ArrayList<Goblin>();
+	
+	//Generate wallList
+	ArrayList<Wall> wallList = new ArrayList<Wall>();
 	
 	
 	public static void main(String[] args) {
@@ -77,25 +83,13 @@ public class ObjectRogueTinker {
 		
 		PC.setHP(PC.maxHealth);
 		
-		//Generate a bunch of goblins all at once
-		for(int i = 0; i < 20; i++){
-			Goblin gob = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
-		gobList.add(gob);	
-		}
+		//Feeds the required lists into the level generator
+		//level.genLevel(0);
 		
-		//Generate a bunch of boulders all at once
-		for(int i = 0; i < 100; i++){
-			Boulder rock = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-			
-			boulderList.add(rock);	
-			}
+		level.genLevel(1, GM, boulderList, gobList, trapList, wallList);
 		
-		//Generate a bunch of traps all at once
-		for(int i = 0; i < 20; i++){
-			DartTrap trap = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-			
-			trapList.add(trap);	
-			}
+		Wall wall1 = new Wall(7,7);
+		wallList.add(wall1);
 				
 		//This is cool - allows while loop to run. Once "Exit" is true, game quits.
 		boolean exit = false;
@@ -124,6 +118,11 @@ public class ObjectRogueTinker {
 				//Display Goblins
 				for (Goblin gob : gobList){
 					csi.print(gob.xPos, gob.yPos, gob.symbol, CSIColor.GREEN);
+				}
+				
+				//Display Walls
+				for (Wall wall : wallList){
+					csi.print(wall.xPos, wall.yPos, wall.symbol, CSIColor.GRAY);
 				}
 				
 				//Setup misc. map elements
@@ -187,7 +186,13 @@ public class ObjectRogueTinker {
 					
 				}
 				
+				//essentially the ".run" mechanic
 				if (timestep = true){
+					for (Wall wall : wallList){
+						wall.bouncePlayer(GM, PC);
+						
+					}
+					
 					for (Boulder rock : boulderList){
 					rock.checkPush(GM, PC); }
 					
@@ -198,11 +203,18 @@ public class ObjectRogueTinker {
 					for (Goblin gob : gobList){
 						PC.attack(gob);
 						gob.decide(PC); 
+						
+						for (Wall wall: wallList){
+							wall.bounceActor(gob);
+						}
+						
 						for (Boulder rock: boulderList)
 						rock.bounceActor(gob);
 						
 						for(DartTrap trap: trapList)
 						trap.checkTrigger(GM, gob);
+						
+						PC.checkXP();
 					}
 					
 					statmes = GM.getMessage();

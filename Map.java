@@ -37,7 +37,8 @@ public class Map {
 		mcsi.print(1, 21, statmes, CSIColor.BABY_BLUE );
 			
 		//Displays player statistics
-		mcsi.print(1, 22, "Strength " + PC.strength + "  " + "Vision " + PC.vision + "   " + "Health " + PC.currentHealth + "/" + PC.maxHealth, CSIColor.BABY_BLUE);
+		mcsi.print(1, 22, "Strength " + PC.strength + "  " + "Vision " + PC.vision + "   " + "Health " + PC.currentHealth + "/" + PC.maxHealth + " Experience " + PC.experience, 
+				CSIColor.BABY_BLUE);
 		
 		//Prints the number of turns passed
 		mcsi.print(1, 23, "Turns " + timeStr, CSIColor.BABY_BLUE);

@@ -9,6 +9,8 @@ public class Goblin extends Actor {
 	
 	String color = "GREEN";
 	
+	public int experience = 25;
+	
 	//Determines goblin behavior
 	
 	void decide(Player PC){
@@ -16,9 +18,13 @@ public class Goblin extends Actor {
 		//Goblin decides if it is dead
 		if (health <= 0) {
 			
+			
 			//Goblin should shout as it dies - no shouting in the graveyard!
 			if (xPos != 0 && yPos != 0){
 				GM.setMessage("The goblin shrieks as it dies!");
+			    
+				//Fork over XP
+				PC.gainXP(experience);
 			}
 			depop();
 		} else {	

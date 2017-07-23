@@ -19,6 +19,14 @@ public class Player {
 	
 	public Announcer GM;
 
+	public int experience = 0;
+	
+	public Armor armor;
+	public Weapon weapon;
+	public Bow bow;
+	
+	
+	
 //Player Methods
     
     //Object Movement
@@ -119,6 +127,8 @@ void rollStat (String desStat){
 void trainStat (String desStat){
 	Random rand = new Random();
 	int d100 = rand.nextInt(100) + 1;
+	//int d20 = rand.nextInt(20) + 1;
+	int d50 = rand.nextInt(50) + 1;
 	
 	switch(desStat){
 	case "Strength":
@@ -129,13 +139,47 @@ void trainStat (String desStat){
 		
 		
 	case "Vision":
+		if ((d50 - this.vision) > 5){
+			this.vision += 1;
+			GM.setMessage("You feel like a visionary!");
+		}
 	break;
 		
 	case "Health":
+		if ((d100 - this.maxHealth) > 50){
+			this.maxHealth += 5;
+			GM.setMessage("You feel more robust!");
+		}
+		
 	break;
 	
 	}
+}
+
+
+void gainXP(Actor mob){
 	
+	this.experience += mob.experience;
+	
+}
+
+void gainXP(int gain){
+	this.experience += gain;
+}
+
+void checkXP(){
+	if (this.experience >= 100){
+		gainLevel();
+	} 
+}
+
+void gainLevel(){
+	trainStat("Strength");
+	trainStat("Vision");
+	trainStat("Health");
+	this.experience = 0;
+	setHP(maxHealth);
+	GM.setMessage("You've gained a level! You feel fantastic!");
 }
 
 //Attack
