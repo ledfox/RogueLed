@@ -35,13 +35,24 @@ public class Map {
 	public static void setUp(ConsoleSystemInterface mcsi, String statmes, Player PC, String timeStr){
 		//Displays statmes
 		mcsi.print(1, 21, statmes, CSIColor.BABY_BLUE );
-			
-		//Displays player statistics
-		mcsi.print(1, 22, "Strength " + PC.strength + "  " + "Vision " + PC.vision + "   " + "Health " + PC.currentHealth + "/" + PC.maxHealth + " Experience " + PC.experience, 
-				CSIColor.BABY_BLUE);
 		
-		//Prints the number of turns passed
-		mcsi.print(1, 23, "Turns " + timeStr, CSIColor.BABY_BLUE);
+		//Displays player statistics
+				mcsi.print(1, 22, "Strength " + PC.strength + "   " 
+						+ "Vision " + PC.vision + "   " 
+						+ "Health " + PC.currentHealth + "/" + PC.maxHealth + "   " 
+						+ "Experience " + PC.experience + "   "
+						+ "Turns " + timeStr, CSIColor.BABY_BLUE);
+		
+		//Display equipment
+		mcsi.print(1, 23, "Melee: " + PC.weapon.currentType + "   "
+						+ "Ranged: " + PC.bow.currentType + "   " 
+						+ "Armor: " + PC.armor.currentType);
+		
+		
+		//Display consumables
+		mcsi.print(1, 24, "Ingots: " + PC.ingots + "   "
+						+ "Arrows: " + PC.arrows + "   "
+						+ "Berries: " + PC.berries);
 	}
 
 }

@@ -1,5 +1,25 @@
 package primary;
 
 public class Bow {
+	
+	String[] type = {"Short Bow","Long Bow","Recurve Bow","Compound Bow","Sniper's Bow"};
 
+	int typeID = 0;
+	
+	String currentType = type[typeID];
+	
+	public void upgrade(){
+		if(typeID < 4){
+			typeID += 1;
+			currentType = type[typeID];
+		} 
+	}
+	
+	//Constructor
+    
+    public Bow (){
+    	currentType = type[typeID];
+    }
+	
+	
 }

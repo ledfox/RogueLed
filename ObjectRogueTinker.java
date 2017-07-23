@@ -177,7 +177,15 @@ public class ObjectRogueTinker {
 					
 				case CharKey.N5: case CharKey.SPACE:
 					PC.loiter();
-					timestep = true;;
+					timestep = true;
+					break;
+					
+				//Testing upgrade system
+				case CharKey.U: case CharKey.u:
+					PC.armor.upgrade();
+					PC.weapon.upgrade();
+					PC.bow.upgrade();
+					csi.refresh();
 					break;
 							
 				//When "Q" is pressed, 'exit' is set to true and game quits. Neat!
@@ -188,20 +196,23 @@ public class ObjectRogueTinker {
 				
 				//essentially the ".run" mechanic
 				if (timestep = true){
+					
+					//Checks if a player is in a wall - bounces them back if they are.
 					for (Wall wall : wallList){
 						wall.bouncePlayer(GM, PC);
 						
 					}
 					
 					for (Boulder rock : boulderList){
-					rock.checkPush(GM, PC); }
+					rock.checkPush(GM, PC); 
+					}
 					
 					for (DartTrap trap : trapList){
 					trap.checkTrigger(GM, PC);
 					}
 					
 					for (Goblin gob : gobList){
-												
+						//Goblin.run does a bunch of stuff. Check goblin class for more info.
 						gob.run(GM, PC, wallList, boulderList, trapList);
 						
 					}
