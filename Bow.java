@@ -8,6 +8,12 @@ public class Bow {
 	
 	String currentType = type[typeID];
 	
+	//TODO write stuff here
+	public void damage(){
+		
+	}
+	
+	
 	public void upgrade(){
 		if(typeID < 4){
 			typeID += 1;
