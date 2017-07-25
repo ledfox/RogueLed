@@ -19,8 +19,13 @@ Added Map class (external to main)
 Goblins now defend themselves
 Recovered from critical error
 
+Version 0.0.3
+Added inventory
+Added Beams
+Added Arrows (need diagonal firing)
+
 Development path:
 Needs polymorphism (Integrate more actors as sub)
 Needs more robust features (Other actors)
-Needs inventory
-Needs levels
+Needs specific stats for inventory (tied to damage, etc)
+
