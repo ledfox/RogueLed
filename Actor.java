@@ -8,12 +8,10 @@ public class Actor {
 	int yPos = 0;
 	char symbol = '0';
 	int health = 1;
-	Announcer GM;
 	String name = "generic actor";
 	String direction = "None";
 	int experience = 1;
-	boolean stuck = false;
-	
+	int power = 0;
 	
 	//Deconstructor
 	
@@ -40,13 +38,6 @@ public class Actor {
     	symbol = c;
     }
     
-//    public Actor (int a, int b, char c, Announcer vGM){
-//    	xPos = a;
-//    	yPos = b;
-//    	symbol = c;
-//    	GM = vGM;
-//    }
-    
     public Actor (int a, int b, char c, String vName){
     	xPos = a;
     	yPos = b;
@@ -54,8 +45,20 @@ public class Actor {
     	name = vName;
     }
     
+    //Attack
+    //For some reason doesn't work in sub-classes unless defined there. TODO fix that
+	public void attack(Player PC){
+		int harm = this.power - PC.armor.quality;
+		if (harm <= 0){
+			PC.GM.setMessage("The " + this.name + " tries to hurt you, but the blow deflects off your armor!");
+		} else {
+			PC.GM.setMessage("The " + this.name + " hits you!");
+			PC.damage(harm);
+		}
+	}
+    
 	//Damage 
-
+    //Note, doesn't seem to work unless declared in the sub class. 
 	void damage(int harm){
 		this.health -= harm;
 	}
@@ -119,41 +122,22 @@ public class Actor {
 		int d9 = rand.nextInt(9) + 1;
 		switch(d9){
 		case 1: 
-		this.moveSouthWest(); 
-		break;
-		
+			this.moveSouthWest(); break;
 		case 2:
-			this.moveSouth(); 
-			break;
-					
+			this.moveSouth(); break;
 		case 3:
-			this.moveSouthEast(); 
-			break;
-			
+			this.moveSouthEast(); break;
 		case 4:
-			this.moveWest(); 
-			break;
-			
+			this.moveWest(); break;
 		case 5: break;
-			
 		case 6: 
-		this.moveEast(); 
-		break;
-		
-			
-		case 7:
-			this.moveNorthWest(); 
-			break;
-						
+			this.moveEast(); break;
+		case 7: 
+			this.moveNorthWest(); break;
 		case 8:
-			this.moveNorth(); 
-			break;
-			
+			this.moveNorth(); break;
 		case 9:
-			this.moveNorthEast(); 
-			break;
-			
-			
+			this.moveNorthEast(); break;
 		default: break;
 		}
 		
@@ -194,8 +178,9 @@ public class Actor {
     
     }
     
+    //Push and bounce
     void pushBack(Actor mob){
-String pushDir = mob.direction;
+    	String pushDir = mob.direction;
     	
     	switch (pushDir){
     	
@@ -224,6 +209,12 @@ String pushDir = mob.direction;
     		mob.moveNorthWest();
     		break;
     	}
+    }
+    
+    void bounceActor(Actor mob){
+		if (mob.xPos == this.xPos && mob.yPos == this.yPos){
+			pushBack(mob);
+		}
     }
     
 	//move towards the player
@@ -265,6 +256,8 @@ String pushDir = mob.direction;
 			return;
 		}
 	}
+	
+
     
     //Getters
     int getXpos(){

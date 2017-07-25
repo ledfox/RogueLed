@@ -83,8 +83,7 @@ public class ObjectRogueTinker {
 		PC.setHP(PC.maxHealth);
 		
 		//Feeds the required lists into the level generator
-		level.genLevel(0);
-		//level.genLevel(GM, actorList, trapList);
+		//level.genLevel(0);
 			
 		level.genLevel(1, GM, boulderList, gobList, trapList, wallList);
 		
@@ -216,6 +215,7 @@ public class ObjectRogueTinker {
 					
 				//When "Q" is pressed, 'exit' is set to true and game quits. Neat!
 				case CharKey.Q: case CharKey.q:
+					csi.print(1, 1, "Quitting...");
 					exit = true;
 					
 				}
@@ -259,7 +259,7 @@ public class ObjectRogueTinker {
 			}
 			
 		//Only triggers on exit
-		csi.print(1, 1, "Quitting...");
+		
 		csi.print(1, 2, "Press space to continue");
 		
 		csi.refresh();

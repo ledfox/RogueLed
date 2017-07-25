@@ -10,7 +10,7 @@ public class Goblin extends Actor {
 	String color = "GREEN";
 	public int experience = 25;
 	boolean fleeing = false;
-	int power = 1;
+	public int power = 5;
 	
 	//Determines goblin behavior
 	
@@ -36,7 +36,7 @@ public class Goblin extends Actor {
 				}
 				
 				flee(PC);
-			
+				
 		
 		} else if (((xPos - PC.xPos) < 10) && ((yPos - PC.yPos) < 10)){
 		
@@ -51,13 +51,13 @@ public class Goblin extends Actor {
 
 		if (xPos == PC.xPos && yPos == PC.yPos){
 			attack(PC);
-			PC.GM.setMessage("The goblin hits you!");
+			
 			pushBack(this);
 			}
 	}
 		
 	void run(Player PC, ArrayList<Wall> wallList, ArrayList<Boulder> boulderList, ArrayList<DartTrap> trapList, ArrayList<Goblin> gobList){
-		PC.attack(this);
+		PC.meleeAttack(this);
 		this.decide(PC); 
 		
 		for (Wall wall: wallList){
@@ -73,28 +73,28 @@ public class Goblin extends Actor {
 		for(Goblin gob: gobList)
 			if (gob != this){
 				gob.bounceActor(this);
+				
 			}
 		
 		PC.checkXP();
 	}
 	
 	
-    void bounceActor(Actor mob){
-		if (mob.xPos == this.xPos && mob.yPos == this.yPos){
-			pushBack(mob);
-		}
-    }
-	
-	
+
 	//Attack
-	void attack(Player PC){
-		int harm = power;
-		PC.damage(harm);
+	//Note, should be able to move to the superclass Actor once I figure out how to make that work
+	public void attack(Player PC){
+		int harm = this.power - PC.armor.quality;
+		if (harm <= 0){
+			PC.GM.setMessage("The " + this.name + " tries to hurt you, but the blow deflects off your armor!");
+		} else {
+			PC.GM.setMessage("The " + this.name + " hits you!");
+			PC.damage(harm);
 		}
-	
+	}
 	
 	//Damage 
-
+	//Note, should be able to move to the superclass Actor once I figure out how to make that work
 	void damage(int harm){
 		this.health -= harm;
 	}

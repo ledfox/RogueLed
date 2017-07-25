@@ -182,14 +182,14 @@ void gainLevel(){
 }
 
 //Attack
-void attack(Actor mob){
+void meleeAttack(Actor mob){
 	Random rand = new Random();
 	int D20 = rand.nextInt(20) + 1;
 	int luckFactor = D20 + vision;
 	int harm;
 	if (strength/5 > 1){
-		harm = strength/5;
-	} else harm = 1;
+		harm = (strength/5) + weapon.quality;
+	} else harm = 1 + weapon.quality;
 	
 	if ((xPos == mob.xPos) && (yPos == mob.yPos) && (luckFactor > 5)){
 		mob.damage(harm);
@@ -204,6 +204,7 @@ void attack(Actor mob){
 //Attack at position
 void attack(int xPos, int yPos){
 	//TODO write stuff here
+	
 }
 
 //Talk to Announcer

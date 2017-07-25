@@ -106,7 +106,13 @@ public class Boulder extends Actor {
     void bounceActor(Actor mob){
 		if (mob.xPos == this.xPos && mob.yPos == this.yPos){
 			pushBack(mob);
-//			mob.moveRandom();
+			mob.moveRandom();
+			
+			//.moveRandom() doesn't check for stacks - this one will
+			if (mob.xPos == this.xPos && mob.yPos == this.yPos){
+				pushBack(mob);
+			}
+			
 		}
 	}
 

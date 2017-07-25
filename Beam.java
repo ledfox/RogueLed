@@ -40,10 +40,7 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 			
 			//Collision 
 			if (nextChar == 'o' || nextChar == '#' || nextChar == 'g'){
-				
-				//Temporary damage formula
-				PC.damage(1);
-				
+							
 				firing = false;
 				break;
 			} 
@@ -370,8 +367,7 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 		
 		}
 
-	}
-	
+	}	
 		
 }
 	
