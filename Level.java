@@ -21,7 +21,7 @@ public void genLevel(int number, Announcer GM, ArrayList<Boulder> boulderList, A
 	case 1:
 		//Generate a bunch of goblins all at once
 				for(int i = 0; i < 20; i++){
-					Goblin gob = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
+					Goblin gob = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', "goblin");
 				gobList.add(gob);	
 				}
 				
@@ -42,12 +42,12 @@ public void genLevel(int number, Announcer GM, ArrayList<Boulder> boulderList, A
 	
 }
 	
-public void genLevel(Announcer GM, ArrayList<Actor> actorList, ArrayList<DartTrap> trapList){
+public void genLevel(ArrayList<Actor> actorList, ArrayList<DartTrap> trapList){
 	
 	Random rand = new Random();
 	
 	for(int i = 0; i < 20; i++){
-		Goblin gob = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "goblin");
+		Goblin gob = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', "goblin");
 	actorList.add(gob);	
 	}
 	

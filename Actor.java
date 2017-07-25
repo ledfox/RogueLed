@@ -7,23 +7,31 @@ public class Actor {
 	int xPos = 0;
 	int yPos = 0;
 	char symbol = '0';
-	
 	int health = 1;
-
 	Announcer GM;
-	
 	String name = "generic actor";
-	
 	String direction = "None";
-
 	int experience = 1;
+	boolean stuck = false;
+	
+	
+	//Deconstructor
+	
+	void depop(){
+		//should delete the character (such as upon death)
+		//currently simply removes the piece from the board. 
+	    
+		if (this != null){
+			this.xPos = 0;
+			this.yPos = 0;		
+		}
+	}
 	
     //Constructor
     
     public Actor(int a, int b) {
     	xPos =  a;
     	yPos =  b;
-    	
     }
     
     public Actor (int a, int b, char c){
@@ -32,18 +40,17 @@ public class Actor {
     	symbol = c;
     }
     
-    public Actor (int a, int b, char c, Announcer vGM){
-    	xPos = a;
-    	yPos = b;
-    	symbol = c;
-    	GM = vGM;
-    }
+//    public Actor (int a, int b, char c, Announcer vGM){
+//    	xPos = a;
+//    	yPos = b;
+//    	symbol = c;
+//    	GM = vGM;
+//    }
     
-    public Actor (int a, int b, char c, Announcer vGM, String vName){
+    public Actor (int a, int b, char c, String vName){
     	xPos = a;
     	yPos = b;
     	symbol = c;
-    	GM = vGM;
     	name = vName;
     }
     
@@ -62,7 +69,6 @@ public class Actor {
     void moveSouth() {
     	if (this.yPos < 19){
 		this.yPos++; this.direction = "South";}
-    	
 		else {}
     }
     
@@ -217,8 +223,48 @@ String pushDir = mob.direction;
     	case "SouthEast":
     		mob.moveNorthWest();
     		break;
+    	}
     }
-    }
+    
+	//move towards the player
+	void approach (Player PC){
+		 if(PC.yPos < this.yPos){
+				this.moveNorth();
+				return;
+			}
+			if ((PC.xPos < this.xPos)){
+				this.moveWest();
+				return;
+			} 
+			if(PC.yPos > this.yPos) {
+				this.moveSouth();
+				return;	
+			} 
+			if (PC.xPos > this.xPos){
+				this.moveEast();
+				return;	
+			}			
+		}
+	
+	//move away from the player
+	void flee (Player PC){
+		if(PC.yPos > this.yPos){
+			this.moveNorth();
+			return;
+		}
+		if ((PC.xPos > this.xPos)){
+			this.moveWest();
+			return;
+		}
+		if(PC.yPos < this.yPos) {
+			this.moveSouth();
+			return;
+		} 
+		if (PC.xPos < this.xPos){
+			this.moveEast();
+			return;
+		}
+	}
     
     //Getters
     int getXpos(){

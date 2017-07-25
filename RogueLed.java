@@ -21,7 +21,7 @@ import net.slashie.libjcsi.wswing.WSwingConsoleInterface;
 //Physics - Ranged Attacks
 //Generate Spells
 
-public class ObjectRogueTinker {
+public class RogueLed {
 
 	//private ConsoleSystemInterface csi = new JCursesConsoleInterface();
     private ConsoleSystemInterface csi = new WSwingConsoleInterface("Simple Roguelike - Object Testing");
@@ -58,7 +58,7 @@ public class ObjectRogueTinker {
 	ArrayList<Actor> actorList = new ArrayList<Actor>();
 	
 	public static void main(String[] args) {
-		new ObjectRogueTinker().run();
+		new RogueLed().run();
 	}
 
 	// The meat of the code, essentially the game engine itself

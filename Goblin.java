@@ -6,14 +6,11 @@ public class Goblin extends Actor {
 
 	public int health = 5;
 	char symbol = 'g';
-	
 	String name = "goblin";
-	
 	String color = "GREEN";
-	
 	public int experience = 25;
-	
 	boolean fleeing = false;
+	int power = 1;
 	
 	//Determines goblin behavior
 	
@@ -22,10 +19,9 @@ public class Goblin extends Actor {
 		//Goblin decides if it is dead
 		if (health <= 0) {
 			
-			
 			//Goblin should shout as it dies - no shouting in the graveyard!
 			if (xPos != 0 && yPos != 0){
-				GM.setMessage("The goblin shrieks as it dies!");
+				PC.GM.setMessage("The goblin shrieks as it dies!");
 			    
 				//Fork over XP
 				PC.gainXP(experience);
@@ -35,7 +31,7 @@ public class Goblin extends Actor {
 		}  if (health == 1) {	
 			
 			if (fleeing = false){
-				GM.setMessage("The goblin panics and flees!");
+				PC.GM.setMessage("The goblin panics and flees!");
 				fleeing = true;
 				}
 				
@@ -50,76 +46,17 @@ public class Goblin extends Actor {
 		} else {
 		
 			//If they can't think of anything better to do, they'll move randomly
-			moveRandom();
-			
-			
+			moveRandom();	
 		}
-		
-		
+
 		if (xPos == PC.xPos && yPos == PC.yPos){
 			attack(PC);
-			GM.setMessage("The goblin hits you!");
+			PC.GM.setMessage("The goblin hits you!");
 			pushBack(this);
 			}
-		
-
-		
-		
 	}
-	
-	//move towards the player
-	void approach (Player PC){
 		
-		 if(PC.yPos < this.yPos){
-				this.moveNorth();
-				return;
-			}
-		
-			if ((PC.xPos < this.xPos)){
-				this.moveWest();
-				return;
-			
-			} if(PC.yPos > this.yPos) {
-				this.moveSouth();
-				return;
-				
-			} if (PC.xPos > this.xPos){
-				this.moveEast();
-				return;
-				
-			}
-			
-			
-			
-		}  //else this.moveRandom();
-	
-	
-	//move away from the player
-	void flee (Player PC){
-		
-		if(PC.yPos > this.yPos){
-			this.moveNorth();
-			return;
-		}
-	
-		if ((PC.xPos > this.xPos)){
-			this.moveWest();
-			return;
-		
-		} if(PC.yPos < this.yPos) {
-			this.moveSouth();
-			return;
-			
-		} if (PC.xPos < this.xPos){
-			this.moveEast();
-			return;
-			
-		}
-		
-		} //else this.moveRandom();
-	
-	
-	void run(Announcer GM, Player PC, ArrayList<Wall> wallList, ArrayList<Boulder> boulderList, ArrayList<DartTrap> trapList, ArrayList<Goblin> gobList){
+	void run(Player PC, ArrayList<Wall> wallList, ArrayList<Boulder> boulderList, ArrayList<DartTrap> trapList, ArrayList<Goblin> gobList){
 		PC.attack(this);
 		this.decide(PC); 
 		
@@ -131,13 +68,11 @@ public class Goblin extends Actor {
 		rock.bounceActor(this);
 		
 		for(DartTrap trap: trapList)
-		trap.checkTrigger(GM, this);
+		trap.checkTrigger(this);
 		
 		for(Goblin gob: gobList)
 			if (gob != this){
-				
 				gob.bounceActor(this);
-		
 			}
 		
 		PC.checkXP();
@@ -153,7 +88,7 @@ public class Goblin extends Actor {
 	
 	//Attack
 	void attack(Player PC){
-		int harm = 1;
+		int harm = power;
 		PC.damage(harm);
 		}
 	
@@ -168,25 +103,11 @@ public class Goblin extends Actor {
 		this.health = value;
 	}
 	
-	//Deconstructor
-	
-	void depop(){
-		//should delete the character (such as upon death)
-		//currently simply removes the piece from the board. 
-	    
-		if (this != null){
-			this.xPos = 0;
-			this.yPos = 0;
-			
-			
-		}
-		
-	}
 	
 	//Constructor
-	public Goblin(int x, int y, char d, Announcer a, String n) {
+	public Goblin(int x, int y, char d, String n) {
 	
-		super(x, y, d, a, n);
+		super(x, y, d, n);
 		
 	}
 

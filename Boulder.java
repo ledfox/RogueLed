@@ -18,6 +18,8 @@ public class Boulder extends Actor {
     
     int health = 1000;
     
+    boolean diggable = true;
+    
     //Constructor
     
     public Boulder(int a, int b, char c) {
@@ -29,7 +31,7 @@ public class Boulder extends Actor {
     	super(a, b);
     }
     
-    void checkPush(Announcer GM, Player PC){
+    void checkPush(Player PC){
     	
     	String direction = PC.direction;
     	if (PC.xPos == this.xPos && PC.yPos == this.yPos){
@@ -38,7 +40,7 @@ public class Boulder extends Actor {
     		Random rand = new Random();
     	int luckFactor = rand.nextInt(6) + 1;
     	if (PC.strength < (this.weight - luckFactor)){
-    		pushBack(PC); GM.setMessage("You fail to push the boulder.");
+    		pushBack(PC); PC.GM.setMessage("You fail to push the boulder.");
     		PC.trainStat("Strength");
     		return;
     	} else {
@@ -104,7 +106,7 @@ public class Boulder extends Actor {
     void bounceActor(Actor mob){
 		if (mob.xPos == this.xPos && mob.yPos == this.yPos){
 			pushBack(mob);
-			mob.moveRandom();
+//			mob.moveRandom();
 		}
 	}
 

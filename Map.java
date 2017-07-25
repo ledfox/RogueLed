@@ -53,6 +53,8 @@ public class Map {
 		mcsi.print(1, 24, "Ingots: " + PC.ingots + "   "
 						+ "Arrows: " + PC.arrows + "   "
 						+ "Berries: " + PC.berries);
+		
+		
 	}
 
 }

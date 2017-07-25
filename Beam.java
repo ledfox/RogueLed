@@ -40,6 +40,10 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 			
 			//Collision 
 			if (nextChar == 'o' || nextChar == '#' || nextChar == 'g'){
+				
+				//Temporary damage formula
+				PC.damage(1);
+				
 				firing = false;
 				break;
 			} 
@@ -189,6 +193,17 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 			int beamPos = PC.xPos + i;
 			int beamLean = PC.yPos + i;
 			
+			//Checks ahead for obstacles
+			char nextChar = csi.peekChar(beamPos, beamLean);
+			System.out.print(nextChar);
+			
+			//Collision 
+			if (nextChar == 'o' || nextChar == '#' || nextChar == 'g'){
+				firing = false;
+				break;
+			} 
+			
+			
 			//Displays the beam
 			csi.print(beamPos, beamLean, "\\", CSIColor.AUBURN);
 			
@@ -222,6 +237,16 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 				int beamPos = PC.xPos + i;
 				int beamLean = PC.yPos - i;
 				
+				//Checks ahead for obstacles
+				char nextChar = csi.peekChar(beamPos, beamLean);
+				System.out.print(nextChar);
+				
+				//Collision 
+				if (nextChar == 'o' || nextChar == '#' || nextChar == 'g'){
+					firing = false;
+					break;
+				} 
+				
 				//Displays the beam
 				csi.print(beamPos, beamLean, "/", CSIColor.AUBURN);
 				
@@ -247,6 +272,96 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 			PC.GM.setMessage("You loose an arrow.");
 			firing = false;	
 			break;
+			
+			//Diagonal
+					case CharKey.T7: case CharKey.N7:
+						
+						while (i <= beamLength){
+							int beamPos = PC.xPos - i;
+							int beamLean = PC.yPos - i;
+							
+							//Checks ahead for obstacles
+							char nextChar = csi.peekChar(beamPos, beamLean);
+							System.out.print(nextChar);
+							
+							//Collision 
+							if (nextChar == 'o' || nextChar == '#' || nextChar == 'g'){
+								firing = false;
+								break;
+							} 
+							
+							//Displays the beam
+							csi.print(beamPos, beamLean, "\\", CSIColor.AUBURN);
+							
+							//Deletes the trail
+							
+							//Sleeps to illustrate beam correctly
+							try        
+							{
+							    Thread.sleep(50);
+							} 
+							catch(InterruptedException ex) 
+							{
+								System.out.println("There was a sleeping problem.");
+							    Thread.currentThread().interrupt();
+							}
+							
+							//Required to show beam
+							csi.refresh();	
+						
+							i++;
+						}
+						
+						PC.GM.setMessage("You loose an arrow.");
+						firing = false;	
+						break;
+						
+						//Diagonal
+					case CharKey.T1: case CharKey.N1:
+						
+						while (i <= beamLength){
+							int beamPos = PC.xPos - i;
+							int beamLean = PC.yPos + i;
+							
+							//Checks ahead for obstacles
+							char nextChar = csi.peekChar(beamPos, beamLean);
+							System.out.print(nextChar);
+							
+							//Collision 
+							if (nextChar == 'o' || nextChar == '#' || nextChar == 'g'){
+								
+				
+								
+								firing = false;
+								break;
+							} 
+							
+							//Displays the beam
+							csi.print(beamPos, beamLean, "/", CSIColor.AUBURN);
+							
+							//Deletes the trail
+							
+							//Sleeps to illustrate beam correctly
+							try        
+							{
+							    Thread.sleep(50);
+							} 
+							catch(InterruptedException ex) 
+							{
+								System.out.println("There was a sleeping problem.");
+							    Thread.currentThread().interrupt();
+							}
+							
+							//Required to show beam
+							csi.refresh();	
+						
+							i++;
+						}
+						
+						PC.GM.setMessage("You loose an arrow.");
+						firing = false;	
+						break;
+			
 	
 	case CharKey.T5: case CharKey.N5: case CharKey.C: case CharKey.c:
 		

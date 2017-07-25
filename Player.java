@@ -33,12 +33,6 @@ public class Player {
 	
 //Player Methods
     
-    //Object Movement
-    
-    void pushBoulderNorth(Boulder rock){
-    	rock.moveNorth();
-    }
-    
     
     //Player Movement
 
@@ -205,6 +199,11 @@ void attack(Actor mob){
 		mob.pushBack(this);
 		GM.setMessage("You miss the " + mob.name + ".");
 	}
+}
+
+//Attack at position
+void attack(int xPos, int yPos){
+	//TODO write stuff here
 }
 
 //Talk to Announcer

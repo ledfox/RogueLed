@@ -6,11 +6,12 @@ public class Wall extends Actor {
 	char symbol = '#';
 	
 	boolean containsIngot = false;
+	boolean diggable = true;
 	
-	void bouncePlayer(Announcer GM, Player PC){
+	void bouncePlayer(Player PC){
 		if (PC.xPos == this.xPos && PC.yPos == this.yPos){
 			pushBack(PC);
-			GM.setMessage("You bump into the wall.");
+			PC.GM.setMessage("You bump into the wall.");
 		}
 	}
 	

@@ -9,15 +9,15 @@ public class DartTrap {
     public char symbol = '^';
     String message = "You've been hit by a dart!";
     
-    void checkTrigger(Announcer GM, Goblin mob){
+    void checkTrigger(Goblin mob){
     	
     	if (mob.xPos == this.xPos && mob.yPos == this.yPos){
     	mob.damage(1);    	
-    	GM.setMessage("The " + mob.name + " shouts in pain!");}
+    	}
     }
     
     
-    void checkTrigger(Announcer GM, Player PC){
+    void checkTrigger(Player PC){
     	Random rand = new Random();
     	int dodgeCheck = (rand.nextInt(20) + 1) + PC.vision;
     	
@@ -25,10 +25,10 @@ public class DartTrap {
     	if (PC.xPos == this.xPos && PC.yPos == this.yPos){
     		
     		if(dodgeCheck > 17){
-    			GM.setMessage("You narrowly dodge a dart!");
+    			PC.GM.setMessage("You narrowly dodge a dart!");
     		} else {
     			PC.damage(1);
-    			GM.setMessage("You've been hit by a dart!");
+    			PC.GM.setMessage("You've been hit by a dart!");
     		}
     	}
     }
