@@ -13,6 +13,8 @@ public class Goblin extends Actor {
 	
 	public int experience = 25;
 	
+	boolean fleeing = false;
+	
 	//Determines goblin behavior
 	
 	void decide(Player PC){
@@ -31,9 +33,14 @@ public class Goblin extends Actor {
 			depop();
 			
 		}  if (health == 1) {	
-		
-			//Critically wounded goblins panic and flee
-			flee(PC);
+			
+			if (fleeing = false){
+				GM.setMessage("The goblin panics and flees!");
+				fleeing = true;
+				}
+				
+				flee(PC);
+			
 		
 		} else if (((xPos - PC.xPos) < 10) && ((yPos - PC.yPos) < 10)){
 		
@@ -128,7 +135,9 @@ public class Goblin extends Actor {
 		
 		for(Goblin gob: gobList)
 			if (gob != this){
-		gob.bounceActor(this);
+				
+				gob.bounceActor(this);
+		
 			}
 		
 		PC.checkXP();

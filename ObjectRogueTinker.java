@@ -201,7 +201,24 @@ public class ObjectRogueTinker {
 					PC.bow.upgrade();
 					csi.refresh();
 					break;
-							
+					
+				//Testing BEAMS
+				case CharKey.F: case CharKey.f:
+				
+					//Generic red beam with a message  
+					//Only fires to the right
+					//Beam.zapBeam
+					
+					//Generic invisible beam that returns to the consul char data over the tiles it passes
+					//Only fires to the right. 
+					//Beam.peekBeam(PC,csi);
+					
+					//Fires an arrow
+					Beam.fireArrow(PC, csi);
+				
+					
+					break;
+					
 				//When "Q" is pressed, 'exit' is set to true and game quits. Neat!
 				case CharKey.Q: case CharKey.q:
 					exit = true;
@@ -252,7 +269,7 @@ public class ObjectRogueTinker {
 		csi.print(1, 2, "Press space to continue");
 		
 		csi.refresh();
-		csi.waitKey(CharKey.SPACE );
+		csi.waitKey(CharKey.SPACE);
 		System.exit(0);
 		
 					
