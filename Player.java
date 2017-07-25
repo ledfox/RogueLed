@@ -27,7 +27,7 @@ public class Player {
 	
 	public int ingots = 0;
 	public int arrows = 0;
-	public int berries = 0;
+	public int berries = 10;
 	
 	
 	
@@ -95,7 +95,36 @@ public class Player {
 		GM.setMessage("You loiter about.");
 	}
 
+//Gather
+	
+	void gainBerry(){
+		this.berries += 1;
+	}
+	
+	void gainIngot(){
+		this.ingots += 1;
+	}
+	
+	void gainArrow(){
+		this.arrows += 1;
+	}
 
+//Consume
+	
+	void eatBerry(){
+		if (this.berries <= 0){
+			GM.setMessage("You're all out of berries!");
+		} else if (currentHealth == maxHealth){
+			GM.setMessage("You're too full to eat any berries!");
+		} else {
+			currentHealth += 3;
+			if (currentHealth > maxHealth){
+				currentHealth = maxHealth;
+			}
+			berries -= 1;
+		}
+	}
+	
 //Stat stuff	
 	
 void rollStat (String desStat){

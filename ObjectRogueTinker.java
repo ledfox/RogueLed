@@ -188,6 +188,12 @@ public class ObjectRogueTinker {
 					timestep = true;
 					break;
 					
+				//Option to eat berries
+				case CharKey.e: case CharKey.E:
+					PC.eatBerry();
+					timestep = true;
+					break;
+				
 				//Testing upgrade system
 				case CharKey.U: case CharKey.u:
 					PC.armor.upgrade();
