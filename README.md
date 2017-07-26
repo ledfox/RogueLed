@@ -24,8 +24,12 @@ Added inventory
 Added Beams
 Added Arrows (need diagonal firing)
 
+Version 0.0.4
+Diagonal firing now possible
+Fixed bug where boulders would "stack" when pushed
+Added berries
+
 Development path:
 Needs polymorphism (Integrate more actors as sub)
 Needs more robust features (Other actors)
 Needs specific stats for inventory (tied to damage, etc)
-
