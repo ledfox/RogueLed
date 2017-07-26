@@ -24,7 +24,7 @@ import net.slashie.libjcsi.wswing.WSwingConsoleInterface;
 public class RogueLed {
 
 	//private ConsoleSystemInterface csi = new JCursesConsoleInterface();
-    private ConsoleSystemInterface csi = new WSwingConsoleInterface("Simple Roguelike - Object Testing");
+    private ConsoleSystemInterface csi = new WSwingConsoleInterface("RogueLed - or 'roggled' if you want");
     
    //Establishes timer
   	private long timer = 0L;
@@ -43,13 +43,13 @@ public class RogueLed {
   	int randY = rand.nextInt(20) + 3;
   		
 	//Generates BoulderList
-	ArrayList<Boulder> boulderList = new ArrayList<Boulder>();
+	static ArrayList<Boulder> boulderList = new ArrayList<Boulder>();
 	
 	//Generates TrapList
 	ArrayList<DartTrap> trapList = new ArrayList<DartTrap>();
 	
 	//Generate goblinList
-	ArrayList<Goblin> gobList = new ArrayList<Goblin>();
+	static ArrayList<Goblin> gobList = new ArrayList<Goblin>();
 	
 	//Generate wallList
 	ArrayList<Wall> wallList = new ArrayList<Wall>();
@@ -214,7 +214,7 @@ public class RogueLed {
 					//Beam.peekBeam(PC,csi);
 					
 					//Fires an arrow
-					Beam.fireArrow(PC, csi);
+					Beam.fireArrow(PC);
 				
 					
 					break;
@@ -273,5 +273,14 @@ public class RogueLed {
 		System.exit(0);
 				
 				}
+	
+	//Getters
+	public static ArrayList<Goblin> getGobs(){
+		return gobList;
+	}
+	
+	public static ArrayList<Boulder> getBoulders(){
+		return boulderList;
+	}
 	
 	}

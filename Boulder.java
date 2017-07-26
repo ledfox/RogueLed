@@ -12,7 +12,7 @@ public class Boulder extends Actor {
 //    public int yPos = 7;
 
 	
-	public int weight = 20;
+	public int weight = 18;
     public char symbol = 'o';
     String message = "You push the boulder.";
     

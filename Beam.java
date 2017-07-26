@@ -14,18 +14,18 @@ public class Beam {
 //TODO stop when hitting something
 //TODO call bow.damage()
 	
-public static void fireArrow(Player PC, ConsoleSystemInterface csi){
+public static void fireArrow(Player PC){
 	boolean firing = true;
 	beamLength = PC.vision;
 	int i = 1;
 	
 	while (firing){
 	
-	csi.print(1, 1, "Which direction would you like to fire? (Press 5 to cancel)");
-	csi.refresh();
+	PC.csi.print(1, 1, "Which direction would you like to fire? (Press 5 to cancel)");
+	PC.csi.refresh();
 	
 	
-	int key = csi.inkey().code;
+	int key = PC.csi.inkey().code;
 
 	switch (key) {				
 	
@@ -35,18 +35,21 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 			int beamPos = PC.yPos - i;
 			
 			//Checks ahead for obstacles
-			char nextChar = csi.peekChar(PC.xPos, beamPos);
+			char nextChar = PC.csi.peekChar(PC.xPos, beamPos);
 			System.out.print(nextChar);
 			
 			//Collision 
-			if (nextChar == 'o' || nextChar == '#' || nextChar == 'g'){
-							
+			if (nextChar == 'g'){
+				PC.rangedAttack(Locator.locateGoblin(PC.xPos, beamPos));
 				firing = false;
 				break;
-			} 
+			} else if (nextChar == 'o' || nextChar == '#'){
+				firing = false;
+				break;
+			}
 			
 			//Displays the beam
-			csi.print(PC.xPos, beamPos, "|", CSIColor.AUBURN);
+			PC.csi.print(PC.xPos, beamPos, "|", CSIColor.AUBURN);
 			
 			//sleep 
 			try        
@@ -58,35 +61,31 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 				System.out.println("There was a sleeping problem.");
 			    Thread.currentThread().interrupt();
 			}
-			
-			csi.refresh();
-			
+			PC.csi.refresh();	
 			i++;
 		}
-	
 	PC.GM.setMessage("You loose an arrow.");
 	firing = false;
 	break;
 		
-	
 	case CharKey.DARROW: case CharKey.T2: case CharKey.N2:
   
 		while (i <= beamLength){
 			int beamPos = PC.yPos + i;
-			
 			//Checks ahead for obstacles
-			char nextChar = csi.peekChar(PC.xPos, beamPos);
+			char nextChar = PC.csi.peekChar(PC.xPos, beamPos);
 			System.out.print(nextChar);
-			
 			//Collision 
-			if (nextChar == 'o' || nextChar == '#' || nextChar == 'g'){
+			if (nextChar == 'g'){
+				PC.rangedAttack(Locator.locateGoblin(PC.xPos, beamPos));
 				firing = false;
 				break;
-			} 
-			
-			//Displays the beam
-			csi.print(PC.xPos, beamPos, "|", CSIColor.AUBURN);
-			
+			} else if (nextChar == 'o' || nextChar == '#'){
+				firing = false;
+				break;
+			}
+			//Display the beam
+			PC.csi.print(PC.xPos, beamPos, "|", CSIColor.AUBURN);
 			try        
 			{
 			    Thread.sleep(50);
@@ -96,13 +95,9 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 				System.out.println("There was a sleeping problem.");
 			    Thread.currentThread().interrupt();
 			}
-			
-			csi.refresh();
-			
+			PC.csi.refresh();	
 			i++;
 		}
-	
-
 	PC.GM.setMessage("You loose an arrow.");
 	firing = false;
 	break;
@@ -113,17 +108,21 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 			int beamPos = PC.xPos - i;
 			
 			//Checks ahead for obstacles
-			char nextChar = csi.peekChar(beamPos, PC.yPos);
+			char nextChar = PC.csi.peekChar(beamPos, PC.yPos);
 			System.out.print(nextChar);
 			
 			//Collision 
-			if (nextChar == 'o' || nextChar == '#' || nextChar == 'g'){
+			if (nextChar == 'g'){
+				PC.rangedAttack(Locator.locateGoblin(beamPos, PC.yPos));
 				firing = false;
 				break;
-			} 
+			} else if (nextChar == 'o' || nextChar == '#'){
+				firing = false;
+				break;
+			}
 			
 			//Displays the beam
-			csi.print(beamPos, PC.yPos, "-", CSIColor.AUBURN);
+			PC.csi.print(beamPos, PC.yPos, "-", CSIColor.AUBURN);
 			
 			try        
 			{
@@ -135,7 +134,7 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 			    Thread.currentThread().interrupt();
 			}
 			
-			csi.refresh();
+			PC.csi.refresh();
 			
 			i++;
 		}
@@ -150,17 +149,21 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 			int beamPos = PC.xPos + i;
 			
 			//Checks ahead for obstacles
-			char nextChar = csi.peekChar(beamPos, PC.yPos);
+			char nextChar = PC.csi.peekChar(beamPos, PC.yPos);
 			System.out.print(nextChar);
 			
 			//Collision 
-			if (nextChar == 'o' || nextChar == '#' || nextChar == 'g'){
+			if (nextChar == 'g'){
+				PC.rangedAttack(Locator.locateGoblin(beamPos, PC.yPos));
 				firing = false;
 				break;
-			} 
+			} else if (nextChar == 'o' || nextChar == '#'){
+				firing = false;
+				break;
+			}
 			
 			//Displays the beam
-			csi.print(beamPos, PC.yPos, "-", CSIColor.AUBURN);
+			PC.csi.print(beamPos, PC.yPos, "-", CSIColor.AUBURN);
 			
 			try        
 			{
@@ -172,7 +175,7 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 			    Thread.currentThread().interrupt();
 			}
 			
-			csi.refresh();
+			PC.csi.refresh();
 			
 			i++;
 		}
@@ -189,18 +192,22 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 			int beamLean = PC.yPos + i;
 			
 			//Checks ahead for obstacles
-			char nextChar = csi.peekChar(beamPos, beamLean);
+			char nextChar = PC.csi.peekChar(beamPos, beamLean);
 			System.out.print(nextChar);
 			
 			//Collision 
-			if (nextChar == 'o' || nextChar == '#' || nextChar == 'g'){
+			if (nextChar == 'g'){
+				PC.rangedAttack(Locator.locateGoblin(beamPos, beamLean));
 				firing = false;
 				break;
-			} 
+			} else if (nextChar == 'o' || nextChar == '#'){
+				firing = false;
+				break;
+			}
 			
 			
 			//Displays the beam
-			csi.print(beamPos, beamLean, "\\", CSIColor.AUBURN);
+			PC.csi.print(beamPos, beamLean, "\\", CSIColor.AUBURN);
 			
 			//Deletes the trail
 			
@@ -216,7 +223,7 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 			}
 			
 			//Required to show beam
-			csi.refresh();	
+			PC.csi.refresh();	
 		
 			i++;
 		}
@@ -233,17 +240,21 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 				int beamLean = PC.yPos - i;
 				
 				//Checks ahead for obstacles
-				char nextChar = csi.peekChar(beamPos, beamLean);
+				char nextChar = PC.csi.peekChar(beamPos, beamLean);
 				System.out.print(nextChar);
 				
 				//Collision 
-				if (nextChar == 'o' || nextChar == '#' || nextChar == 'g'){
+				if (nextChar == 'g'){
+					PC.rangedAttack(Locator.locateGoblin(beamPos, beamLean));
 					firing = false;
 					break;
-				} 
+				} else if (nextChar == 'o' || nextChar == '#'){
+					firing = false;
+					break;
+				}
 				
 				//Displays the beam
-				csi.print(beamPos, beamLean, "/", CSIColor.AUBURN);
+				PC.csi.print(beamPos, beamLean, "/", CSIColor.AUBURN);
 				
 				//Deletes the trail
 				
@@ -259,7 +270,7 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 				}
 				
 				//Required to show beam
-				csi.refresh();	
+				PC.csi.refresh();	
 			
 				i++;
 			}
@@ -276,17 +287,21 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 							int beamLean = PC.yPos - i;
 							
 							//Checks ahead for obstacles
-							char nextChar = csi.peekChar(beamPos, beamLean);
+							char nextChar = PC.csi.peekChar(beamPos, beamLean);
 							System.out.print(nextChar);
 							
 							//Collision 
-							if (nextChar == 'o' || nextChar == '#' || nextChar == 'g'){
+							if (nextChar == 'g'){
+								PC.rangedAttack(Locator.locateGoblin(beamPos, beamLean));
 								firing = false;
 								break;
-							} 
+							} else if (nextChar == 'o' || nextChar == '#'){
+								firing = false;
+								break;
+							}
 							
 							//Displays the beam
-							csi.print(beamPos, beamLean, "\\", CSIColor.AUBURN);
+							PC.csi.print(beamPos, beamLean, "\\", CSIColor.AUBURN);
 							
 							//Deletes the trail
 							
@@ -302,7 +317,7 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 							}
 							
 							//Required to show beam
-							csi.refresh();	
+							PC.csi.refresh();	
 						
 							i++;
 						}
@@ -319,20 +334,21 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 							int beamLean = PC.yPos + i;
 							
 							//Checks ahead for obstacles
-							char nextChar = csi.peekChar(beamPos, beamLean);
+							char nextChar = PC.csi.peekChar(beamPos, beamLean);
 							System.out.print(nextChar);
 							
 							//Collision 
-							if (nextChar == 'o' || nextChar == '#' || nextChar == 'g'){
-								
-				
-								
+							if (nextChar == 'g'){
+								PC.rangedAttack(Locator.locateGoblin(beamPos, beamLean));								
 								firing = false;
 								break;
-							} 
+							} else if (nextChar == 'o' || nextChar == '#'){
+								firing = false;
+								break;
+							}
 							
 							//Displays the beam
-							csi.print(beamPos, beamLean, "/", CSIColor.AUBURN);
+							PC.csi.print(beamPos, beamLean, "/", CSIColor.AUBURN);
 							
 							//Deletes the trail
 							
@@ -348,7 +364,7 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 							}
 							
 							//Required to show beam
-							csi.refresh();	
+							PC.csi.refresh();	
 						
 							i++;
 						}

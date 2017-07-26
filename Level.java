@@ -64,7 +64,7 @@ public void genLevel(ArrayList<Actor> actorList, ArrayList<DartTrap> trapList){
 		
 		trapList.add(trap);	
 		}
+	}
 }
 
-	
-}
+

@@ -233,9 +233,16 @@ void meleeAttack(Actor mob){
 	}
 }
 
-//Attack at position
-void attack(int xPos, int yPos){
-	//TODO write stuff here
+void rangedAttack(Actor mob){
+	Random rand = new Random();
+	int D20 = rand.nextInt(20) + 1;
+	int luckFactor = D20 + vision;
+	int harm;
+	if (strength/5 > 1){
+		harm = (strength/5) + bow.quality;
+	} else harm = 1 + bow.quality;
+	
+	mob.damage(harm);
 	
 }
 

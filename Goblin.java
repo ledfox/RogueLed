@@ -12,13 +12,15 @@ public class Goblin extends Actor {
 	public int experience = 25;
 	boolean fleeing = false;
 	public int power = 3;
+	Random rand = new Random();
+	boolean dead = false;
 	
 	//Determines goblin behavior
-	
 	void decide(Player PC){
 		
 		//Goblin decides if it is dead
 		if (health <= 0) {
+			dead = true;
 			
 			//Goblin should shout as it dies - no shouting in the graveyard!
 			if (xPos != 0 && yPos != 0){
@@ -27,7 +29,10 @@ public class Goblin extends Actor {
 				//Fork over XP
 				PC.gainXP(experience);
 			}
+			if (dead){
 			depop();
+			return;
+			}
 			
 		}  if (health == 1) {	
 			
@@ -35,7 +40,7 @@ public class Goblin extends Actor {
 				PC.GM.setMessage("The goblin panics and flees!");
 				fleeing = true;
 				}
-			Random rand = new Random();
+			//This lets Goblin behavior be a bit less predictable
 			int d10 = rand.nextInt(10) + 1;
 				if (d10 >= 10){
 					lickWounds();
@@ -46,10 +51,18 @@ public class Goblin extends Actor {
 				flee(PC);
 				}
 		
+		//This essentially sets the goblin's vision to 10
+		//Need to decide if mobs will have proper vision or not
 		} else if (((xPos - PC.xPos) < 10) && ((yPos - PC.yPos) < 10)){
 		
-		//Goblin will approach PC IF its not dead
+		//Sometimes goblins move randomly even if they weren't planning on it
+		int d10 = rand.nextInt(10) + 1;
+		if (d10 > 8){
+			moveRandom();
+		} else {
+		//In most cases, a goblin that sees a PC will move towards it
 		approach(PC);
+		}		
 		
 		} else {
 		
