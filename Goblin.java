@@ -1,6 +1,7 @@
 package primary;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Goblin extends Actor {
 
@@ -10,7 +11,7 @@ public class Goblin extends Actor {
 	String color = "GREEN";
 	public int experience = 25;
 	boolean fleeing = false;
-	public int power = 5;
+	public int power = 3;
 	
 	//Determines goblin behavior
 	
@@ -34,9 +35,16 @@ public class Goblin extends Actor {
 				PC.GM.setMessage("The goblin panics and flees!");
 				fleeing = true;
 				}
-				
+			Random rand = new Random();
+			int d10 = rand.nextInt(10) + 1;
+				if (d10 >= 10){
+					lickWounds();
+					fleeing = false;
+				} else if ((d10 == 9) || (d10 == 8)){
+					moveRandom();
+				} else {			
 				flee(PC);
-				
+				}
 		
 		} else if (((xPos - PC.xPos) < 10) && ((yPos - PC.yPos) < 10)){
 		
@@ -49,9 +57,9 @@ public class Goblin extends Actor {
 			moveRandom();	
 		}
 
+		//Goblins attack if they can (on PC's square)
 		if (xPos == PC.xPos && yPos == PC.yPos){
 			attack(PC);
-			
 			pushBack(this);
 			}
 	}
@@ -79,7 +87,10 @@ public class Goblin extends Actor {
 		PC.checkXP();
 	}
 	
-	
+	//Special Goblin action
+	public void lickWounds(){
+		damage(-1);
+	}
 
 	//Attack
 	//Note, should be able to move to the superclass Actor once I figure out how to make that work

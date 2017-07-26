@@ -33,7 +33,7 @@ public class ObjectRogueTinker {
   	Announcer GM = new Announcer();
   	
     //Generate Player
-  	Player PC = new Player (5, 5, GM);
+  	Player PC = new Player (5, 5, GM, csi);
   	
   	//Generates a level object
   	Level level = new Level();

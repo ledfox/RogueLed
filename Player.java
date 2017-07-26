@@ -2,6 +2,8 @@ package primary;
 
 import java.util.Random;
 
+import net.slashie.libjcsi.ConsoleSystemInterface;
+
 public class Player {
 
 	 //Tied to core gameplay: csi.print(xPosthis, yPosthis, "@", CSIColor.ATOMIC_TANGERINE);
@@ -29,7 +31,7 @@ public class Player {
 	public int arrows = 0;
 	public int berries = 10;
 	
-	
+	public ConsoleSystemInterface csi;
 	
 //Player Methods
     
@@ -122,6 +124,7 @@ public class Player {
 				currentHealth = maxHealth;
 			}
 			berries -= 1;
+			GM.setMessage("The berry was delicious!");
 		}
 	}
 	
@@ -256,10 +259,11 @@ void setHP(int value){
 
 //Constructor Methods	
 	
-  public Player(int a, int b, Announcer vGM) {
+  public Player(int a, int b, Announcer vGM, ConsoleSystemInterface Pcsi) {
   	xPos =  a;
   	yPos =  b;
   	GM = vGM;
+  	csi = Pcsi;
   }
 
 //Getters

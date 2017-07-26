@@ -33,7 +33,7 @@ public class RogueLed {
   	Announcer GM = new Announcer();
   	
     //Generate Player
-  	Player PC = new Player (5, 5, GM);
+  	Player PC = new Player (5, 5, GM, csi);
   	
   	//Generates a level object
   	Level level = new Level();
@@ -83,8 +83,7 @@ public class RogueLed {
 		PC.setHP(PC.maxHealth);
 		
 		//Feeds the required lists into the level generator
-		level.genLevel(0);
-		//level.genLevel(GM, actorList, trapList);
+		//level.genLevel(0);
 			
 		level.genLevel(1, GM, boulderList, gobList, trapList, wallList);
 		
@@ -189,6 +188,12 @@ public class RogueLed {
 					timestep = true;
 					break;
 					
+				//Option to eat berries
+				case CharKey.e: case CharKey.E:
+					PC.eatBerry();
+					timestep = true;
+					break;
+				
 				//Testing upgrade system
 				case CharKey.U: case CharKey.u:
 					PC.armor.upgrade();
@@ -216,6 +221,7 @@ public class RogueLed {
 					
 				//When "Q" is pressed, 'exit' is set to true and game quits. Neat!
 				case CharKey.Q: case CharKey.q:
+					csi.print(1, 1, "Quitting...");
 					exit = true;
 					
 				}
@@ -259,7 +265,7 @@ public class RogueLed {
 			}
 			
 		//Only triggers on exit
-		csi.print(1, 1, "Quitting...");
+		
 		csi.print(1, 2, "Press space to continue");
 		
 		csi.refresh();

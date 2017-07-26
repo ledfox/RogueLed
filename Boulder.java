@@ -34,9 +34,94 @@ public class Boulder extends Actor {
     void checkPush(Player PC){
     	
     	String direction = PC.direction;
+    	
     	if (PC.xPos == this.xPos && PC.yPos == this.yPos){
+    	int relTile = 0;
+    	char nextChar = '.';
+    	
+    	int sigTile = 0;
+    	
+    	//Obstacle check code
+    		switch (direction){
+    		case "North":
+    			relTile = PC.yPos - 1;
+    			nextChar = PC.csi.peekChar(PC.xPos, relTile);
+    			if (nextChar == 'o' || nextChar == 'g'){
+    				pushBack(PC);
+    				PC.GM.setMessage("There's something blocking the boulder's path!");
+    				return;
+    			} else break;
     		
-        //Strength check code - needs to stop movement in order to be stable    		
+    		case "South":
+    			relTile = PC.yPos + 1;
+    			nextChar = PC.csi.peekChar(PC.xPos, relTile);
+    			if (nextChar == 'o' || nextChar == 'g'){
+    				pushBack(PC);
+    				PC.GM.setMessage("There's something blocking the boulder's path!");
+    				return;
+    			} else break;
+    			
+    		case "East":
+    			sigTile = PC.xPos + 1;
+    			nextChar = PC.csi.peekChar(sigTile, PC.yPos);
+    			if (nextChar == 'o' || nextChar == 'g'){
+    				pushBack(PC);
+    				PC.GM.setMessage("There's something blocking the boulder's path!");
+    				return;
+    			} else break;
+    			
+    		case "West":
+    			sigTile = PC.xPos - 1;
+    			nextChar = PC.csi.peekChar(sigTile, PC.yPos);
+    			if (nextChar == 'o' || nextChar == 'g'){
+    				pushBack(PC);
+    				PC.GM.setMessage("There's something blocking the boulder's path!");
+    				return;
+    			} else break;
+    			
+    		case "NorthWest":
+    			relTile = PC.yPos - 1;
+    			sigTile = PC.xPos - 1;
+    			nextChar = PC.csi.peekChar(sigTile, relTile);
+    			if (nextChar == 'o' || nextChar == 'g'){
+    				pushBack(PC);
+    				PC.GM.setMessage("There's something blocking the boulder's path!");
+    				return;
+    			} else break;
+    			
+    		case "NorthEast":
+    			relTile = PC.yPos - 1;
+    			sigTile = PC.xPos + 1;
+    			nextChar = PC.csi.peekChar(sigTile, relTile);
+    			if (nextChar == 'o' || nextChar == 'g'){
+    				pushBack(PC);
+    				PC.GM.setMessage("There's something blocking the boulder's path!");
+    				return;
+    			} else break;
+    			
+    		case "SouthWest":
+    			relTile = PC.yPos + 1;
+    			sigTile = PC.xPos - 1;
+    			nextChar = PC.csi.peekChar(sigTile, relTile);
+    			if (nextChar == 'o' || nextChar == 'g'){
+    				pushBack(PC);
+    				PC.GM.setMessage("There's something blocking the boulder's path!");
+    				return;
+    			} else break;
+    			
+    		case "SouthEast":
+    			relTile = PC.yPos + 1;
+    			sigTile = PC.xPos + 1;
+    			nextChar = PC.csi.peekChar(sigTile, relTile);
+    			if (nextChar == 'o' || nextChar == 'g'){
+    				pushBack(PC);
+    				PC.GM.setMessage("There's something blocking the boulder's path!");
+    				return;
+    			} else break;
+    			
+    			
+    		}
+        //Strength check code  		
     		Random rand = new Random();
     	int luckFactor = rand.nextInt(6) + 1;
     	if (PC.strength < (this.weight - luckFactor)){
@@ -44,7 +129,7 @@ public class Boulder extends Actor {
     		PC.trainStat("Strength");
     		return;
     	} else {
-    		
+    		//Succeed on pushing the boulder
     		switch (direction){
     		case "North":
     			if (this.yPos > 3){
@@ -109,6 +194,7 @@ public class Boulder extends Actor {
 			mob.moveRandom();
 			
 			//.moveRandom() doesn't check for stacks - this one will
+			//currently does nothing - bounceActor wouldn't be checked here
 			if (mob.xPos == this.xPos && mob.yPos == this.yPos){
 				pushBack(mob);
 			}

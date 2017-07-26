@@ -48,9 +48,7 @@ public static void fireArrow(Player PC, ConsoleSystemInterface csi){
 			//Displays the beam
 			csi.print(PC.xPos, beamPos, "|", CSIColor.AUBURN);
 			
-			//Remove the beam trail
-			//TODO figure this one out
-			
+			//sleep 
 			try        
 			{
 			    Thread.sleep(50);
