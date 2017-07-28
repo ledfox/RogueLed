@@ -3,18 +3,21 @@ package primary;
 import java.util.ArrayList;
 import java.util.Random;
 
+import net.slashie.libjcsi.CSIColor;
+
 public class Goblin extends Actor {
 
 	public int health = 5;
-	char symbol = 'g';
-	String name = "goblin";
-	String color = "GREEN";
 	public int experience = 25;
-	boolean fleeing = false;
 	public int power = 3;
+	
+	static char symbol = 'g';
+	CSIColor color = CSIColor.GREEN;
+	String name = "goblin";
+	
 	Random rand = new Random();
 	boolean dead = false;
-	
+	boolean fleeing = false;
 	//Determines goblin behavior
 	void decide(Player PC){
 		
@@ -131,7 +134,7 @@ public class Goblin extends Actor {
 	//Constructor
 	public Goblin(int x, int y, char d, String n) {
 	
-		super(x, y, d, n);
+		super(x, y, symbol, n);
 		
 	}
 

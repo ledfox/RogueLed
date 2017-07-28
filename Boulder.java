@@ -12,12 +12,11 @@ public class Boulder extends Actor {
 //    public int yPos = 7;
 
 	
-	public int weight = 18;
+	public int weight = 15;
     public char symbol = 'o';
-    String message = "You push the boulder.";
-    
     int health = 1000;
     
+    String message = "You push the boulder.";
     boolean diggable = true;
     
     //Constructor
@@ -134,49 +133,49 @@ public class Boulder extends Actor {
     		case "North":
     			if (this.yPos > 3){
     		this.moveNorth();} else {pushBack(PC);}
-    			PC.trainStat("Strength");
+    			PC.trainStat("Strength"); PC.GM.setMessage(message);
     		break;
     		
     		case "South":
     			if (this.yPos < 19){
     		this.moveSouth();} else {pushBack(PC);}
-    			PC.trainStat("Strength");
+    			PC.trainStat("Strength"); PC.GM.setMessage(message);
     			break;
     		
     		case "East":
     			if (this.xPos < 77){
     		this.moveEast();} else {pushBack(PC);}
-    			PC.trainStat("Strength");
+    			PC.trainStat("Strength"); PC.GM.setMessage(message);
     			break;
     		
     		case "West":
     			if(this.xPos > 2){
     		this.moveWest();} else {pushBack(PC);}
-    			PC.trainStat("Strength");
+    			PC.trainStat("Strength"); PC.GM.setMessage(message);
     			break;
     		
     		case "NorthWest":
     			if((this.yPos > 3 && this.xPos > 2)){
     		this.moveNorthWest();}else {pushBack(PC);}
-    			PC.trainStat("Strength");
+    			PC.trainStat("Strength"); PC.GM.setMessage(message);
     			break;
     		
     		case "NorthEast":
     			if((this.yPos > 3 && this.xPos < 77)){
     		this.moveNorthEast();}else {pushBack(PC);}
-    			PC.trainStat("Strength");
+    			PC.trainStat("Strength"); PC.GM.setMessage(message);
     			break;
     		
     		case "SouthWest":
     			if((this.yPos < 19 && this.xPos > 2)){
     		this.moveSouthWest();} else {pushBack(PC);}
-    			PC.trainStat("Strength");
+    			PC.trainStat("Strength"); PC.GM.setMessage(message);
     			break;
     		
     		case "SouthEast":
     			if((this.yPos < 19 && this.xPos < 77)){
     		this.moveSouthEast();} else {pushBack(PC);}
-    			PC.trainStat("Strength");
+    			PC.trainStat("Strength"); PC.GM.setMessage(message);
     			break;
     		
     		}
@@ -194,7 +193,7 @@ public class Boulder extends Actor {
 			mob.moveRandom();
 			
 			//.moveRandom() doesn't check for stacks - this one will
-			//currently does nothing - bounceActor wouldn't be checked here
+			//currently works better than not having it, but not perfect
 			if (mob.xPos == this.xPos && mob.yPos == this.yPos){
 				pushBack(mob);
 			}

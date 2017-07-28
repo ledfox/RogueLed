@@ -217,17 +217,17 @@ void gainLevel(){
 void meleeAttack(Actor mob){
 	Random rand = new Random();
 	int D20 = rand.nextInt(20) + 1;
-	int luckFactor = D20 + vision;
+	int luckFactor = D20 + vision/2;
 	int harm;
 	if (strength/5 > 1){
 		harm = (strength/5) + weapon.quality;
 	} else harm = 1 + weapon.quality;
 	
-	if ((xPos == mob.xPos) && (yPos == mob.yPos) && (luckFactor > 5)){
+	if ((xPos == mob.xPos) && (yPos == mob.yPos) && (luckFactor > 10)){
 		mob.damage(harm);
 		mob.pushBack(this);
 		GM.setMessage("You hit the " + mob.name + "!");
-	} else if ((xPos == mob.xPos) && (yPos == mob.yPos) && (luckFactor < 5)){
+	} else if ((xPos == mob.xPos) && (yPos == mob.yPos) && (luckFactor < 10)){
 		mob.pushBack(this);
 		GM.setMessage("You miss the " + mob.name + ".");
 	}
@@ -241,8 +241,13 @@ void rangedAttack(Actor mob){
 	if (strength/5 > 1){
 		harm = (strength/5) + bow.quality;
 	} else harm = 1 + bow.quality;
-	
+	if (luckFactor > 10){
 	mob.damage(harm);
+	GM.setMessage("Your arrow strikes the " + mob.name + "!");
+	} else {
+		GM.setMessage("Your arrow misses the " + mob.name + ".");
+	}
+	
 	
 }
 

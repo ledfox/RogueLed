@@ -2,6 +2,8 @@ package primary;
 
 import java.util.Random;
 
+import net.slashie.libjcsi.CSIColor;
+
 public class Actor {
 
 	int xPos = 0;
@@ -12,6 +14,7 @@ public class Actor {
 	String direction = "None";
 	int experience = 1;
 	int power = 0;
+	public CSIColor color = CSIColor.GRAY;
 	
 	//Deconstructor
 	
@@ -145,7 +148,7 @@ public class Actor {
 	
     //Pushback mechanic
     
-    void pushBack(Player PC){
+    static void pushBack(Player PC){
     	String pushDir = PC.direction;
     	
     	switch (pushDir){
@@ -217,6 +220,12 @@ public class Actor {
 		}
     }
     
+    void bouncePlayer(Player PC){
+		if (PC.xPos == this.xPos && PC.yPos == this.yPos){
+			pushBack(PC);
+		}
+    }
+    
 	//move towards the player
 	void approach (Player PC){
 		 if(PC.yPos < this.yPos){
@@ -275,5 +284,10 @@ public class Actor {
 	
 	void setYpos(int newPos){
 		yPos = newPos;
+	}
+
+	public void run(Player pC) {
+		// TODO Auto-generated method stub
+		
 	}
 }

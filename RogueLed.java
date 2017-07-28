@@ -83,9 +83,9 @@ public class RogueLed {
 		PC.setHP(PC.maxHealth);
 		
 		//Feeds the required lists into the level generator
-		//level.genLevel(0);
+		level.genLevel(0);
 			
-		level.genLevel(1, GM, boulderList, gobList, trapList, wallList);
+		//level.genLevel(1, GM, boulderList, gobList, trapList, wallList);
 		
 		
 		//Generate wall for a test
@@ -95,9 +95,15 @@ public class RogueLed {
 		//actorList.add(wall1);
 		
 		//Bring Ursatz to life for testing
-//		Goblin Ursatz = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', GM, "Ursatz");
-//		gobList.add(Ursatz);	
-//		
+		Goblin Ursatz = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3, Goblin.symbol, "Ursatz");
+		gobList.add(Ursatz);	
+
+		//Test with a dummy
+		Dummy tDummy = new Dummy (10, 10);
+		actorList.add(tDummy);
+		
+		//Another dummy test
+		
 		
 		//This is cool - allows while loop to run. Once "Exit" is true, game quits.
 		boolean exit = false;
@@ -118,6 +124,14 @@ public class RogueLed {
 				//Prints the player character in ATOMIC TANGERINE
 				csi.print(PC.xPos, PC.yPos, "@", CSIColor.ATOMIC_TANGERINE);
 				
+				//Display dummy 
+//				csi.print(tDummy.xPos, tDummy.yPos, tDummy.symbol, tDummy.color);
+				
+				//Display actors
+				for (Actor next : actorList){
+					csi.print(next.xPos, next.yPos, next.symbol, next.color);
+				}
+				
 				//Display Boulders
 				for (Boulder rock : boulderList){
 					csi.print(rock.xPos, rock.yPos, rock.symbol, CSIColor.BEIGE);		
@@ -125,7 +139,7 @@ public class RogueLed {
 
 				//Display Goblins
 				for (Goblin gob : gobList){
-					csi.print(gob.xPos, gob.yPos, gob.symbol, CSIColor.GREEN);
+					csi.print(gob.xPos, gob.yPos, Goblin.symbol, CSIColor.GREEN);
 				}
 				
 				//Display Walls
@@ -228,6 +242,10 @@ public class RogueLed {
 				
 				//essentially the ".run" mechanic
 				if (timestep = true){
+					
+					for(Actor next : actorList){
+						next.run(PC);
+					}
 					
 					//Checks if a player is in a wall - bounces them back if they are.
 					for (Wall wall : wallList){
