@@ -29,7 +29,11 @@ Diagonal firing now possible
 Fixed bug where boulders would "stack" when pushed
 Added berries
 
-Development path:
-Needs polymorphism (Integrate more actors as sub)
-Needs more robust features (Other actors)
-Needs specific stats for inventory (tied to damage, etc)
+Requirements for 0.1.0
+Collectables (Berries, Ingots, Arrows)
+Gods (Good, Neutral, Evil)
+-Alters
+-Invokations
+-Passive abilities
+Forges
+-Crafting
