@@ -225,10 +225,10 @@ void meleeAttack(Actor mob){
 	
 	if ((xPos == mob.xPos) && (yPos == mob.yPos) && (luckFactor > 10)){
 		mob.damage(harm);
-		mob.pushBack(this);
+		Actor.pushBack(this);
 		GM.setMessage("You hit the " + mob.name + "!");
 	} else if ((xPos == mob.xPos) && (yPos == mob.yPos) && (luckFactor < 10)){
-		mob.pushBack(this);
+		Actor.pushBack(this);
 		GM.setMessage("You miss the " + mob.name + ".");
 	}
 }

@@ -9,7 +9,7 @@ public class Goblin extends Actor {
 
 	public int health = 5;
 	public int experience = 25;
-	public int power = 3;
+	public int power = 2;
 	
 	static char symbol = 'g';
 	CSIColor color = CSIColor.GREEN;

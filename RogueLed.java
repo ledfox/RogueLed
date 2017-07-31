@@ -51,6 +51,9 @@ public class RogueLed {
 	//Generate goblinList
 	static ArrayList<Goblin> gobList = new ArrayList<Goblin>();
 	
+	//Generate collectablesList
+	static ArrayList<Collectable> junkList = new ArrayList<Collectable>();
+	
 	//Generate wallList
 	ArrayList<Wall> wallList = new ArrayList<Wall>();
 	
@@ -83,9 +86,9 @@ public class RogueLed {
 		PC.setHP(PC.maxHealth);
 		
 		//Feeds the required lists into the level generator
-		level.genLevel(0);
+		//level.genLevel(0);
 			
-		//level.genLevel(1, GM, boulderList, gobList, trapList, wallList);
+		level.genLevel(1, GM, boulderList, gobList, junkList, trapList, wallList);
 		
 		
 		//Generate wall for a test
@@ -120,6 +123,11 @@ public class RogueLed {
 				for (DartTrap trap : trapList){
 					csi.print(trap.xPos, trap.yPos, trap.symbol, CSIColor.RED);
 				}
+				
+				//Display Collectables
+				for (Collectable junk : junkList){
+					csi.print(junk.xPos, junk.yPos, junk.symbol, junk.color);
+				}
 
 				//Prints the player character in ATOMIC TANGERINE
 				csi.print(PC.xPos, PC.yPos, "@", CSIColor.ATOMIC_TANGERINE);
@@ -141,6 +149,8 @@ public class RogueLed {
 				for (Goblin gob : gobList){
 					csi.print(gob.xPos, gob.yPos, Goblin.symbol, CSIColor.GREEN);
 				}
+				
+				
 				
 				//Display Walls
 				for (Wall wall : wallList){
@@ -263,7 +273,11 @@ public class RogueLed {
 					for (Goblin gob : gobList){
 						//Goblin.run does a bunch of stuff. Check goblin class for more info.
 						gob.run(PC, wallList, boulderList, trapList, gobList);
-						
+						//System.out.println(gob.health);
+					}
+					
+					for (Collectable junk : junkList){
+						junk.collect(PC);
 					}
 					
 					//Get PC's position for debugging

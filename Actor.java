@@ -9,7 +9,7 @@ public class Actor {
 	int xPos = 0;
 	int yPos = 0;
 	char symbol = '0';
-	int health = 1;
+	static int health = 1;
 	String name = "generic actor";
 	String direction = "None";
 	int experience = 1;
@@ -63,7 +63,7 @@ public class Actor {
 	//Damage 
     //Note, doesn't seem to work unless declared in the sub class. 
 	void damage(int harm){
-		this.health -= harm;
+		health -= harm;
 	}
 
 	void setHP(int value){

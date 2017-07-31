@@ -9,7 +9,8 @@ public class Level {
 		
 	}
 	
-public void genLevel(int number, Announcer GM, ArrayList<Boulder> boulderList, ArrayList<Goblin> gobList, ArrayList<DartTrap> trapList, ArrayList<Wall> wallList){
+public void genLevel(int number, Announcer GM, ArrayList<Boulder> boulderList, ArrayList<Goblin> gobList, 
+		ArrayList<Collectable> junkList, ArrayList<DartTrap> trapList, ArrayList<Wall> wallList){
 	
 	Random rand = new Random();
 	
@@ -24,6 +25,13 @@ public void genLevel(int number, Announcer GM, ArrayList<Boulder> boulderList, A
 					Goblin gob = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', "goblin");
 				gobList.add(gob);	
 				}
+				
+				//Generate a bunch of collectables all at once
+				for (int i = 0; i < 100; i++){
+					Collectable junk = new Collectable(rand.nextInt(75) + 3, rand.nextInt(17) + 3, '%');
+				junkList.add(junk);
+				}
+				
 				
 				//Generate a bunch of boulders all at once
 				for(int i = 0; i < 100; i++){
