@@ -7,7 +7,7 @@ public class Collectable {
 	public int xPos = 10;
 	public int yPos = 10;
 
-	static char symbol = '$';
+	char symbol = '$';
 	
 	String name = "unknown object";
 	
@@ -31,7 +31,7 @@ public class Collectable {
 				break;
 			
 			}
-			
+			PC.GM.setMessage("You pick up a " + name);
 			depop();
 		}
 	}

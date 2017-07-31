@@ -238,7 +238,7 @@ public class RogueLed {
 					//Beam.peekBeam(PC,csi);
 					
 					//Fires an arrow
-					Beam.fireArrow(PC);
+					PC.fireArrow();
 				
 					
 					break;

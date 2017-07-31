@@ -28,7 +28,7 @@ public class Player {
 	public Bow bow = new Bow();
 	
 	public int ingots = 0;
-	public int arrows = 0;
+	public int arrows = 10;
 	public int berries = 10;
 	
 	public ConsoleSystemInterface csi;
@@ -111,6 +111,19 @@ public class Player {
 		this.arrows += 1;
 	}
 
+//Fire Arrow
+	
+	void fireArrow(){
+		if (this.arrows <= 0){
+			GM.setMessage("You're all out of arrows!");
+		} else {
+			
+			//Fires an arrow
+			Beam.fireArrow(this);
+			arrows -= 1;
+		}
+	}
+	
 //Consume
 	
 	void eatBerry(){

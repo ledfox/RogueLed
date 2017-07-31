@@ -26,12 +26,23 @@ public void genLevel(int number, Announcer GM, ArrayList<Boulder> boulderList, A
 				gobList.add(gob);	
 				}
 				
-				//Generate a bunch of collectables all at once
+				//Generate a bunch of berries all at once
 				for (int i = 0; i < 100; i++){
 					Collectable junk = new Collectable(rand.nextInt(75) + 3, rand.nextInt(17) + 3, '%');
 				junkList.add(junk);
 				}
 				
+				//Generate a bunch of arrows all at once
+				for (int i = 0; i < 100; i++){
+					Collectable junk = new Collectable(rand.nextInt(75) + 3, rand.nextInt(17) + 3, '/');
+					junkList.add(junk);
+				}
+				
+//				//Generate a bunch of ingots all at once
+				for (int i = 0; i < 100; i++){
+					Collectable junk = new Collectable(rand.nextInt(75) + 3, rand.nextInt(17) + 3, ']');
+					junkList.add(junk);
+				}
 				
 				//Generate a bunch of boulders all at once
 				for(int i = 0; i < 100; i++){
