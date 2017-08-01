@@ -67,7 +67,7 @@ public class Actor {
 	}
 
 	void setHP(int value){
-		this.health = value;
+		Actor.health = value;
 	}
     
     //Actor Movement

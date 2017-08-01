@@ -9,11 +9,6 @@ public class Beam {
 	static int beamLength = 0;
 	
 	
-//TODO diagonal 
-//TODO consume ammo
-//TODO stop when hitting something
-//TODO call bow.damage()
-	
 public static void fireArrow(Player PC){
 	boolean firing = true;
 	beamLength = PC.vision;
@@ -23,7 +18,6 @@ public static void fireArrow(Player PC){
 	
 	PC.csi.print(1, 1, "Which direction would you like to fire? (Press 5 to cancel)");
 	PC.csi.refresh();
-	
 	
 	int key = PC.csi.inkey().code;
 
@@ -374,7 +368,7 @@ public static void fireArrow(Player PC){
 						break;
 			
 	
-	case CharKey.T5: case CharKey.N5: case CharKey.C: case CharKey.c:
+	case CharKey.T5: case CharKey.N5: case CharKey.C: case CharKey.c: case CharKey.ESC:
 		
 		PC.GM.setMessage("You decide against firing any arrows.");
 		firing = false;
@@ -385,6 +379,7 @@ public static void fireArrow(Player PC){
 		
 }
 	
+//Test beam
 public static void zapBeam (Player PC, ConsoleSystemInterface csi){
 	beamLength = PC.vision;
 	int i = 1;

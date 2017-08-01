@@ -86,7 +86,7 @@ public class RogueLed {
 		PC.setHP(PC.maxHealth);
 		
 		//Feeds the required lists into the level generator
-		//level.genLevel(0);
+		level.genLevel(0);
 			
 		level.genLevel(1, GM, boulderList, gobList, junkList, trapList, wallList);
 		
@@ -97,6 +97,10 @@ public class RogueLed {
 		//Add wall1 to actor list for a test
 		//actorList.add(wall1);
 		
+		//Generate a forge for testing
+		Forge forge = new Forge(7,7);
+		
+		
 		//Bring Ursatz to life for testing
 		Goblin Ursatz = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3, Goblin.symbol, "Ursatz");
 		gobList.add(Ursatz);	
@@ -104,11 +108,9 @@ public class RogueLed {
 		//Test with a dummy
 		Dummy tDummy = new Dummy (10, 10);
 		actorList.add(tDummy);
+	
 		
-		//Another dummy test
-		
-		
-		//This is cool - allows while loop to run. Once "Exit" is true, game quits.
+		//Allows while loop to run. Once "Exit" is true, game quits.
 		boolean exit = false;
 				
 		
@@ -119,6 +121,9 @@ public class RogueLed {
 		
 				csi.restore();
 
+				//Display forge
+				csi.print(Forge.xPos, Forge.yPos, forge.symbol, CSIColor.DARK_GRAY);
+				
 				//Display Dart Traps
 				for (DartTrap trap : trapList){
 					csi.print(trap.xPos, trap.yPos, trap.symbol, CSIColor.RED);
@@ -150,12 +155,12 @@ public class RogueLed {
 					csi.print(gob.xPos, gob.yPos, Goblin.symbol, CSIColor.GREEN);
 				}
 				
-				
-				
 				//Display Walls
 				for (Wall wall : wallList){
 					csi.print(wall.xPos, wall.yPos, wall.symbol, CSIColor.GRAY);
 				}
+				
+				
 				
 				//Setup misc. map elements
 				Map.setUp(csi, statmes, PC, timeStr);
@@ -218,11 +223,12 @@ public class RogueLed {
 					timestep = true;
 					break;
 				
-				//Testing upgrade system
+				//Upgrade system
 				case CharKey.U: case CharKey.u:
-					PC.armor.upgrade();
-					PC.weapon.upgrade();
-					PC.bow.upgrade();
+//					PC.armor.upgrade();
+//					PC.weapon.upgrade();
+//					PC.bow.upgrade();
+					PC.forge();
 					csi.refresh();
 					break;
 					

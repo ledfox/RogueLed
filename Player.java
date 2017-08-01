@@ -27,6 +27,7 @@ public class Player {
 	public Weapon weapon = new Weapon();
 	public Bow bow = new Bow();
 	
+	//TODO set ingots back to 0 after testing
 	public int ingots = 0;
 	public int arrows = 10;
 	public int berries = 10;
@@ -121,6 +122,16 @@ public class Player {
 			//Fires an arrow
 			Beam.fireArrow(this);
 			arrows -= 1;
+		}
+	}
+	
+//Forge
+	
+	void forge(){
+		if (this.ingots <= 0){
+			GM.setMessage("You have no ingots to forge with!");
+		} else {
+			Forge.upgrade(this);
 		}
 	}
 	
