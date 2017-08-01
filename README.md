@@ -29,11 +29,12 @@ Diagonal firing now possible
 Fixed bug where boulders would "stack" when pushed
 Added berries
 
+Version 0.0.5
+Collectables fully implimented
+Forge implimented
+
 Requirements for 0.1.0
-Collectables (Berries, Ingots, Arrows)
 Gods (Good, Neutral, Evil)
 -Alters
 -Invokations
 -Passive abilities
-Forges
--Crafting
