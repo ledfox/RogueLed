@@ -1,6 +1,5 @@
 package primary;
 
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -33,7 +32,7 @@ public class RogueLed {
   	Announcer GM = new Announcer();
   	
     //Generate Player
-  	Player PC = new Player (5, 5, GM, csi);
+  	Player PC = new Player (13, 13, GM, csi);
   	
   	//Generates a level object
   	Level level = new Level();
@@ -55,7 +54,7 @@ public class RogueLed {
 	static ArrayList<Collectable> junkList = new ArrayList<Collectable>();
 	
 	//Generate wallList
-	ArrayList<Wall> wallList = new ArrayList<Wall>();
+	static ArrayList<Wall> wallList = new ArrayList<Wall>();
 	
 	//Generate actorList
 	ArrayList<Actor> actorList = new ArrayList<Actor>();
@@ -86,10 +85,11 @@ public class RogueLed {
 		PC.setHP(PC.maxHealth);
 		
 		//Feeds the required lists into the level generator
-		level.genLevel(0);
+		//level.genLevel(0);
 			
-		level.genLevel(1, GM, boulderList, gobList, junkList, trapList, wallList);
+		//level.genLevel(1, GM, boulderList, gobList, junkList, trapList, wallList);
 		
+		level.genLevel(2, GM, boulderList, gobList, junkList, trapList, wallList);
 		
 		//Generate wall for a test
 		//Wall wall1 = new Wall(7,7);
@@ -98,8 +98,7 @@ public class RogueLed {
 		//actorList.add(wall1);
 		
 		//Generate a forge for testing
-		Forge forge = new Forge(7,7);
-		
+		Forge forge = new Forge(20,7);
 		
 		//Bring Ursatz to life for testing
 		Goblin Ursatz = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3, Goblin.symbol, "Ursatz");
@@ -109,10 +108,8 @@ public class RogueLed {
 		Dummy tDummy = new Dummy (10, 10);
 		actorList.add(tDummy);
 	
-		
 		//Allows while loop to run. Once "Exit" is true, game quits.
 		boolean exit = false;
-				
 		
 			while (!exit){
 				
@@ -160,8 +157,6 @@ public class RogueLed {
 					csi.print(wall.xPos, wall.yPos, wall.symbol, CSIColor.GRAY);
 				}
 				
-				
-				
 				//Setup misc. map elements
 				Map.setUp(csi, statmes, PC, timeStr);
 				
@@ -174,7 +169,7 @@ public class RogueLed {
 				//Main character movement
 				switch (key) {				
 				
-				//Base code allows for arrow movement - added number pad to cardinal directions
+				//Base code allows for movement - number pad to cardinal directions
 				//timer++ hardcoded whenever a key is pressed (to increment turn)
 				
 				case CharKey.UARROW: case CharKey.T8: case CharKey.N8:
@@ -216,8 +211,14 @@ public class RogueLed {
 					PC.loiter();
 					timestep = true;
 					break;
+				
+				//Dig
+				case CharKey.d: case CharKey.D:
+					PC.dig();
+					timestep = true;
+					break;
 					
-				//Option to eat berries
+				//Eat berries
 				case CharKey.e: case CharKey.E:
 					PC.eatBerry();
 					timestep = true;
@@ -225,24 +226,12 @@ public class RogueLed {
 				
 				//Upgrade system
 				case CharKey.U: case CharKey.u:
-//					PC.armor.upgrade();
-//					PC.weapon.upgrade();
-//					PC.bow.upgrade();
 					PC.forge();
 					csi.refresh();
 					break;
 					
-				//Testing BEAMS
-				case CharKey.F: case CharKey.f:
-				
-					//Generic red beam with a message  
-					//Only fires to the right
-					//Beam.zapBeam
-					
-					//Generic invisible beam that returns to the consul char data over the tiles it passes
-					//Only fires to the right. 
-					//Beam.peekBeam(PC,csi);
-					
+				//Arrow firing
+				case CharKey.F: case CharKey.f:	
 					//Fires an arrow
 					PC.fireArrow();
 				
@@ -287,7 +276,7 @@ public class RogueLed {
 					}
 					
 					//Get PC's position for debugging
-					//PC.getPosition();
+					PC.getPosition();
 					
 					statmes = GM.getMessage();
 					
@@ -311,7 +300,6 @@ public class RogueLed {
 		System.exit(0);
 				
 				}
-	
 	//Getters
 	public static ArrayList<Goblin> getGobs(){
 		return gobList;
@@ -319,6 +307,10 @@ public class RogueLed {
 	
 	public static ArrayList<Boulder> getBoulders(){
 		return boulderList;
+	}
+	
+	public static ArrayList<Wall> getWalls(){
+		return wallList;
 	}
 	
 	}

@@ -21,6 +21,14 @@ public class Wall extends Actor {
 			pushBack(mob);
 		}
 	}
+    
+    //Deconstructor
+    public static void breakWall(Wall wall){
+    	if (wall != null){
+			wall.xPos = 0;
+			wall.yPos = 0;		
+		}
+    }
 	
 	//Constructor
 	public Wall(int a, int b){
