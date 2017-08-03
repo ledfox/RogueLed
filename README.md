@@ -33,6 +33,9 @@ Version 0.0.5
 Collectables fully implimented
 Forge implimented
 
+Version 0.0.6
+Digging partially implimented 
+
 Requirements for 0.1.0
 Gods (Good, Neutral, Evil)
 -Alters
