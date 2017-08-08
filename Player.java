@@ -100,6 +100,9 @@ public class Player {
 	}
 	
 //Dig
+	//TODO - Check world boundry
+	//TODO - dig boulders
+	//TODO - walls should drop ingots 
 	
 	void dig(){
 		boolean digging = true;

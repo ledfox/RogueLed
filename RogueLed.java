@@ -45,7 +45,7 @@ public class RogueLed {
 	static ArrayList<Boulder> boulderList = new ArrayList<Boulder>();
 	
 	//Generates TrapList
-	ArrayList<DartTrap> trapList = new ArrayList<DartTrap>();
+	static ArrayList<DartTrap> trapList = new ArrayList<DartTrap>();
 	
 	//Generate goblinList
 	static ArrayList<Goblin> gobList = new ArrayList<Goblin>();
@@ -87,9 +87,9 @@ public class RogueLed {
 		//Feeds the required lists into the level generator
 		//level.genLevel(0);
 			
-		//level.genLevel(1, GM, boulderList, gobList, junkList, trapList, wallList);
+		level.genLevel(1, GM, junkList, wallList);
 		
-		level.genLevel(2, GM, boulderList, gobList, junkList, trapList, wallList);
+		//level.genLevel(2, GM, boulderList, gobList, junkList, trapList, wallList);
 		
 		//Generate wall for a test
 		//Wall wall1 = new Wall(7,7);
@@ -144,7 +144,7 @@ public class RogueLed {
 				
 				//Display Boulders
 				for (Boulder rock : boulderList){
-					csi.print(rock.xPos, rock.yPos, rock.symbol, CSIColor.BEIGE);		
+					csi.print(rock.xPos, rock.yPos, Boulder.symbol, CSIColor.BEIGE);		
 				}
 
 				//Display Goblins

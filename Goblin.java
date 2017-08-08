@@ -130,6 +130,13 @@ public class Goblin extends Actor {
 		this.health = value;
 	}
 	
+	//Super constructor
+	
+	public static void popGoblin(int x, int y){
+
+		Goblin gob = new Goblin(x, y, symbol, "goblin");
+		RogueLed.gobList.add(gob);
+	}
 	
 	//Constructor
 	public Goblin(int x, int y, char d, String n) {

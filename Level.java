@@ -9,8 +9,7 @@ public class Level {
 		
 	}
 	
-public void genLevel(int number, Announcer GM, ArrayList<Boulder> boulderList, ArrayList<Goblin> gobList, 
-		ArrayList<Collectable> junkList, ArrayList<DartTrap> trapList, ArrayList<Wall> wallList){
+public void genLevel(int number, Announcer GM, ArrayList<Collectable> junkList, ArrayList<Wall> wallList){
 	
 	Random rand = new Random();
 	
@@ -23,8 +22,7 @@ public void genLevel(int number, Announcer GM, ArrayList<Boulder> boulderList, A
 		
 		//Generate a bunch of goblins all at once
 				for(int i = 0; i < 20; i++){
-					Goblin gob = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', "goblin");
-				gobList.add(gob);	
+					Goblin.popGoblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3);	
 				}
 				
 				//Generate a bunch of berries all at once
@@ -47,17 +45,15 @@ public void genLevel(int number, Announcer GM, ArrayList<Boulder> boulderList, A
 				
 				//Generate a bunch of boulders all at once
 				for(int i = 0; i < 100; i++){
-					Boulder rock = new Boulder(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-					
-					boulderList.add(rock);	
+				Boulder.popBoulder((rand.nextInt(75) + 3), (rand.nextInt(17) + 3));
 					}
 				
 				//Generate a bunch of traps all at once
 				for(int i = 0; i < 20; i++){
-					DartTrap trap = new DartTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
-					
-					trapList.add(trap);	
+					DartTrap.popTrap((rand.nextInt(75) + 3), (rand.nextInt(17) + 3));
 					}
+				
+				break;
 				
 	case 2: //Generate hand-drawn level 2
 		
@@ -126,6 +122,9 @@ public void genLevel(int number, Announcer GM, ArrayList<Boulder> boulderList, A
 			//break a hole to walk through
 			Wall.breakWall(Locator.locateWall(7, 7));
 		}
+		
+		//Pop some goblins
+		Goblin.popGoblin(23, 10);
 		
 	}
 	

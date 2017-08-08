@@ -33,6 +33,18 @@ public class DartTrap {
     	}
     }
     
+    //Super Constructor
+    
+//    public static void popBoulder(int x, int y){
+//    	Boulder bou = new Boulder(x, y, symbol);
+//    	RogueLed.boulderList.add(bou);
+//    }
+    
+    public static void popTrap(int x, int y){
+    	DartTrap trap = new DartTrap(x, y);
+    	RogueLed.trapList.add(trap);
+    }
+    
     //Constructor
     
     public DartTrap(int a, int b) {
