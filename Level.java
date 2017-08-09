@@ -1,6 +1,5 @@
 package primary;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Level {
@@ -8,8 +7,8 @@ public class Level {
 	public void genLevel(int number){
 		
 	}
-	
-public void genLevel(int number, Announcer GM, ArrayList<Collectable> junkList, ArrayList<Wall> wallList){
+	//TODO generate 'popJunk'
+public void genLevel(int number, Announcer GM){
 	
 	Random rand = new Random();
 	
@@ -27,20 +26,17 @@ public void genLevel(int number, Announcer GM, ArrayList<Collectable> junkList, 
 				
 				//Generate a bunch of berries all at once
 				for (int i = 0; i < 100; i++){
-					Collectable junk = new Collectable(rand.nextInt(75) + 3, rand.nextInt(17) + 3, '%');
-				junkList.add(junk);
+					Collectable.popBerry((rand.nextInt(75) + 3), (rand.nextInt(17) + 3));
 				}
 				
 				//Generate a bunch of arrows all at once
 				for (int i = 0; i < 100; i++){
-					Collectable junk = new Collectable(rand.nextInt(75) + 3, rand.nextInt(17) + 3, '/');
-					junkList.add(junk);
+					Collectable.popArrow((rand.nextInt(75) + 3), (rand.nextInt(17) + 3));
 				}
 				
 //				//Generate a bunch of ingots all at once
 				for (int i = 0; i < 100; i++){
-					Collectable junk = new Collectable(rand.nextInt(75) + 3, rand.nextInt(17) + 3, ']');
-					junkList.add(junk);
+					Collectable.popIngot((rand.nextInt(75) + 3), (rand.nextInt(17) + 3));
 				}
 				
 				//Generate a bunch of boulders all at once
@@ -62,63 +58,52 @@ public void genLevel(int number, Announcer GM, ArrayList<Collectable> junkList, 
 		
 		//Generate some buffer wall on the south end
 		for(int i = 0; i < 78; i++){
-			Wall wall = new Wall((i + 1), 19);
-			wallList.add(wall);
+			Wall.popWall((i + 1), 19);
 		}
 		
 		for(int i = 0; i < 78; i++){
-			Wall wall = new Wall((i + 1), 18);
-			wallList.add(wall);
+			Wall.popWall((i + 1), 18);
 		}
 		
 		//Generate some buffer wall on the north end
 		for(int i = 0; i < 78; i++){
-			Wall wall = new Wall((i + 1), 3);
-			wallList.add(wall);
+			Wall.popWall((i + 1), 3);
 		}
 		
 				for(int i = 0; i < 78; i++){
-					Wall wall = new Wall((i + 1), 4);
-					wallList.add(wall);
+					Wall.popWall((i + 1), 4);
 				}
 				
 		//Generate some buffer wall on the west end
 				for(int i = 0; i < 17; i++){
-					Wall wall = new Wall(2, i+3);
-					wallList.add(wall);
+					Wall.popWall(2, i+3);
 				}
 				
 				for(int i = 0; i < 17; i++){
-					Wall wall = new Wall(3, i+3);
-					wallList.add(wall);
+					Wall.popWall(3, i+3);
 				}	
 	
 				//Generate some buffer wall on the east end
 				for(int i = 0; i < 17; i++){
-					Wall wall = new Wall(76, i+3);
-					wallList.add(wall);
+					Wall.popWall(76, i+3);
 				}
 				
 				for(int i = 0; i < 17; i++){
-					Wall wall = new Wall(77, i+3);
-					wallList.add(wall);
+					Wall.popWall(77, i+3);
 				}			
 				
 		//Generate a 5 length wall
 		for(int i = 0; i < 5; i++){
-			Wall wall = new Wall(7, (i + 4));
-			wallList.add(wall);
+			Wall.popWall(7, (i + 4));
 		}
 		
 		for(int i = 0; i < 8; i++){
-			Wall wall = new Wall(12, (i + 10));
-			wallList.add(wall);
+			Wall.popWall(12, (i + 10));
 		}
 		
 		//Generate another 70 length wall
 		for (int i = 0; i < 70; i++){
-			Wall wall = new Wall((i+2), 8);
-			wallList.add(wall);
+			Wall.popWall((i+2), 8);
 			//break a hole to walk through
 			Wall.breakWall(Locator.locateWall(7, 7));
 		}

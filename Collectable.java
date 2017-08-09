@@ -36,6 +36,22 @@ public class Collectable {
 		}
 	}
 	
+	//Super constructor
+	public static void popIngot (int x, int y){
+		Collectable junk = new Collectable (x, y, ']');
+		RogueLed.junkList.add(junk);
+	}
+	
+	public static void popBerry (int x, int y){
+		Collectable junk = new Collectable (x, y, '%');
+		RogueLed.junkList.add(junk);
+	}
+	
+	public static void popArrow (int x, int y){
+		Collectable junk = new Collectable (x, y, '/');
+		RogueLed.junkList.add(junk);
+	}
+	
 	//Constructor
 	public Collectable(int x, int y, char sym){
 		xPos = x;

@@ -87,7 +87,7 @@ public class RogueLed {
 		//Feeds the required lists into the level generator
 		//level.genLevel(0);
 			
-		level.genLevel(1, GM, junkList, wallList);
+		level.genLevel(1, GM);
 		
 		//level.genLevel(2, GM, boulderList, gobList, junkList, trapList, wallList);
 		
