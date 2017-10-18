@@ -21,21 +21,7 @@ public class Wall extends Actor {
 			pushBack(mob);
 		}
 	}
-    
-    //Deconstructor
-    public static void breakWall(Wall wall){
-    	if (wall != null){
-			wall.xPos = 0;
-			wall.yPos = 0;		
-		}
-    }
 	
-    //Super constructor
-    public static void popWall(int x, int y){
-    	Wall seg = new Wall (x, y);
-		RogueLed.wallList.add(seg);
-    }
-    
 	//Constructor
 	public Wall(int a, int b){
 		super(a, b);

@@ -16,7 +16,7 @@ public class Dummy extends Actor {
 	String name = "training dummy";
 	
 	public void run(Player PC){
-		if (PC.xPos == Dummy.xPos && PC.yPos == Dummy.yPos){
+		if (PC.xPos == this.xPos && PC.yPos == this.yPos){
 			PC.meleeAttack(this);
 			bouncePlayer(PC);
 			PC.GM.setMessage("The dummy has " + health + " health remaining.");

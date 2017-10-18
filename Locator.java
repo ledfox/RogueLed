@@ -8,7 +8,7 @@ public class Locator {
 		Goblin gotGob = null;
 		ArrayList<Goblin> gobList = RogueLed.getGobs();
 		
-		//Get Goblin 
+		//Display Goblins
 		for (Goblin gob : gobList){
 			if (gob.xPos == xPos && gob.yPos == yPos)
 				gotGob = gob;
@@ -20,24 +20,12 @@ public class Locator {
 		Boulder gotBou = null;
 		ArrayList<Boulder> bouList = RogueLed.getBoulders();
 		
-		//Get Boulder
+		//Display Goblins
 		for (Boulder bou : bouList){
 			if (bou.xPos == xPos && bou.yPos == yPos)
 				gotBou = bou;
 		}
 		return gotBou;
-	}
-	
-	static Wall locateWall(int xPos, int yPos){
-		Wall gotWall = null;
-		ArrayList<Wall> wallList = RogueLed.getWalls();
-		
-		//Get Boulder
-		for (Wall waa : wallList){
-			if (waa.xPos == xPos && waa.yPos == yPos)
-				gotWall = waa;
-		}
-		return gotWall;
 	}
 	
 }

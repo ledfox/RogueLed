@@ -13,18 +13,11 @@ public class Boulder extends Actor {
 
 	
 	public int weight = 15;
-    static public char symbol = 'o';
+    public char symbol = 'o';
     int health = 1000;
     
     String message = "You push the boulder.";
     boolean diggable = true;
-    
-  
-    
-    public static void popBoulder(int x, int y){
-    	Boulder bou = new Boulder(x, y, symbol);
-    	RogueLed.boulderList.add(bou);
-    }
     
     //Constructor
     
