@@ -48,11 +48,20 @@ public class Map {
 						+ "Ranged: " + PC.bow.currentType + "   " 
 						+ "Armor: " + PC.armor.currentType);
 		
+		//Display class
+		mcsi.print(1, 24, "Class: " + PC.currentClass);
+		
+		if(PC.currentClass.contentEquals("Rogue")){
+			
+		}
+		
+		
 		
 		//Display consumables
-		mcsi.print(1, 24, "Ingots: " + PC.ingots + "   "
-						+ "Arrows: " + PC.arrows + "   "
-						+ "Berries: " + PC.berries);
+		//mcsi.print(1, 24, "Ingots: " + PC.ingots + "   "
+			//			+ "Arrows: " + PC.arrows + "   "
+				//		+ "Berries: " + PC.berries);
+	
 		
 		
 	}

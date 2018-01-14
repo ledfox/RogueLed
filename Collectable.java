@@ -7,7 +7,7 @@ public class Collectable {
 	public int xPos = 10;
 	public int yPos = 10;
 
-	char symbol = '$';
+	static char symbol = '$';
 	
 	String name = "unknown object";
 	
@@ -31,25 +31,9 @@ public class Collectable {
 				break;
 			
 			}
-			PC.GM.setMessage("You pick up a " + name);
+			
 			depop();
 		}
-	}
-	
-	//Super constructor
-	public static void popIngot (int x, int y){
-		Collectable junk = new Collectable (x, y, ']');
-		RogueLed.junkList.add(junk);
-	}
-	
-	public static void popBerry (int x, int y){
-		Collectable junk = new Collectable (x, y, '%');
-		RogueLed.junkList.add(junk);
-	}
-	
-	public static void popArrow (int x, int y){
-		Collectable junk = new Collectable (x, y, '/');
-		RogueLed.junkList.add(junk);
 	}
 	
 	//Constructor

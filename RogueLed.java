@@ -1,5 +1,6 @@
 package primary;
 
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -32,7 +33,7 @@ public class RogueLed {
   	Announcer GM = new Announcer();
   	
     //Generate Player
-  	Player PC = new Player (13, 13, GM, csi);
+  	Player PC = new Player (5, 5, GM, csi);
   	
   	//Generates a level object
   	Level level = new Level();
@@ -45,7 +46,7 @@ public class RogueLed {
 	static ArrayList<Boulder> boulderList = new ArrayList<Boulder>();
 	
 	//Generates TrapList
-	static ArrayList<DartTrap> trapList = new ArrayList<DartTrap>();
+	ArrayList<DartTrap> trapList = new ArrayList<DartTrap>();
 	
 	//Generate goblinList
 	static ArrayList<Goblin> gobList = new ArrayList<Goblin>();
@@ -53,8 +54,11 @@ public class RogueLed {
 	//Generate collectablesList
 	static ArrayList<Collectable> junkList = new ArrayList<Collectable>();
 	
+	//Generate alterList
+	static ArrayList<Altar> godsList = new ArrayList<Altar>();
+	
 	//Generate wallList
-	static ArrayList<Wall> wallList = new ArrayList<Wall>();
+	ArrayList<Wall> wallList = new ArrayList<Wall>();
 	
 	//Generate actorList
 	ArrayList<Actor> actorList = new ArrayList<Actor>();
@@ -84,21 +88,18 @@ public class RogueLed {
 		
 		PC.setHP(PC.maxHealth);
 		
+		
 		//Feeds the required lists into the level generator
 		//level.genLevel(0);
 			
-		level.genLevel(1, GM);
+		level.genLevel(1, GM, godsList, boulderList, gobList, junkList, trapList, wallList);
 		
-		//level.genLevel(2, GM, boulderList, gobList, junkList, trapList, wallList);
 		
 		//Generate wall for a test
 		//Wall wall1 = new Wall(7,7);
 		//wallList.add(wall1);
 		//Add wall1 to actor list for a test
 		//actorList.add(wall1);
-		
-		//Generate a forge for testing
-		Forge forge = new Forge(20,7);
 		
 		//Bring Ursatz to life for testing
 		Goblin Ursatz = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3, Goblin.symbol, "Ursatz");
@@ -107,9 +108,13 @@ public class RogueLed {
 		//Test with a dummy
 		Dummy tDummy = new Dummy (10, 10);
 		actorList.add(tDummy);
-	
-		//Allows while loop to run. Once "Exit" is true, game quits.
+		
+		//Another dummy test
+		
+		
+		//This is cool - allows while loop to run. Once "Exit" is true, game quits.
 		boolean exit = false;
+				
 		
 			while (!exit){
 				
@@ -118,9 +123,6 @@ public class RogueLed {
 		
 				csi.restore();
 
-				//Display forge
-				csi.print(Forge.xPos, Forge.yPos, forge.symbol, CSIColor.DARK_GRAY);
-				
 				//Display Dart Traps
 				for (DartTrap trap : trapList){
 					csi.print(trap.xPos, trap.yPos, trap.symbol, CSIColor.RED);
@@ -129,6 +131,11 @@ public class RogueLed {
 				//Display Collectables
 				for (Collectable junk : junkList){
 					csi.print(junk.xPos, junk.yPos, junk.symbol, junk.color);
+				}
+				
+				//Display Altars
+				for (Altar gods : godsList){
+					csi.print(gods.xPos, gods.yPos, gods.symbol, gods.csiColor);
 				}
 
 				//Prints the player character in ATOMIC TANGERINE
@@ -144,13 +151,15 @@ public class RogueLed {
 				
 				//Display Boulders
 				for (Boulder rock : boulderList){
-					csi.print(rock.xPos, rock.yPos, Boulder.symbol, CSIColor.BEIGE);		
+					csi.print(rock.xPos, rock.yPos, rock.symbol, CSIColor.BEIGE);		
 				}
 
 				//Display Goblins
 				for (Goblin gob : gobList){
 					csi.print(gob.xPos, gob.yPos, Goblin.symbol, CSIColor.GREEN);
 				}
+				
+				
 				
 				//Display Walls
 				for (Wall wall : wallList){
@@ -167,9 +176,9 @@ public class RogueLed {
 				boolean timestep = false;
 				
 				//Main character movement
-				switch (key) {				
+				switch (key) {		
 				
-				//Base code allows for movement - number pad to cardinal directions
+				//Base code allows for arrow movement - added number pad to cardinal directions
 				//timer++ hardcoded whenever a key is pressed (to increment turn)
 				
 				case CharKey.UARROW: case CharKey.T8: case CharKey.N8:
@@ -204,36 +213,58 @@ public class RogueLed {
 				case CharKey.N3:
 					PC.moveSouthEast(); timestep = true;
 					break;
+				
 					
 				//Waiting
-					
 				case CharKey.N5: case CharKey.SPACE:
 					PC.loiter();
-					timestep = true;
-					break;
-				
-				//Dig
-				case CharKey.d: case CharKey.D:
-					PC.dig();
-					timestep = true;
+					timestep = true;				
 					break;
 					
-				//Eat berries
+				//Option to eat berries
 				case CharKey.e: case CharKey.E:
 					PC.eatBerry();
 					timestep = true;
 					break;
 				
-				//Upgrade system
+				//Testing upgrade system
 				case CharKey.U: case CharKey.u:
-					PC.forge();
+					PC.armor.upgrade();
+					PC.weapon.upgrade();
+					PC.bow.upgrade();
 					csi.refresh();
 					break;
 					
-				//Arrow firing
-				case CharKey.F: case CharKey.f:	
+				case CharKey.P: case CharKey.p:
+					for (Altar gods : godsList){
+						gods.pray(PC);
+				    }
+					csi.refresh();
+					break;
+					
+					
+				case CharKey.Y: case CharKey.y:
+				
+				PC.confirm();
+				PC.loiter();
+					timestep = true;				
+					
+					break;
+				
+					
+				//Testing BEAMS
+				case CharKey.F: case CharKey.f:
+				
+					//Generic red beam with a message  
+					//Only fires to the right
+					//Beam.zapBeam
+					
+					//Generic invisible beam that returns to the consul char data over the tiles it passes
+					//Only fires to the right. 
+					//Beam.peekBeam(PC,csi);
+					
 					//Fires an arrow
-					PC.fireArrow();
+					Beam.fireArrow(PC);
 				
 					
 					break;
@@ -247,6 +278,12 @@ public class RogueLed {
 				
 				//essentially the ".run" mechanic
 				if (timestep = true){
+					
+					//Code to kill player if they deserve it
+					if (PC.currentHealth <= 0){
+					csi.print(1, 1, "You have perished.");
+					exit = true;
+					}
 					
 					for(Actor next : actorList){
 						next.run(PC);
@@ -269,27 +306,35 @@ public class RogueLed {
 						//Goblin.run does a bunch of stuff. Check goblin class for more info.
 						gob.run(PC, wallList, boulderList, trapList, gobList);
 						//System.out.println(gob.health);
+							
+						//Should allow a goblin to go bezerk when its the last one left
+						//Currently this does not happen
+						if (gobList.size() == 1 && gob.promotable == true) {
+							gob.promote();
+							PC.GM.setMessage("Realizing its the last one left alive, the goblin goes bezerk!");
+						}
+						
+						
+						}
+						
 					}
+					
+				    
 					
 					for (Collectable junk : junkList){
 						junk.collect(PC);
 					}
 					
 					//Get PC's position for debugging
-					PC.getPosition();
+					//PC.getPosition();
 					
 					statmes = GM.getMessage();
 					
 					timer++;
 					timestep = false;
 				}
+			
 
-				//Code to kill player if they deserve it
-				if (PC.currentHealth <= 0){
-					csi.print(1, 1, "You've perished! Better luck next time.");
-					exit = true;
-				}
-			}
 			
 		//Only triggers on exit
 		
@@ -300,6 +345,7 @@ public class RogueLed {
 		System.exit(0);
 				
 				}
+	
 	//Getters
 	public static ArrayList<Goblin> getGobs(){
 		return gobList;
@@ -307,10 +353,6 @@ public class RogueLed {
 	
 	public static ArrayList<Boulder> getBoulders(){
 		return boulderList;
-	}
-	
-	public static ArrayList<Wall> getWalls(){
-		return wallList;
 	}
 	
 	}

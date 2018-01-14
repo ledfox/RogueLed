@@ -15,13 +15,13 @@ public class Goblin extends Actor {
 	CSIColor color = CSIColor.GREEN;
 	String name = "goblin";
 	
+	boolean promotable = true;
+	
 	Random rand = new Random();
 	boolean dead = false;
 	boolean fleeing = false;
 	//Determines goblin behavior
 	void decide(Player PC){
-		
-		while (!dead){
 		
 		//Goblin decides if it is dead
 		if (health <= 0) {
@@ -34,8 +34,6 @@ public class Goblin extends Actor {
 				//Fork over XP
 				PC.gainXP(experience);
 			}
-			//Should be converted so goblin pops an item on death
-			//needs while (!dead) code
 			if (dead){
 			depop();
 			return;
@@ -82,7 +80,6 @@ public class Goblin extends Actor {
 			attack(PC);
 			pushBack(this);
 			}
-		}
 	}
 		
 	void run(Player PC, ArrayList<Wall> wallList, ArrayList<Boulder> boulderList, ArrayList<DartTrap> trapList, ArrayList<Goblin> gobList){
@@ -135,13 +132,19 @@ public class Goblin extends Actor {
 		this.health = value;
 	}
 	
-	//Super constructor
-	
-	public static void popGoblin(int x, int y){
-
-		Goblin gob = new Goblin(x, y, symbol, "goblin");
-		RogueLed.gobList.add(gob);
+	//Promotion
+	//When the goblin realizes its the last one of its kind, it goes bezerk!
+	//Development path to include three ultimate goblin types - goblin bezerker, goblin archer and one other
+	public void promote(){
+		
+		color = CSIColor.RED;
+		health = 30;
+		promotable = false;
+		power = 5;
+		
+		lickWounds();
 	}
+	
 	
 	//Constructor
 	public Goblin(int x, int y, char d, String n) {

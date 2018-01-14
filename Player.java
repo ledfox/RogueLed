@@ -2,7 +2,6 @@ package primary;
 
 import java.util.Random;
 
-import net.slashie.libjcsi.CharKey;
 import net.slashie.libjcsi.ConsoleSystemInterface;
 
 public class Player {
@@ -17,6 +16,7 @@ public class Player {
 	public int maxHealth;
 	
 	public String direction = "None";
+	public String currentClass = "Rogue";
 	
 	public int currentHealth;
 	
@@ -28,15 +28,36 @@ public class Player {
 	public Weapon weapon = new Weapon();
 	public Bow bow = new Bow();
 	
-	//TODO set ingots back to 0 after testing
 	public int ingots = 0;
-	public int arrows = 10;
+	public int arrows = 0;
 	public int berries = 10;
 	
 	public ConsoleSystemInterface csi;
 	
 //Player Methods
     
+	//Prayer
+	
+	void pray(Altar proximate){
+		if (currentClass.equals("Rogue")){
+		GM.setMessage("This is " + proximate.name +". Would you like to convert? (y/n)");
+		} else {
+			GM.setMessage("You're already a dedicated " + currentClass + "!");
+		}
+	}
+	
+	
+	void convert(Altar proximate){
+		currentClass = (proximate.profession);
+		GM.setMessage("You've become a " + currentClass);
+	}
+	
+	public void confirm() {
+		// TODO Auto-generated method stub
+		
+		
+	}
+
     
     //Player Movement
 
@@ -98,122 +119,6 @@ public class Player {
 	void loiter(){
 		GM.setMessage("You loiter about.");
 	}
-	
-//Dig
-	//TODO - Check world boundry
-	//TODO - dig boulders
-	//TODO - walls should drop ingots 
-	
-	void dig(){
-		boolean digging = true;
-		char nextChar;
-		
-		while (digging){
-			this.csi.print(1, 1, "Which direction would you like to dig? (Press 5 to cancel)");
-			this.csi.refresh();
-			int key = this.csi.inkey().code;
-			
-			switch (key) {		
-			
-		case CharKey.UARROW: case CharKey.T8: case CharKey.N8:
-			nextChar = this.csi.peekChar(xPos, yPos-1);
-			System.out.print(nextChar);
-			if (nextChar == '#'){
-				Wall.breakWall(Locator.locateWall(xPos, yPos-1));
-				GM.setMessage("You dig through the wall!");
-			} else {
-				GM.setMessage("Your pickaxe won't be very effective against that!");
-			}
-			digging = false;
-			break;
-				
-		case CharKey.DARROW: case CharKey.T2: case CharKey.N2:
-			nextChar = this.csi.peekChar(xPos, yPos+1);
-			System.out.print(nextChar);
-			if (nextChar == '#'){
-				Wall.breakWall(Locator.locateWall(xPos, yPos+1));
-				GM.setMessage("You dig through the wall!");
-			} else {
-				GM.setMessage("Your pickaxe won't be very effective against that!");
-			}
-			digging = false;
-			break;
-		
-		case CharKey.RARROW: case CharKey.T6: case CharKey.N6:
-			nextChar = this.csi.peekChar(xPos+1, yPos);
-			System.out.print(nextChar);
-			if (nextChar == '#'){
-				Wall.breakWall(Locator.locateWall(xPos+1, yPos));
-				GM.setMessage("You dig through the wall!");
-			} else {
-				GM.setMessage("Your pickaxe won't be very effective against that!");
-			}
-			digging = false;
-			break;
-		
-		case CharKey.LARROW: case CharKey.T4: case CharKey.N4:
-			nextChar = this.csi.peekChar(xPos-1, yPos);
-			System.out.print(nextChar);
-			if (nextChar == '#'){
-				Wall.breakWall(Locator.locateWall(xPos-1, yPos));
-				GM.setMessage("You dig through the wall!");
-			} else {
-				GM.setMessage("Your pickaxe won't be very effective against that!");
-			}
-			digging = false;
-			break;	
-		
-		case CharKey.T1: case CharKey.N1:
-			nextChar = this.csi.peekChar(xPos-1, yPos+1);
-			System.out.print(nextChar);
-			if (nextChar == '#'){
-				Wall.breakWall(Locator.locateWall(xPos-1, yPos+1));
-				GM.setMessage("You dig through the wall!");
-			} else {
-				GM.setMessage("Your pickaxe won't be very effective against that!");
-			}
-			digging = false;
-			break;	
-			
-		case CharKey.T3: case CharKey.N3:
-			nextChar = this.csi.peekChar(xPos+1, yPos+1);
-			System.out.print(nextChar);
-			if (nextChar == '#'){
-				Wall.breakWall(Locator.locateWall(xPos+1, yPos+1));
-				GM.setMessage("You dig through the wall!");
-			} else {
-				GM.setMessage("Your pickaxe won't be very effective against that!");
-			}
-			digging = false;
-			break;	
-		
-		case CharKey.T7: case CharKey.N7:
-			nextChar = this.csi.peekChar(xPos-1, yPos-1);
-			System.out.print(nextChar);
-			if (nextChar == '#'){
-				Wall.breakWall(Locator.locateWall(xPos-1, yPos-1));
-				GM.setMessage("You dig through the wall!");
-			} else {
-				GM.setMessage("Your pickaxe won't be very effective against that!");
-			}
-			digging = false;
-			break;		
-		
-		case CharKey.T9: case CharKey.N9:
-			nextChar = this.csi.peekChar(xPos+1, yPos-1);
-			System.out.print(nextChar);
-			if (nextChar == '#'){
-				Wall.breakWall(Locator.locateWall(xPos+1, yPos-1));
-				GM.setMessage("You dig through the wall!");
-			} else {
-				GM.setMessage("Your pickaxe won't be very effective against that!");
-			}
-			digging = false;
-			break;		
-			
-			}
-		}
-	}
 
 //Gather
 	
@@ -229,29 +134,6 @@ public class Player {
 		this.arrows += 1;
 	}
 
-//Fire Arrow
-	
-	void fireArrow(){
-		if (this.arrows <= 0){
-			GM.setMessage("You're all out of arrows!");
-		} else {
-			
-			//Fires an arrow
-			Beam.fireArrow(this);
-			arrows -= 1;
-		}
-	}
-	
-//Forge
-	
-	void forge(){
-		if (this.ingots <= 0){
-			GM.setMessage("You have no ingots to forge with!");
-		} else {
-			Forge.upgrade(this);
-		}
-	}
-	
 //Consume
 	
 	void eatBerry(){
@@ -426,5 +308,18 @@ void setHP(int value){
 	  System.out.println("yPos " + yPos);
 	  System.out.println("");
   }
+  
+  public void getCharClass(){
+	  System.out.print(this.currentClass);
+  }
+  
+//Setter
+ 
+
+public void setClass(String newClass) {
+	// TODO Auto-generated method stub
+	currentClass = newClass;
+}
+
 
 }
