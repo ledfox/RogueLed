@@ -18,6 +18,7 @@ public class Player {
 	public String direction = "None";
 	public String currentClass = "Rogue";
 	public boolean converting = false;
+	public boolean crafting = false; 
 	
 	public int currentHealth;
 	
@@ -30,7 +31,7 @@ public class Player {
 	public Weapon weapon = new Weapon();
 	public Bow bow = new Bow();
 	
-	public int ingots = 0;
+	public int ingots = 10;
 	public int arrows = 10;
 	public int berries = 10;
 	
@@ -58,6 +59,59 @@ public class Player {
 				".  " + proximate.message);
 		this.converting = false;
 	}
+	
+	//Crafting
+	
+	void craft(Forge proximate){
+		if (this.ingots < 1){
+			GM.setMessage("You need ingots to forge metal!");
+		}
+		GM.setMessage("Would you craft (w)eapons, (a)rmor or (b)ow?");
+		crafting = true;
+	}
+	
+	void craftSelect(char selection){
+		
+		switch(selection){
+		case 'w': case 'W':
+			if(this.ingots < weapon.quality + 1){
+				GM.setMessage("You don't have the metal!");
+				break;
+			} else {
+			this.ingots = this.ingots - (weapon.quality + 1);
+			this.weapon.upgrade();
+			GM.setMessage("You craft yourself a " + weapon.currentType + "!");
+			crafting = false;
+			} break;
+		case 'a': case 'A':
+			if(this.ingots < armor.quality + 1){
+				GM.setMessage("You don't have the metal!");
+				break;
+			} else {
+			this.ingots = this.ingots - (weapon.quality + 1);
+			this.armor.upgrade();
+			GM.setMessage("You craft yourself a " + armor.currentType + "!");
+			crafting = false;
+			} break;
+		case 'b': case 'B':
+			if(this.ingots < bow.quality + 1){
+				GM.setMessage("You don't have the metal!");
+				break;
+			} else {
+			this.ingots = this.ingots - (weapon.quality + 1);
+			this.bow.upgrade();
+			GM.setMessage("You craft yourself a " + bow.currentType + "!");
+			crafting = false;
+			} break;
+			
+		default:
+			GM.setMessage("You lean against the forge.");
+			crafting = false;
+			break;
+		}
+	}
+	
+	//Confirm
 	
 	public boolean confirm(char confirmChar) {
 		if ((confirmChar == 'y')||(confirmChar =='Y')){

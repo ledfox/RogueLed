@@ -63,6 +63,9 @@ public class RogueLed {
 	//Generate actorList
 	ArrayList<Actor> actorList = new ArrayList<Actor>();
 	
+	//Generate forgeList
+	ArrayList<Forge> forgeList = new ArrayList<Forge>();
+	
 	public static void main(String[] args) {
 		new RogueLed().run();
 	}
@@ -94,7 +97,7 @@ public class RogueLed {
 			
 		//Just change the first number for alternate levels
 		
-		level.genLevel(3, GM, actorList, godsList, boulderList, gobList, junkList, trapList, wallList);
+		level.genLevel(2, GM, actorList, forgeList, godsList, boulderList, gobList, junkList, trapList, wallList);
 		
 		
 		//Generate wall for a test
@@ -138,6 +141,11 @@ public class RogueLed {
 				//Display Altars
 				for (Altar gods : godsList){
 					csi.print(gods.xPos, gods.yPos, gods.symbol, gods.csiColor);
+				}
+				
+				//Display Forges
+				for (Forge forge : forgeList){
+					csi.print(forge.xPos, forge.yPos, forge.symbol, forge.csiColor);
 				}
 
 				//Prints the player character in ATOMIC TANGERINE
@@ -231,9 +239,14 @@ public class RogueLed {
 				
 				//Testing upgrade system
 				case CharKey.U: case CharKey.u:
-					PC.armor.upgrade();
-					PC.weapon.upgrade();
-					PC.bow.upgrade();
+					
+					for (Forge forge : forgeList){
+						forge.craft(PC);
+					}
+
+//					PC.armor.upgrade();
+//					PC.weapon.upgrade();
+//					PC.bow.upgrade();
 					csi.refresh();
 					break;
 					
@@ -256,7 +269,37 @@ public class RogueLed {
 					timestep = true;				
 					
 					break;
+					
+				//FORGE selection options	
+				case CharKey.W: case CharKey.w:
+					if (PC.crafting){
+						for (Forge forge : forgeList){
+							PC.craftSelect('w');
+					    }
+					} else PC.loiter();
+						timestep = true;				
+						
+					break;	
 				
+				case CharKey.A: case CharKey.a:
+					if (PC.crafting){
+						for (Forge forge : forgeList){
+							PC.craftSelect('a');
+					    }
+					} else PC.loiter();
+						timestep = true;				
+						
+					break;
+					
+				case CharKey.B: case CharKey.b:
+					if (PC.crafting){
+						for (Forge forge : forgeList){
+							PC.craftSelect('b');
+					    }
+					} else PC.loiter();
+						timestep = true;				
+						
+					break;			
 					
 				//Testing BEAMS
 				case CharKey.F: case CharKey.f:

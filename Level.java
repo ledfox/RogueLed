@@ -9,7 +9,7 @@ public class Level {
 		
 	}
 	
-public void genLevel(int number, Announcer GM, ArrayList<Actor> actorList, ArrayList<Altar> godsList, ArrayList<Boulder> boulderList, ArrayList<Goblin> gobList, 
+public void genLevel(int number, Announcer GM, ArrayList<Actor> actorList, ArrayList<Forge> forgeList, ArrayList<Altar> godsList, ArrayList<Boulder> boulderList, ArrayList<Goblin> gobList, 
 		ArrayList<Collectable> junkList, ArrayList<DartTrap> trapList, ArrayList<Wall> wallList){
 	
 	Random rand = new Random();
@@ -124,6 +124,10 @@ public void genLevel(int number, Announcer GM, ArrayList<Actor> actorList, Array
 				
 				Altar ramish = new Altar(rand.nextInt(75) + 3, rand.nextInt(17) + 3, 'R');
 				godsList.add(ramish);
+				
+				Forge exampleForge = new Forge(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
+				forgeList.add(exampleForge);
+				
 				break;			
 				
 				
@@ -137,6 +141,10 @@ public void genLevel(int number, Announcer GM, ArrayList<Actor> actorList, Array
 		
 		Altar ramish3 = new Altar(rand.nextInt(75) + 3, rand.nextInt(17) + 3, 'R');
 		godsList.add(ramish3);
+		
+		Forge exampleForge3 = new Forge(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
+		forgeList.add(exampleForge3);
+		
 		break;			
 		
 		
