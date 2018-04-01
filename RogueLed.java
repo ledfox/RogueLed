@@ -244,9 +244,13 @@ public class RogueLed {
 					
 					
 				case CharKey.Y: case CharKey.y:
-				
-				PC.confirm();
-				PC.loiter();
+				if (PC.converting){
+					for (Altar gods : godsList){
+						gods.convert(PC);
+				    }
+				}
+				//PC.confirm('y');
+				//PC.loiter();
 					timestep = true;				
 					
 					break;

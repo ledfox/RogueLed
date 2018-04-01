@@ -21,6 +21,14 @@ public class Altar {
 			}
 		}
 	
+	public void convert(Player PC){
+		if ((PC.xPos == this.xPos) && (PC.yPos == this.yPos)){
+			
+		PC.convert(this);
+			
+			}
+		}
+	
 	
 	//Constructor
 	public Altar(int x, int y, char cha){

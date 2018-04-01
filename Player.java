@@ -17,6 +17,7 @@ public class Player {
 	
 	public String direction = "None";
 	public String currentClass = "Rogue";
+	public boolean converting = false;
 	
 	public int currentHealth;
 	
@@ -41,6 +42,7 @@ public class Player {
 	void pray(Altar proximate){
 		if (currentClass.equals("Rogue")){
 		GM.setMessage("This is " + proximate.name +". Would you like to convert? (y/n)");
+		this.converting = true;
 		} else {
 			GM.setMessage("You're already a dedicated " + currentClass + "!");
 		}
@@ -48,13 +50,22 @@ public class Player {
 	
 	
 	void convert(Altar proximate){
-		currentClass = (proximate.profession);
+		String newClass = proximate.profession;
+		setClass(newClass);
+		//currentClass = (proximate.profession);
 		GM.setMessage("You've become a " + currentClass);
+		this.converting = false;
 	}
 	
-	public void confirm() {
-		// TODO Auto-generated method stub
-		
+	public boolean confirm(char confirmChar) {
+		if ((confirmChar == 'y')||(confirmChar =='Y')){
+			return true;
+		} else if ((confirmChar == 'n')||(confirmChar =='N')) {
+			return false;
+		} else {
+			this.loiter();
+			return false;
+		}
 		
 	}
 
