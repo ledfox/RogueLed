@@ -48,14 +48,25 @@ public class Map {
 						+ "Ranged: " + PC.bow.currentType + "   " 
 						+ "Armor: " + PC.armor.currentType);
 		
-		//Display class
-		mcsi.print(1, 24, "Class: " + PC.currentClass);
 		
-		if(PC.currentClass.contentEquals("Rogue")){
+		
+		if(PC.currentClass.contentEquals("Necromancer")){
 			
+			//Display class
+			mcsi.print(1, 24, "Class: " + PC.currentClass
+					+ "   " + "Kills: " + PC.kills
+					+ "   " + "Berries: " + PC.berries
+					+ "  " + "Ingots: " + PC.ingots);
 		}
 		
-		
+		else{
+			
+			//Display class
+			mcsi.print(1, 24, "Class: " + PC.currentClass 
+					+ "   " + "Arrows: " + PC.arrows
+					+ "   " + "Berries: " + PC.berries
+					+ "  " + "Ingots: " + PC.ingots);
+		}
 		
 		//Display consumables
 		//mcsi.print(1, 24, "Ingots: " + PC.ingots + "   "

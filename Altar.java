@@ -12,6 +12,7 @@ public class Altar {
 	String colorString = "GOLD";
 	String profession = "Miser";
 	static char colorChar = 'G';
+	String message = "You feel a strange sense of loss.";
 	
 	public void pray(Player PC){
 		if ((PC.xPos == this.xPos) && (PC.yPos == this.yPos)){
@@ -41,6 +42,7 @@ public class Altar {
 			colorString = "WHITE";
 			colorChar = 'W';
 			profession = "Herbalist";
+			message = "You feel at one with the life around you.";
 			break;
 			
 		case 'R':
@@ -49,6 +51,7 @@ public class Altar {
 			colorString = "GRAY";
 			colorChar = 'R';
 			profession = "Weaponsmith";
+			message = "You notice lots of odds and ends lying about.";
 			break;
 		
 		case 'D':
@@ -57,6 +60,7 @@ public class Altar {
 			colorString = "DARKGRAY";
 			colorChar = 'D';
 			profession = "Necromancer";
+			message = "Visions of death swim in your mind.";
 			break;
 		}
 		}

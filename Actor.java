@@ -286,7 +286,7 @@ public class Actor {
 		yPos = newPos;
 	}
 
-	public void run(Player pC) {
+	public void run(Player PC) {
 		// TODO Auto-generated method stub
 		
 	}

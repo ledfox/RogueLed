@@ -92,7 +92,9 @@ public class RogueLed {
 		//Feeds the required lists into the level generator
 		//level.genLevel(0);
 			
-		level.genLevel(1, GM, godsList, boulderList, gobList, junkList, trapList, wallList);
+		//Just change the first number for alternate levels
+		
+		level.genLevel(3, GM, actorList, godsList, boulderList, gobList, junkList, trapList, wallList);
 		
 		
 		//Generate wall for a test
@@ -102,13 +104,13 @@ public class RogueLed {
 		//actorList.add(wall1);
 		
 		//Bring Ursatz to life for testing
-		Goblin Ursatz = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3, Goblin.symbol, "Ursatz");
-		gobList.add(Ursatz);	
+//		Goblin Ursatz = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3, Goblin.symbol, "Ursatz");
+//		gobList.add(Ursatz);	
 
 		//Test with a dummy
-		Dummy tDummy = new Dummy (10, 10);
-		actorList.add(tDummy);
-		
+//		Dummy tDummy = new Dummy (10, 10);
+//		actorList.add(tDummy);
+//		
 		//Another dummy test
 		
 		
@@ -156,7 +158,7 @@ public class RogueLed {
 
 				//Display Goblins
 				for (Goblin gob : gobList){
-					csi.print(gob.xPos, gob.yPos, Goblin.symbol, CSIColor.GREEN);
+					csi.print(gob.xPos, gob.yPos, Goblin.symbol, gob.color);
 				}
 				
 				
@@ -268,8 +270,16 @@ public class RogueLed {
 					//Beam.peekBeam(PC,csi);
 					
 					//Fires an arrow
-					Beam.fireArrow(PC);
-				
+					
+					if (PC.currentClass == "Necromancer"){
+						Beam.fireDisentigrate(PC);
+					
+					} else if (PC.arrows < 1){
+						GM.setMessage("You have no arrows to fire!");
+						break;
+						
+					} else Beam.fireArrow(PC);
+					PC.loseArrow();
 					
 					break;
 					
@@ -310,14 +320,16 @@ public class RogueLed {
 						//Goblin.run does a bunch of stuff. Check goblin class for more info.
 						gob.run(PC, wallList, boulderList, trapList, gobList);
 						//System.out.println(gob.health);
-							
+		
+						
 						//Should allow a goblin to go bezerk when its the last one left
 						//Currently this does not happen
-						if (gobList.size() == 1 && gob.promotable == true) {
+						if (gobList.size() == 1) {
 							gob.promote();
 							PC.GM.setMessage("Realizing its the last one left alive, the goblin goes bezerk!");
 						}
 						
+						//if (gob.dead) gobList.remove(gob);
 						
 						}
 						

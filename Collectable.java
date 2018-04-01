@@ -7,7 +7,7 @@ public class Collectable {
 	public int xPos = 10;
 	public int yPos = 10;
 
-	static char symbol = '$';
+	char symbol = '$';
 	
 	String name = "unknown object";
 	
@@ -59,6 +59,18 @@ public class Collectable {
 		default:
 			color = CSIColor.HOT_PINK;
 		}
+	}
+	
+	
+	//Pop
+	public void pop(){
+		//Below is where collectables are spawned in the level code
+		//Generate a bunch of collectables all at once
+//		for (int i = 0; i < 100; i++){
+//			Collectable junk = new Collectable(rand.nextInt(75) + 3, rand.nextInt(17) + 3, '%');
+//		junkList.add(junk);
+//		}
+		
 	}
 	
 	//Deconstructor

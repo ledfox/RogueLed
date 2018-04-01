@@ -12,7 +12,7 @@ public class Goblin extends Actor {
 	public int power = 2;
 	
 	static char symbol = 'g';
-	CSIColor color = CSIColor.GREEN;
+	CSIColor color = CSIColor.GRAY;
 	String name = "goblin";
 	
 	boolean promotable = true;
@@ -23,8 +23,11 @@ public class Goblin extends Actor {
 	//Determines goblin behavior
 	void decide(Player PC){
 		
+		
+		//DEATH
 		//Goblin decides if it is dead
 		if (health <= 0) {
+
 			dead = true;
 			
 			//Goblin should shout as it dies - no shouting in the graveyard!
@@ -33,6 +36,7 @@ public class Goblin extends Actor {
 			    
 				//Fork over XP
 				PC.gainXP(experience);
+				PC.gainKill();
 			}
 			if (dead){
 			depop();
@@ -71,8 +75,9 @@ public class Goblin extends Actor {
 		
 		} else {
 		
-			//If they can't think of anything better to do, they'll move randomly
+			//If they can't think of anything better to do, they'll move randomly and try to hide
 			moveRandom();	
+			hide();
 		}
 
 		//Goblins attack if they can (on PC's square)
@@ -83,6 +88,13 @@ public class Goblin extends Actor {
 	}
 		
 	void run(Player PC, ArrayList<Wall> wallList, ArrayList<Boulder> boulderList, ArrayList<DartTrap> trapList, ArrayList<Goblin> gobList){
+		
+		//VISION
+				//Decides whether to draw the goblin or not
+				if ((((xPos - PC.xPos) <= PC.vision) && ((yPos - PC.yPos) <= PC.vision))){
+					color = CSIColor.GREEN;
+				} else color = CSIColor.BLACK;	
+				
 		PC.meleeAttack(this);
 		this.decide(PC); 
 		
@@ -102,12 +114,17 @@ public class Goblin extends Actor {
 				
 			}
 		
+		
 		PC.checkXP();
 	}
 	
-	//Special Goblin action
+	//Special Goblin actions
 	public void lickWounds(){
 		damage(-1);
+	}
+	
+	public void hide(){
+		color = CSIColor.BLACK;
 	}
 
 	//Attack
@@ -120,6 +137,8 @@ public class Goblin extends Actor {
 			PC.GM.setMessage("The " + this.name + " hits you!");
 			PC.damage(harm);
 		}
+		
+		
 	}
 	
 	//Damage 

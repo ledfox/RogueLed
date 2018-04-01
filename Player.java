@@ -24,13 +24,14 @@ public class Player {
 	public Announcer GM;
 
 	public int experience = 0;
+	public int kills = 0;
 	
 	public Armor armor = new Armor();
 	public Weapon weapon = new Weapon();
 	public Bow bow = new Bow();
 	
 	public int ingots = 0;
-	public int arrows = 0;
+	public int arrows = 10;
 	public int berries = 10;
 	
 	public ConsoleSystemInterface csi;
@@ -53,7 +54,8 @@ public class Player {
 		String newClass = proximate.profession;
 		setClass(newClass);
 		//currentClass = (proximate.profession);
-		GM.setMessage("You've become a " + currentClass);
+		GM.setMessage("You've become a " + currentClass +
+				".  " + proximate.message);
 		this.converting = false;
 	}
 	
@@ -145,6 +147,10 @@ public class Player {
 		this.arrows += 1;
 	}
 
+	void gainKill(){
+		this.kills += 1;
+	}
+	
 //Consume
 	
 	void eatBerry(){
@@ -160,6 +166,10 @@ public class Player {
 			berries -= 1;
 			GM.setMessage("The berry was delicious!");
 		}
+	}
+	
+	void loseArrow(){
+		this.arrows -= 1;
 	}
 	
 //Stat stuff	
@@ -272,14 +282,22 @@ void rangedAttack(Actor mob){
 	int D20 = rand.nextInt(20) + 1;
 	int luckFactor = D20 + vision;
 	int harm;
-	if (strength/5 > 1){
+	
+	//Death-Beam formula
+	if (currentClass == "Necromancer"){
+		harm = 5 + vision;
+		luckFactor += 5;
+	} 
+	
+	//Bow formula	
+	else if (strength/5 > 1){
 		harm = (strength/5) + bow.quality;
 	} else harm = 1 + bow.quality;
 	if (luckFactor > 10){
 	mob.damage(harm);
-	GM.setMessage("Your arrow strikes the " + mob.name + "!");
+	GM.setMessage("Your attack strikes the " + mob.name + "!");
 	} else {
-		GM.setMessage("Your arrow misses the " + mob.name + ".");
+		GM.setMessage("Your attack misses the " + mob.name + ".");
 	}
 	
 	
