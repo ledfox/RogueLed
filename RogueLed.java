@@ -123,14 +123,17 @@ public class RogueLed {
 		
 			while (!exit){
 				
+				
+				
 				//Sets timer
 				String timeStr = String.valueOf(timer);
-		
+				boolean timestep = false;
+				
 				csi.restore();
 
 				//Display Dart Traps
 				for (DartTrap trap : trapList){
-					csi.print(trap.xPos, trap.yPos, trap.symbol, CSIColor.RED);
+					csi.print(trap.xPos, trap.yPos, trap.symbol, trap.color);
 				}
 				
 				//Display Collectables
@@ -140,12 +143,12 @@ public class RogueLed {
 				
 				//Display Altars
 				for (Altar gods : godsList){
-					csi.print(gods.xPos, gods.yPos, gods.symbol, gods.csiColor);
+					csi.print(gods.xPos, gods.yPos, gods.symbol, gods.color);
 				}
 				
 				//Display Forges
 				for (Forge forge : forgeList){
-					csi.print(forge.xPos, forge.yPos, forge.symbol, forge.csiColor);
+					csi.print(forge.xPos, forge.yPos, forge.symbol, forge.color);
 				}
 
 				//Prints the player character in ATOMIC TANGERINE
@@ -161,14 +164,13 @@ public class RogueLed {
 				
 				//Display Boulders
 				for (Boulder rock : boulderList){
-					csi.print(rock.xPos, rock.yPos, rock.symbol, CSIColor.BEIGE);		
+					csi.print(rock.xPos, rock.yPos, rock.symbol, rock.color);		
 				}
 
 				//Display Goblins
 				for (Goblin gob : gobList){
 					csi.print(gob.xPos, gob.yPos, Goblin.symbol, gob.color);
 				}
-				
 				
 				
 				//Display Walls
@@ -182,8 +184,8 @@ public class RogueLed {
 				csi.refresh();
 				int key = csi.inkey().code;
 				
-				@SuppressWarnings("unused")
-				boolean timestep = false;
+				
+				
 				
 				//Main character movement
 				switch (key) {		
@@ -344,50 +346,65 @@ public class RogueLed {
 					
 					for(Actor next : actorList){
 						next.run(PC);
+//						next.checkVisibility(PC);
 					}
 					
-					//Checks if a player is in a wall - bounces them back if they are.
+					//Checks if a player is in a wall - bounces them back if they arei
 					for (Wall wall : wallList){
 						wall.bouncePlayer(PC);
 					}
 					
+//					for (Altar gods : godsList){
+//						gods.checkVisibility(PC);
+//					}
+					
+					for (Forge forge : forgeList){
+						forge.checkVisibility(PC);
+					}
+					
 					for (Boulder rock : boulderList){
 					rock.checkPush(PC); 
+					rock.checkVisibility(PC);
 					}
 					
 					for (DartTrap trap : trapList){
 					trap.checkTrigger(PC);
+					trap.checkVisibility(PC);
 					}
 					
 					for (Goblin gob : gobList){
 						//Goblin.run does a bunch of stuff. Check goblin class for more info.
 						gob.run(PC, wallList, boulderList, trapList, gobList);
 						//System.out.println(gob.health);
-		
+						
+						//Checks visibility
+						gob.checkVisibility(PC);
 						
 						//Should allow a goblin to go bezerk when its the last one left
 						//Currently this does not happen
 						if (gobList.size() == 1) {
 							gob.promote();
-							PC.GM.setMessage("Realizing its the last one left alive, the goblin goes bezerk!");
+							//PC.GM.setMessage("Realizing its the last one left alive, the goblin goes bezerk!");
+//						    PC.GM.setMessage("I still have " + gob.health + " hit points!");
+//							PC.GM.setMessage("Satz is at " + gob.xPos + "," + gob.yPos);
 						}
 						
 						//if (gob.dead) gobList.remove(gob);
 						
 						}
-						
-					}
-					
+					}		
 				    
 					
 					for (Collectable junk : junkList){
 						junk.collect(PC);
+						junk.checkVisibility(PC);
 					}
 					
 					//Get PC's position for debugging
 					//PC.getPosition();
 					
 					statmes = GM.getMessage();
+					System.out.println(PC.xPos + " , " + PC.yPos + " ");
 					
 					timer++;
 					timestep = false;

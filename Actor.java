@@ -2,19 +2,19 @@ package primary;
 
 import java.util.Random;
 
-import net.slashie.libjcsi.CSIColor;
+//import net.slashie.libjcsi.CSIColor;
 
-public class Actor {
+public class Actor extends Visible {
 
-	int xPos = 0;
-	int yPos = 0;
+//	int xPos = 0;
+//	int yPos = 0;
 	char symbol = '0';
 	static int health = 1;
 	String name = "generic actor";
 	String direction = "None";
 	int experience = 1;
 	int power = 0;
-	public CSIColor color = CSIColor.GRAY;
+//	public CSIColor color = CSIColor.GRAY;
 	
 	//Deconstructor
 	
@@ -33,12 +33,14 @@ public class Actor {
     public Actor(int a, int b) {
     	xPos =  a;
     	yPos =  b;
+//    	defaultColor = CSIColor.GRAY;
     }
     
     public Actor (int a, int b, char c){
     	xPos = a;
     	yPos = b;
     	symbol = c;
+//    	defaultColor = CSIColor.GRAY;
     }
     
     public Actor (int a, int b, char c, String vName){
@@ -46,6 +48,7 @@ public class Actor {
     	yPos = b;
     	symbol = c;
     	name = vName;
+//    	defaultColor = CSIColor.GRAY;
     }
     
     //Attack

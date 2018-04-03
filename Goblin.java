@@ -12,10 +12,9 @@ public class Goblin extends Actor {
 	public int power = 2;
 	
 	static char symbol = 'g';
-	CSIColor color = CSIColor.GRAY;
 	String name = "goblin";
-	
 	boolean promotable = true;
+  
 	
 	Random rand = new Random();
 	boolean dead = false;
@@ -62,8 +61,15 @@ public class Goblin extends Actor {
 		
 		//This essentially sets the goblin's vision to 10
 		//Need to decide if mobs will have proper vision or not
-		} else if (((xPos - PC.xPos) < 10) && ((yPos - PC.yPos) < 10)){
-		
+//		} else if (((xPos - PC.xPos) < 10) && ((yPos - PC.yPos) < 10)){
+//		
+				
+		//Gob vision = 4		
+		} else if ((((xPos - PC.xPos) <= 4) && ((yPos - PC.yPos) <= 4))
+//					)
+				&& ((PC.xPos - xPos) <= 4) && ((PC.yPos - yPos) <= 4))
+			{
+			
 		//Sometimes goblins move randomly even if they weren't planning on it
 		int d10 = rand.nextInt(10) + 1;
 		if (d10 > 8){
@@ -77,7 +83,7 @@ public class Goblin extends Actor {
 		
 			//If they can't think of anything better to do, they'll move randomly and try to hide
 			moveRandom();	
-			hide();
+//			hide();
 		}
 
 		//Goblins attack if they can (on PC's square)
@@ -89,11 +95,6 @@ public class Goblin extends Actor {
 		
 	void run(Player PC, ArrayList<Wall> wallList, ArrayList<Boulder> boulderList, ArrayList<DartTrap> trapList, ArrayList<Goblin> gobList){
 		
-		//VISION
-				//Decides whether to draw the goblin or not
-				if ((((xPos - PC.xPos) <= PC.vision) && ((yPos - PC.yPos) <= PC.vision))){
-					color = CSIColor.GREEN;
-				} else color = CSIColor.BLACK;	
 				
 		PC.meleeAttack(this);
 		this.decide(PC); 
@@ -123,9 +124,9 @@ public class Goblin extends Actor {
 		damage(-1);
 	}
 	
-	public void hide(){
-		color = CSIColor.BLACK;
-	}
+//	public void hide(){
+//		color = CSIColor.BLACK;
+//	}
 
 	//Attack
 	//Note, should be able to move to the superclass Actor once I figure out how to make that work
@@ -155,13 +156,14 @@ public class Goblin extends Actor {
 	//When the goblin realizes its the last one of its kind, it goes bezerk!
 	//Development path to include three ultimate goblin types - goblin bezerker, goblin archer and one other
 	public void promote(){
-		
+		if (promotable){
 		color = CSIColor.RED;
 		health = 30;
 		promotable = false;
 		power = 5;
-		
 		lickWounds();
+		}
+		
 	}
 	
 	
@@ -169,6 +171,8 @@ public class Goblin extends Actor {
 	public Goblin(int x, int y, char d, String n) {
 	
 		super(x, y, symbol, n);
+		defaultColor = CSIColor.GREEN;
+		color = defaultColor;
 		
 	}
 

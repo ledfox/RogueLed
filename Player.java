@@ -71,45 +71,51 @@ public class Player {
 	}
 	
 	void craftSelect(char selection){
-		
-		switch(selection){
-		case 'w': case 'W':
-			if(this.ingots < weapon.quality + 1){
-				GM.setMessage("You don't have the metal!");
-				break;
-			} else {
-			this.ingots = this.ingots - (weapon.quality + 1);
-			this.weapon.upgrade();
-			GM.setMessage("You craft yourself a " + weapon.currentType + "!");
-			crafting = false;
-			} break;
-		case 'a': case 'A':
-			if(this.ingots < armor.quality + 1){
-				GM.setMessage("You don't have the metal!");
-				break;
-			} else {
-			this.ingots = this.ingots - (weapon.quality + 1);
-			this.armor.upgrade();
-			GM.setMessage("You craft yourself a " + armor.currentType + "!");
-			crafting = false;
-			} break;
-		case 'b': case 'B':
-			if(this.ingots < bow.quality + 1){
-				GM.setMessage("You don't have the metal!");
-				break;
-			} else {
-			this.ingots = this.ingots - (weapon.quality + 1);
-			this.bow.upgrade();
-			GM.setMessage("You craft yourself a " + bow.currentType + "!");
-			crafting = false;
-			} break;
+	
+			switch(selection){
 			
-		default:
-			GM.setMessage("You lean against the forge.");
-			crafting = false;
-			break;
+			//WEAPON
+			case 'w': case 'W':
+				if(this.ingots < (weapon.quality * 2) + 1){
+					GM.setMessage("You don't have the metal!");
+					break;
+				} else {
+				this.ingots = (this.ingots - ((weapon.quality * 2) + 1));
+				this.weapon.upgrade();
+				GM.setMessage("You craft yourself a " + weapon.currentType + "!");
+				crafting = false;
+				} break;
+				
+			//ARMOR	
+			case 'a': case 'A':
+				if(this.ingots < (armor.quality * 2) + 1){
+					GM.setMessage("You don't have the metal!");
+					break;
+				} else {
+				this.ingots = (this.ingots - ((armor.quality * 2) + 1));
+				this.armor.upgrade();
+				GM.setMessage("You craft yourself a " + armor.currentType + "!");
+				crafting = false;
+				} break;
+			
+			//BOW	
+			case 'b': case 'B':
+				if(this.ingots < (bow.quality * 2) + 1){
+					GM.setMessage("You don't have the metal!");
+					break;
+				} else {
+				this.ingots = (this.ingots - ((bow.quality * 2) +1 ));
+				this.bow.upgrade();
+				GM.setMessage("You craft yourself a " + bow.currentType + "!");
+				crafting = false;
+				} break;	
+			default:
+				GM.setMessage("You lean against the forge.");
+				crafting = false;
+				break;	
+			}
 		}
-	}
+		
 	
 	//Confirm
 	

@@ -2,6 +2,8 @@ package primary;
 
 import java.util.Random;
 
+import net.slashie.libjcsi.CSIColor;
+
 
 public class Boulder extends Actor {
 
@@ -23,11 +25,14 @@ public class Boulder extends Actor {
     
     public Boulder(int a, int b, char c) {
     	super(a, b, c);
-    	
+    	defaultColor = CSIColor.GRAY;
+    	color = defaultColor;
     }
     
     public Boulder (int a, int b){
     	super(a, b);
+    	defaultColor = CSIColor.GRAY;
+    	color = defaultColor;
     }
     
     void checkPush(Player PC){

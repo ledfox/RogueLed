@@ -2,16 +2,19 @@ package primary;
 
 import net.slashie.libjcsi.CSIColor;
 
-public class Collectable {
+public class Collectable extends Visible {
 
-	public int xPos = 10;
-	public int yPos = 10;
+//	public int xPos = 10;
+//	public int yPos = 10;
 
 	char symbol = '$';
 	
 	String name = "unknown object";
 	
-	CSIColor color = CSIColor.WHITE;
+	//CSIColor color = CSIColor.WHITE;
+//	public CSIColor defaultColor;
+	
+	
 	
 	public void collect(Player PC){
 		if ((PC.xPos == this.xPos) && (PC.yPos == this.yPos)){
@@ -44,21 +47,23 @@ public class Collectable {
 		
 		switch(symbol){
 		case ']':
-			color = CSIColor.PLATINUM;
+			defaultColor = CSIColor.PLATINUM;
 			name = "ingot";
 			break;
 		case '/':
-			color = CSIColor.AUBURN;
+			defaultColor = CSIColor.AUBURN;
 			name = "arrow";
 			break;
 		case '%':
-			color = CSIColor.CORAL_RED;
+			defaultColor = CSIColor.CORAL_RED;
 			name = "berry";
 			break;
 			
 		default:
-			color = CSIColor.HOT_PINK;
+			defaultColor = CSIColor.HOT_PINK;
 		}
+		
+		color = defaultColor;
 	}
 	
 	

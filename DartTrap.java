@@ -2,12 +2,16 @@ package primary;
 
 import java.util.Random;
 
-public class DartTrap {
+import net.slashie.libjcsi.CSIColor;
+
+public class DartTrap extends Visible{
 	
-    public int xPos = 4;
-    public int yPos = 4;
+//    public int xPos = 4;
+//    public int yPos = 4;
     public char symbol = '^';
     String message = "You've been hit by a dart!";
+    
+
     
     void checkTrigger(Goblin mob){
     	
@@ -38,6 +42,8 @@ public class DartTrap {
     public DartTrap(int a, int b) {
     	xPos = a;
     	yPos = b;
+    	defaultColor = CSIColor.RAZZMATAZZ;
+    	color = defaultColor;
     	
     }
 

@@ -3,6 +3,8 @@ package primary;
 import java.util.ArrayList;
 import java.util.Random;
 
+import net.slashie.libjcsi.CSIColor;
+
 public class Level {
 
 	public void genLevel(int number){
@@ -132,6 +134,7 @@ public void genLevel(int number, Announcer GM, ArrayList<Actor> actorList, Array
 				
 				
 	case 3:
+		//Generate 3 altars and a forge
 		
 		Altar delevon3 = new Altar(rand.nextInt(75) + 3, rand.nextInt(17) + 3, 'D');
 		godsList.add(delevon3);
@@ -147,6 +150,20 @@ public void genLevel(int number, Announcer GM, ArrayList<Actor> actorList, Array
 		
 		break;			
 		
+	case 4:
+		//Generate one goblin and one altar and one arrow.
+		
+		Goblin satz = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3, 'z', "satz");
+		gobList.add(satz);
+		
+		Altar delevon4 = new Altar (rand.nextInt(75) + 3, rand.nextInt(17) + 3, 'D');
+		godsList.add(delevon4);
+		
+		Collectable marker = new Collectable(10, 10, '/');
+		junkList.add(marker);
+		
+		Collectable inker = new Collectable (20, 10, ']');
+		junkList.add(inker);
 		
 	}
 	

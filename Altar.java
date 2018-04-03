@@ -2,13 +2,13 @@ package primary;
 
 import net.slashie.libjcsi.CSIColor;
 
-public class Altar {
+public class Altar extends Visible {
 
-	public int xPos = 10;
-	public int yPos = 10;
+//	public int xPos = 10;
+//	public int yPos = 10;
 	static char symbol = '_';
 	String name = "Altar to a Diety";
-	CSIColor csiColor = CSIColor.GOLD;
+	CSIColor color = CSIColor.GOLD;
 	String colorString = "GOLD";
 	String profession = "Miser";
 	static char colorChar = 'G';
@@ -38,7 +38,7 @@ public class Altar {
 		switch(cha){
 		case 'W':
 			name = "Altar to Wo'hosa";
-			csiColor = CSIColor.WHITE;
+			color = CSIColor.WHITE;
 			colorString = "WHITE";
 			colorChar = 'W';
 			profession = "Herbalist";
@@ -47,7 +47,7 @@ public class Altar {
 			
 		case 'R':
 			name = "Altar to Rahmish";
-			csiColor = CSIColor.GRAY;
+			color = CSIColor.GRAY;
 			colorString = "GRAY";
 			colorChar = 'R';
 			profession = "Weaponsmith";
@@ -56,7 +56,7 @@ public class Altar {
 		
 		case 'D':
 			name = "Altar to Delevon";
-			csiColor = CSIColor.DARK_GRAY;
+			color = CSIColor.DARK_GRAY;
 			colorString = "DARKGRAY";
 			colorChar = 'D';
 			profession = "Necromancer";
