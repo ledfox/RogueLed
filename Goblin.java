@@ -14,11 +14,12 @@ public class Goblin extends Actor {
 	static char symbol = 'g';
 	String name = "goblin";
 	boolean promotable = true;
-  
-	
-	Random rand = new Random();
+
 	boolean dead = false;
 	boolean fleeing = false;
+	
+	Random rand = new Random();
+
 	//Determines goblin behavior
 	void decide(Player PC){
 		
@@ -36,13 +37,21 @@ public class Goblin extends Actor {
 				//Fork over XP
 				PC.gainXP(experience);
 				PC.gainKill();
+				PC.tallyDown();
 			}
 			if (dead){
 			depop();
 			return;
 			}
 			
-		}  if (health == 1) {	
+		}
+		
+		//RAGE
+		//Goblin decides if it is enraged
+		if (PC.kills >= 7) promote();
+		
+		//PANIC
+		if (health == 1) {	
 			
 			if (fleeing = false){
 				PC.GM.setMessage("The goblin panics and flees!");
@@ -58,15 +67,10 @@ public class Goblin extends Actor {
 				} else {			
 				flee(PC);
 				}
-		
-		//This essentially sets the goblin's vision to 10
-		//Need to decide if mobs will have proper vision or not
-//		} else if (((xPos - PC.xPos) < 10) && ((yPos - PC.yPos) < 10)){
-//		
 				
+		//VISION		
 		//Gob vision = 4		
 		} else if ((((xPos - PC.xPos) <= 4) && ((yPos - PC.yPos) <= 4))
-//					)
 				&& ((PC.xPos - xPos) <= 4) && ((PC.yPos - yPos) <= 4))
 			{
 			
@@ -86,6 +90,7 @@ public class Goblin extends Actor {
 //			hide();
 		}
 
+		//ATTACK
 		//Goblins attack if they can (on PC's square)
 		if (xPos == PC.xPos && yPos == PC.yPos){
 			attack(PC);
@@ -157,11 +162,12 @@ public class Goblin extends Actor {
 	//Development path to include three ultimate goblin types - goblin bezerker, goblin archer and one other
 	public void promote(){
 		if (promotable){
-		color = CSIColor.RED;
+		defaultColor = CSIColor.RED;
 		health = 30;
-		promotable = false;
+		experience = 100;
 		power = 5;
 		lickWounds();
+		promotable = false;
 		}
 		
 	}

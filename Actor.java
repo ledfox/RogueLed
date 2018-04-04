@@ -269,7 +269,6 @@ public class Actor extends Visible {
 		}
 	}
 	
-
     
     //Getters
     int getXpos(){

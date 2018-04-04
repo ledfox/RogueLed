@@ -20,7 +20,7 @@ public class Locator {
 		Boulder gotBou = null;
 		ArrayList<Boulder> bouList = RogueLed.getBoulders();
 		
-		//Display Goblins
+		//Display Boulders
 		for (Boulder bou : bouList){
 			if (bou.xPos == xPos && bou.yPos == yPos)
 				gotBou = bou;
@@ -28,4 +28,16 @@ public class Locator {
 		return gotBou;
 	}
 	
+	static Actor locateActor(int xPos, int yPos){
+		Actor retrievedActor = null;
+		ArrayList<Actor> retrievedActorList = RogueLed.retrieveActors();
+	
+	
+	//Display Actors
+	for (Actor guy : retrievedActorList){
+		if (guy.xPos == xPos && guy.yPos == yPos)
+			retrievedActor = guy;
+	}
+	return retrievedActor;
+	}
 }

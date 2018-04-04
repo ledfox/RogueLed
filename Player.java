@@ -19,6 +19,7 @@ public class Player {
 	public String currentClass = "Rogue";
 	public boolean converting = false;
 	public boolean crafting = false; 
+	public int tally = 0;
 	
 	public int currentHealth;
 	
@@ -34,6 +35,8 @@ public class Player {
 	public int ingots = 10;
 	public int arrows = 10;
 	public int berries = 10;
+	
+	public int seeds = 0;
 	
 	public ConsoleSystemInterface csi;
 	
@@ -58,6 +61,12 @@ public class Player {
 		GM.setMessage("You've become a " + currentClass +
 				".  " + proximate.message);
 		this.converting = false;
+	}
+	
+	//Planting seeds
+	
+	void plant(){
+		
 	}
 	
 	//Crafting
@@ -292,13 +301,20 @@ void trainStat (String desStat){
 
 
 void gainXP(Actor mob){
-	
 	this.experience += mob.experience;
 	
 }
 
 void gainXP(int gain){
 	this.experience += gain;
+}
+
+void tallyDown(){
+	tally -=1 ;
+}
+
+void tallyUp(){
+	tally +=1;
 }
 
 void checkXP(){

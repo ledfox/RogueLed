@@ -51,7 +51,7 @@ public class Altar extends Visible {
 			colorString = "GRAY";
 			colorChar = 'R';
 			profession = "Weaponsmith";
-			message = "You notice lots of odds and ends lying about.";
+			message = "You see a dungeon full of tools.";
 			break;
 		
 		case 'D':

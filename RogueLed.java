@@ -28,6 +28,9 @@ public class RogueLed {
     
    //Establishes timer
   	private long timer = 0L;
+  	
+  	//Establishes tally
+//  private int tally = 0;
     
   	//Generate game master
   	Announcer GM = new Announcer();
@@ -61,7 +64,7 @@ public class RogueLed {
 	ArrayList<Wall> wallList = new ArrayList<Wall>();
 	
 	//Generate actorList
-	ArrayList<Actor> actorList = new ArrayList<Actor>();
+	static ArrayList<Actor> actorList = new ArrayList<Actor>();
 	
 	//Generate forgeList
 	ArrayList<Forge> forgeList = new ArrayList<Forge>();
@@ -170,8 +173,10 @@ public class RogueLed {
 				//Display Goblins
 				for (Goblin gob : gobList){
 					csi.print(gob.xPos, gob.yPos, Goblin.symbol, gob.color);
+//					PC.tallyUp();
 				}
 				
+			
 				
 				//Display Walls
 				for (Wall wall : wallList){
@@ -253,9 +258,14 @@ public class RogueLed {
 					break;
 					
 				case CharKey.P: case CharKey.p:
+					
+					if (PC.currentClass == "Herbalist"){
+						PC.plant();
+					} else {
 					for (Altar gods : godsList){
 						gods.pray(PC);
 				    }
+					}
 					csi.refresh();
 					break;
 					
@@ -382,12 +392,12 @@ public class RogueLed {
 						
 						//Should allow a goblin to go bezerk when its the last one left
 						//Currently this does not happen
-						if (gobList.size() == 1) {
-							gob.promote();
+//						if (gobList.size() == 1) {
+//							gob.promote();
 							//PC.GM.setMessage("Realizing its the last one left alive, the goblin goes bezerk!");
 //						    PC.GM.setMessage("I still have " + gob.health + " hit points!");
 //							PC.GM.setMessage("Satz is at " + gob.xPos + "," + gob.yPos);
-						}
+//						}
 						
 						//if (gob.dead) gobList.remove(gob);
 						
@@ -423,6 +433,10 @@ public class RogueLed {
 				}
 	
 	//Getters
+	public static ArrayList<Actor> retrieveActors(){
+		return actorList;
+	}
+	
 	public static ArrayList<Goblin> getGobs(){
 		return gobList;
 	}
@@ -430,5 +444,12 @@ public class RogueLed {
 	public static ArrayList<Boulder> getBoulders(){
 		return boulderList;
 	}
+	
+//	public int countGoblins(){
+		//Tally up goblins into a safe export
+//		int tally = gob.size();
+//		return tally;	
+//	}
+	
 	
 	}
