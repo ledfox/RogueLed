@@ -1,7 +1,17 @@
 # RogueLed
 Roguelike Project
 
-0Version 0.0.0 
+Goblin PlagueBug Version
+
+In this version, the first goblin to die inexplicably kills the other goblins in the area. Could be spun as "Other Goblings Flee," but for right now this is being treated as a bug.
+
+BENEFITS:
+Win con active
+
+DRAWBACKS:
+Rage isn't working at the moment. May simply need to toss more goblins in.
+
+
 Added Map (Basic)
 Added Player Class
 Added Boulder Class
