@@ -57,9 +57,15 @@ public class Map {
 					+ "   " + "Kills: " + PC.kills
 					+ "   " + "Berries: " + PC.berries
 					+ "  " + "Ingots: " + PC.ingots);
-		}
-		
-		else{
+		} else if (PC.currentClass.contentEquals("Herbalist")){
+			//Display class
+			mcsi.print(1, 24, "Class: " + PC.currentClass
+					+ "   " + "Seeds: " + PC.seeds
+					+ "   " + "Berries: " + PC.berries
+					+ "   " + "Ingots: " + PC.ingots
+					+ "   " + "Arrows:" + PC.arrows);
+			
+		} else {
 			
 			//Display class
 			mcsi.print(1, 24, "Class: " + PC.currentClass 

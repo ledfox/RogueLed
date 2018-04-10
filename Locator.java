@@ -33,7 +33,7 @@ public class Locator {
 		ArrayList<Actor> retrievedActorList = RogueLed.retrieveActors();
 	
 	
-	//Display Actors
+	//return Actors
 	for (Actor guy : retrievedActorList){
 		if (guy.xPos == xPos && guy.yPos == yPos)
 			retrievedActor = guy;

@@ -17,9 +17,10 @@ public class Player {
 	
 	public String direction = "None";
 	public String currentClass = "Rogue";
+	
 	public boolean converting = false;
 	public boolean crafting = false; 
-	public int tally = 0;
+	public boolean asking = false;
 	
 	public int currentHealth;
 	
@@ -27,10 +28,11 @@ public class Player {
 
 	public int experience = 0;
 	public int kills = 0;
+	public int tally = 0;
 	
-	public Armor armor = new Armor();
-	public Weapon weapon = new Weapon();
-	public Bow bow = new Bow();
+	public Equipment armor = new Equipment();
+	public Equipment weapon = new Equipment();
+	public Equipment bow = new Equipment();
 	
 	public int ingots = 10;
 	public int arrows = 10;
@@ -234,6 +236,11 @@ public class Player {
 			}
 			berries -= 1;
 			GM.setMessage("The berry was delicious!");
+			
+			if(currentClass == "Herbalist"){
+				seeds += 3;
+				trainStat("Health");
+			};
 		}
 	}
 	
@@ -331,6 +338,14 @@ void gainLevel(){
 	this.experience = 0;
 	setHP(maxHealth);
 	GM.setMessage("You've gained a level! You feel fantastic!");
+	
+	//Death-Beam formula
+	if (currentClass == "Herbalist"){
+		this.maxHealth += 5 + vision;
+		trainStat("Strength");
+		trainStat("Strength");
+		trainStat("Strength");
+	} 
 }
 
 //Attack
