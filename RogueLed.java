@@ -30,12 +30,13 @@ public class RogueLed {
   	private long timer = 0L;
   	
   	//Establishes tally
-//  private int tally = 0;
+  	private int tally = 0;
     
   	//Generate game master
   	Announcer GM = new Announcer();
   	
     //Generate Player
+  	//Spqwn at 5, 5
   	Player PC = new Player (5, 5, GM, csi);
   	
   	//Generates a level object
@@ -99,8 +100,8 @@ public class RogueLed {
 		//level.genLevel(0);
 			
 		//Just change the first number for alternate levels
-		
-		level.genLevel(2, GM, actorList, forgeList, godsList, boulderList, gobList, junkList, trapList, wallList);
+		//SETLEVEL
+		level.genLevel(6, GM, actorList, forgeList, godsList, boulderList, gobList, junkList, trapList, wallList);
 		
 		
 		//Generate wall for a test
@@ -198,6 +199,34 @@ public class RogueLed {
 				//Base code allows for arrow movement - added number pad to cardinal directions
 				//timer++ hardcoded whenever a key is pressed (to increment turn)
 				
+				case CharKey.QUESTION:
+					GM.setMessage("What would you like to know?");
+					
+					//Fires an arrow
+					
+//					if (PC.currentClass == "Necromancer"){
+//						Beam.fireDisentigrate(PC);
+//					
+//					} else if (PC.arrows < 1){
+//						GM.setMessage("You have no arrows to fire!");
+//						break;
+//						
+//					} else 
+//					
+					//Fires arrow all the time. 
+//					Beam.fireArrow(PC);
+					
+					
+					//Fires the QUESTIONBEAM
+					Beam.peekBeam(PC);
+					
+					//PC.loseArrow();
+					
+					break;
+					
+					
+					
+				
 				case CharKey.UARROW: case CharKey.T8: case CharKey.N8:
 					PC.moveNorth(); timestep = true;  
 					break;
@@ -215,19 +244,19 @@ public class RogueLed {
 					break;
 					
 				//Diag movement options
-				case CharKey.N7:
+				case CharKey.N7: case CharKey.T7:
 					PC.moveNorthWest(); timestep = true; 	
 					break;
 					
-				case CharKey.N9:
+				case CharKey.N9: case CharKey.T9:
 					PC.moveNorthEast(); timestep = true; 
 					break;
 					
-				case CharKey.N1:
+				case CharKey.N1: case CharKey.T1:
 					PC.moveSouthWest(); timestep = true; 
 					break;
 					
-				case CharKey.N3:
+				case CharKey.N3: case CharKey.T3:
 					PC.moveSouthEast(); timestep = true;
 					break;
 				
@@ -243,7 +272,11 @@ public class RogueLed {
 					PC.eatBerry();
 					timestep = true;
 					break;
-				
+					
+				//Ask about Tally
+				case CharKey.T: case CharKey.t:
+					GM.setMessage("Current Tally: " + tally);
+					
 				//Testing upgrade system
 				case CharKey.U: case CharKey.u:
 					
@@ -268,6 +301,12 @@ public class RogueLed {
 					}
 					csi.refresh();
 					break;
+					
+				case CharKey.M: case CharKey.m:
+					
+					if (PC.asking){
+						GM.setMessage("Press 'P' to Pray or 'U' to use a forge.");
+					}
 					
 					
 				case CharKey.Y: case CharKey.y:
@@ -313,7 +352,7 @@ public class RogueLed {
 						
 					break;			
 					
-				//Testing BEAMS
+				// BEAMS
 				case CharKey.F: case CharKey.f:
 				
 					//Generic red beam with a message  
@@ -338,6 +377,7 @@ public class RogueLed {
 					
 					break;
 					
+					
 				//When "Q" is pressed, 'exit' is set to true and game quits. Neat!
 				case CharKey.Q: case CharKey.q:
 					csi.print(1, 1, "Quitting...");
@@ -348,11 +388,55 @@ public class RogueLed {
 				//essentially the ".run" mechanic
 				if (timestep = true){
 					
+					//Runs through the list of goblins and see if any of them are dead
+					for (Goblin gob : gobList){
+						
+//						Goblin death triggers
+						if (gob.dead)  {
+						
+						//Set goblin to the beginning of the list
+//						gobList.set(0, gob);
+						
+						//Truncate goblin from list
+						gobList.remove(gob);
+						
+						//Tally down
+//						tally -= 1;
+						
+						//Tally equal to gobList.size
+						tally = gobList.size();
+						
+						//BUGGY stopgap measure
+						//This allows for stability but is arbitrarily lethal to goblins. 
+						break;
+						
+						//Proper code needs to be figured out using clues below
+						
+//						gobList.removeAll(Collections.singleton(null));
+						
+//						for (Iterator<String> iterator = list.iterator(); iterator.hasNext(); ) {
+//						    String value = iterator.next();
+//						    if (value.length() > 5) {
+//						        iterator.remove();
+//						    }
+//						}
+						
+						} 
+						
+					}
+					
 					//Code to kill player if they deserve it
 					if (PC.currentHealth <= 0){
 					csi.print(1, 1, "You have perished.");
 					exit = true;
 					}
+					
+					//Wins the game if warranted
+					if (gobList.isEmpty()){
+						csi.print(1, 1, "You've completed your mission and pacified the goblins.");
+						exit = true;
+					}
+					
 					
 					for(Actor next : actorList){
 						next.run(PC);
@@ -399,10 +483,41 @@ public class RogueLed {
 //							PC.GM.setMessage("Satz is at " + gob.xPos + "," + gob.yPos);
 //						}
 						
-						//if (gob.dead) gobList.remove(gob);
+//						Goblin death triggers
+//						if (gob.dead)  {
 						
-						}
-					}		
+						//Set goblin to the beginning of the list
+//						gobList.set(0, gob);
+						
+						//Truncate goblin from list
+//						gobList.remove(0);
+						
+						//Tally down
+//						tally -= 1;
+						
+						//Tally equal to gobList.size
+//						tally = gobList.size();
+						
+						//BUGGY stopgap measure
+						//This allows for stability but is arbitrarily lethal to goblins. 
+//						break;
+						
+						//Proper code needs to be figured out using clues below
+						
+//						gobList.removeAll(Collections.singleton(null));
+						
+//						for (Iterator<String> iterator = list.iterator(); iterator.hasNext(); ) {
+//						    String value = iterator.next();
+//						    if (value.length() > 5) {
+//						        iterator.remove();
+//						    }
+//						}
+						
+						} 
+						
+					}
+					
+						
 				    
 					
 					for (Collectable junk : junkList){

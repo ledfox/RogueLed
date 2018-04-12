@@ -39,10 +39,10 @@ public class Goblin extends Actor {
 				PC.gainKill();
 				PC.tallyDown();
 			}
-			if (dead){
-			depop();
-			return;
-			}
+//			if (dead){
+//			depop();
+//			return;
+//			}
 			
 		}
 		
@@ -162,7 +162,7 @@ public class Goblin extends Actor {
 	//Development path to include three ultimate goblin types - goblin bezerker, goblin archer and one other
 	public void promote(){
 		if (promotable){
-		defaultColor = CSIColor.RED;
+		defaultColor = CSIColor.FALU_RED;
 		health = 30;
 		experience = 100;
 		power = 5;

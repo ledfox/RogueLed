@@ -165,8 +165,50 @@ public void genLevel(int number, Announcer GM, ArrayList<Actor> actorList, Array
 		Collectable inker = new Collectable (20, 10, ']');
 		junkList.add(inker);
 		
-	}
+		break;
+		
+	case 5:
+		//Generate a shitload of goblins for debugging Goblin Plague
+		for(int i = 0; i < 100; i++){
+			Goblin gob = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', "goblin");
+		gobList.add(gob);	
+		}
+		
+		//Generate many altars to Delevon as goblins are a worthy sacrifice to him
+		Altar delevon5 = new Altar (rand.nextInt(75) + 3, rand.nextInt(17) + 3, 'D');
+		godsList.add(delevon5);
 	
+		Altar delevon6 = new Altar (rand.nextInt(75) + 3, rand.nextInt(17) + 3, 'D');
+		godsList.add(delevon6);
+		
+		Altar delevon7 = new Altar (rand.nextInt(75) + 3, rand.nextInt(17) + 3, 'D');
+		godsList.add(delevon7);
+		
+		Altar delevon8 = new Altar (rand.nextInt(75) + 3, rand.nextInt(17) + 3, 'D');
+		godsList.add(delevon8);
+	
+	
+	break;
+	
+	case 6:
+		
+		//Generate a small number of goblins 
+				for(int i = 0; i < 2; i++){
+					Goblin gob = new Goblin(rand.nextInt(75) + 3, rand.nextInt(17) + 3,'g', "goblin");
+				gobList.add(gob);	
+				}
+		
+		//Generate a bunch of ingots all at once
+		for (int i = 0; i < 100; i++){
+			Collectable ingot = new Collectable(rand.nextInt(75) + 3, rand.nextInt(17) + 3, ']');
+		junkList.add(ingot);
+		}
+		
+		Forge exampleForge6 = new Forge(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
+		forgeList.add(exampleForge6);
+		
+		break;
+	}
 }
 	
 public void genLevel(ArrayList<Actor> actorList, ArrayList<DartTrap> trapList){

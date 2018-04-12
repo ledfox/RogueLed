@@ -20,13 +20,13 @@ public class Collectable extends Visible {
 		if ((PC.xPos == this.xPos) && (PC.yPos == this.yPos)){
 			switch(symbol){
 			case ']':
-				PC.ingots += 1;
+				PC.gainIngot();
 				break;
 			case '/':
-				PC.arrows += 1;
+				PC.gainArrow();
 				break;
 			case '%':
-				PC.berries += 1;
+				PC.gainBerry();
 				break;
 				
 			default:

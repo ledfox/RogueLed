@@ -17,9 +17,10 @@ public class Player {
 	
 	public String direction = "None";
 	public String currentClass = "Rogue";
+	
 	public boolean converting = false;
 	public boolean crafting = false; 
-	public int tally = 0;
+	public boolean asking = false;
 	
 	public int currentHealth;
 	
@@ -27,10 +28,11 @@ public class Player {
 
 	public int experience = 0;
 	public int kills = 0;
+	public int tally = 0;
 	
-	public Armor armor = new Armor();
-	public Weapon weapon = new Weapon();
-	public Bow bow = new Bow();
+	public Equipment armor = new Equipment("ARMOR");
+	public Equipment weapon = new Equipment("WEAPON");
+	public Equipment bow = new Equipment("BOW");
 	
 	public int ingots = 10;
 	public int arrows = 10;
@@ -145,54 +147,54 @@ public class Player {
 
     void moveSouth() {
     	if (this.yPos < 19){
-		this.yPos++; GM.setMessage("You head south."); this.direction = "South";}
+		this.yPos++;  this.direction = "South";}
 		else {GM.setMessage("You can't go there!");}
     }
     
     void moveNorth() {
-    	if (this.yPos > 3){GM.setMessage("You head north."); this.direction = "North";
+    	if (this.yPos > 3){ this.direction = "North";
     	this.yPos--;}
     	else {GM.setMessage("You can't go there!");
     	}
     }
     
     void moveWest() {
-    	if (this.xPos > 2){GM.setMessage("You head west."); this.direction = "West";
+    	if (this.xPos > 2){this.direction = "West";
 		this.xPos--;}
 		else {GM.setMessage("You can't go there!");
 		}
     }
     
     void moveEast() {
-    	if (this.xPos < 77) {GM.setMessage("You head east."); this.direction = "East";
+    	if (this.xPos < 77) {this.direction = "East";
 		this.xPos++;}
 		else {GM.setMessage("You can't go there!");
 		}
     }
     
     void moveNorthWest(){
-		if (this.yPos > 3 && this.xPos > 2){GM.setMessage("You head northwest.");
+		if (this.yPos > 3 && this.xPos > 2){
 		this.yPos--; this.xPos--; this.direction = "NorthWest";}
 		else{GM.setMessage("You can't go there!");
 		}
     }
 		
 	void moveNorthEast(){
-		if (this.yPos > 3 && this.xPos < 77){GM.setMessage("You head northeast.");
+		if (this.yPos > 3 && this.xPos < 77){
 		this.yPos--; this.xPos++; this.direction="NorthEast" ;}
 		else{GM.setMessage("You can't go there!");
 		}
 	}
 		
 	void moveSouthWest(){
-		if (this.yPos < 19 && this.xPos > 2){GM.setMessage("You head southwest.");
+		if (this.yPos < 19 && this.xPos > 2){
 		this.yPos++; this.xPos--; this.direction="SouthWest" ;}
 		else{GM.setMessage("You can't go there!");
 		}
 	}
 		
 	void moveSouthEast(){
-		if (this.yPos < 19 && this.xPos < 77){GM.setMessage("You head southeast.");
+		if (this.yPos < 19 && this.xPos < 77){
 		this.yPos++; this.xPos++;  this.direction="SouthEast";}
 		else{GM.setMessage("You can't go there!");
 		}
@@ -206,14 +208,17 @@ public class Player {
 	
 	void gainBerry(){
 		this.berries += 1;
+		GM.setMessage("You gain a berry (press 'e' to try to eat it");
 	}
 	
 	void gainIngot(){
 		this.ingots += 1;
+		GM.setMessage("You gain an ingot (press 'u' at a forge to use it)");
 	}
 	
 	void gainArrow(){
 		this.arrows += 1;
+		GM.setMessage("You gain an arrow (press 'f' to fire it)");
 	}
 
 	void gainKill(){
@@ -234,6 +239,11 @@ public class Player {
 			}
 			berries -= 1;
 			GM.setMessage("The berry was delicious!");
+			
+			if(currentClass == "Herbalist"){
+				seeds += 3;
+				trainStat("Health");
+			};
 		}
 	}
 	
@@ -331,6 +341,14 @@ void gainLevel(){
 	this.experience = 0;
 	setHP(maxHealth);
 	GM.setMessage("You've gained a level! You feel fantastic!");
+	
+	//Death-Beam formula
+	if (currentClass == "Herbalist"){
+		this.maxHealth += 5 + vision;
+		trainStat("Strength");
+		trainStat("Strength");
+		trainStat("Strength");
+	} 
 }
 
 //Attack
