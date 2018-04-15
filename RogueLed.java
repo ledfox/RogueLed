@@ -31,13 +31,24 @@ public class RogueLed {
   	
   	//Establishes tally
   	private int tally = 0;
-    
+  	
   	//Generate game master
   	Announcer GM = new Announcer();
   	
     //Generate Player
   	//Spqwn at 5, 5
   	Player PC = new Player (5, 5, GM, csi);
+  	
+    //Determines starting level
+  	int currentLevel = 1;
+  	
+  	//List of Levels for convenience
+  	//Level 0 - empty level (currently full of doorTraps)
+  	//Level 1 - just boulders, berries and goblins
+  	//Level 2 - lots of items and goblins: good display of features
+  	//Level 3 - few items, no goblins
+  	//Level 4 - low number of items, good for testing
+  	
   	
   	//Generates a level object
   	Level level = new Level();
@@ -51,6 +62,9 @@ public class RogueLed {
 	
 	//Generates TrapList
 	ArrayList<DartTrap> trapList = new ArrayList<DartTrap>();
+	
+	//Generates DoorTrapList
+	ArrayList<DoorTrap> doorTrapList = new ArrayList<DoorTrap>();
 	
 	//Generate goblinList
 	static ArrayList<Goblin> gobList = new ArrayList<Goblin>();
@@ -101,7 +115,18 @@ public class RogueLed {
 			
 		//Just change the first number for alternate levels
 		//SETLEVEL
-		level.genLevel(6, GM, actorList, forgeList, godsList, boulderList, gobList, junkList, trapList, wallList);
+		
+		level.genLevel(currentLevel, GM, actorList, forgeList, godsList, boulderList, gobList, junkList, trapList, doorTrapList, wallList);
+		
+		//public void changeLevel(String which){
+//		switch (which) {
+//		case "Down": case "DOWN":
+//			
+//		case "Up": case "UP":
+//			
+//			default:break;
+//		}
+	//}
 		
 		
 		//Generate wall for a test
@@ -138,6 +163,11 @@ public class RogueLed {
 				//Display Dart Traps
 				for (DartTrap trap : trapList){
 					csi.print(trap.xPos, trap.yPos, trap.symbol, trap.color);
+				}
+				
+				//Display Door Traps
+				for (DoorTrap down : doorTrapList){
+					csi.print(down.xPos, down.yPos, down.symbol, down.color);
 				}
 				
 				//Display Collectables
@@ -432,11 +462,18 @@ public class RogueLed {
 					}
 					
 					//Wins the game if warranted
+					//TEMPORARILY DISABLED FOR TESTING
+					//TODO RESTORE THIS!!!!!
 					if (gobList.isEmpty()){
 						csi.print(1, 1, "You've completed your mission and pacified the goblins.");
 						exit = true;
 					}
 					
+					for (DoorTrap down : doorTrapList){
+						down.descend(PC, this);
+//						level.genLevel(currentLevel, GM, actorList, forgeList, godsList, boulderList, gobList, junkList, trapList, doorTrapList, wallList);
+						down.checkVisibility(PC);
+					}
 					
 					for(Actor next : actorList){
 						next.run(PC);
@@ -466,6 +503,8 @@ public class RogueLed {
 					trap.checkVisibility(PC);
 					}
 					
+					
+					
 					for (Goblin gob : gobList){
 						//Goblin.run does a bunch of stuff. Check goblin class for more info.
 						gob.run(PC, wallList, boulderList, trapList, gobList);
@@ -474,15 +513,7 @@ public class RogueLed {
 						//Checks visibility
 						gob.checkVisibility(PC);
 						
-						//Should allow a goblin to go bezerk when its the last one left
-						//Currently this does not happen
-//						if (gobList.size() == 1) {
-//							gob.promote();
-							//PC.GM.setMessage("Realizing its the last one left alive, the goblin goes bezerk!");
-//						    PC.GM.setMessage("I still have " + gob.health + " hit points!");
-//							PC.GM.setMessage("Satz is at " + gob.xPos + "," + gob.yPos);
-//						}
-						
+//						gob.pacify();
 //						Goblin death triggers
 //						if (gob.dead)  {
 						
@@ -559,6 +590,29 @@ public class RogueLed {
 	public static ArrayList<Boulder> getBoulders(){
 		return boulderList;
 	}
+	
+	//Setter
+//	public void setLevel(int level){
+	//Just change the first number for alternate levels
+	//SETLEVEL
+//	level.genLevel(5, GM, actorList, forgeList, godsList, boulderList, gobList, junkList, trapList, wallList);
+	
+		
+//	}
+	
+	public void changeLevel(String which){
+	switch (which) {
+	case "Down": case "DOWN":
+		currentLevel -= 1;
+		
+		break;
+	case "Up": case "UP":
+		currentLevel += 1;
+		break;
+		default:break;
+	}
+}
+	
 	
 //	public int countGoblins(){
 		//Tally up goblins into a safe export

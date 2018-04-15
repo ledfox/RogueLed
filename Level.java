@@ -12,13 +12,19 @@ public class Level {
 	}
 	
 public void genLevel(int number, Announcer GM, ArrayList<Actor> actorList, ArrayList<Forge> forgeList, ArrayList<Altar> godsList, ArrayList<Boulder> boulderList, ArrayList<Goblin> gobList, 
-		ArrayList<Collectable> junkList, ArrayList<DartTrap> trapList, ArrayList<Wall> wallList){
+		ArrayList<Collectable> junkList, ArrayList<DartTrap> trapList, ArrayList<DoorTrap> doorTrapList, ArrayList<Wall> wallList){
 	
 	Random rand = new Random();
 	
 	
 	switch (number){
 	case 0:
+		//Should be empty - testing DoorTrap so temporarily putting some here.
+		for (int i = 0; i < 100; i++){
+			DoorTrap down = new DoorTrap(rand.nextInt(75) + 3, rand.nextInt(17) + 3);
+			doorTrapList.add(down);	
+		}
+		
 		break;
 	
 	case 1:
@@ -234,6 +240,16 @@ public void genLevel(ArrayList<Actor> actorList, ArrayList<DartTrap> trapList){
 		trapList.add(trap);	
 		}
 	}
+
+//public void changeLevel(String which){
+//	switch (which) {
+//	case "Down": case "DOWN":
+//		
+//	case "Up": case "UP":
+//		
+//		default:break;
+//	}
+//}
 
 //public void popBerry(junkList junk){
 //	//Generate a bunch of collectables all at once

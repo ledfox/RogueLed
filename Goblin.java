@@ -5,7 +5,7 @@ import java.util.Random;
 
 import net.slashie.libjcsi.CSIColor;
 
-public class Goblin extends Actor {
+public class Goblin extends Monster {
 
 	public int health = 5;
 	public int experience = 25;
@@ -17,12 +17,16 @@ public class Goblin extends Actor {
 
 	boolean dead = false;
 	boolean fleeing = false;
+	boolean hostile = true;
 	
 	Random rand = new Random();
 
 	//Determines goblin behavior
 	void decide(Player PC){
 		
+		//Decide to be passive
+		//Goblins never do this
+//		pacify();
 		
 		//DEATH
 		//Goblin decides if it is dead
@@ -136,14 +140,15 @@ public class Goblin extends Actor {
 	//Attack
 	//Note, should be able to move to the superclass Actor once I figure out how to make that work
 	public void attack(Player PC){
+		if (hostile = false){
 		int harm = this.power - PC.armor.quality;
-		if (harm <= 0){
-			PC.GM.setMessage("The " + this.name + " tries to hurt you, but the blow deflects off your armor!");
-		} else {
+			if (harm <= 0){
+				PC.GM.setMessage("The " + this.name + " tries to hurt you, but the blow deflects off your armor!");
+			} else {
 			PC.GM.setMessage("The " + this.name + " hits you!");
 			PC.damage(harm);
+			}
 		}
-		
 		
 	}
 	
@@ -170,6 +175,14 @@ public class Goblin extends Actor {
 		promotable = false;
 		}
 		
+	}
+	
+	//Hostility
+	//Goblins are crazy and always attack.
+	//Other races might not sometimes.
+	
+	public void pacify(){
+		hostile = false;
 	}
 	
 	

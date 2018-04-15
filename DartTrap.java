@@ -13,10 +13,17 @@ public class DartTrap extends Visible{
     
 
     
-    void checkTrigger(Goblin mob){
+    void checkTrigger(Monster monster){
     	
-    	if (mob.xPos == this.xPos && mob.yPos == this.yPos){
-    	mob.damage(1);    	
+    	if (monster.xPos == this.xPos && monster.yPos == this.yPos){
+    	monster.damage(1);    	
+    	}
+    }
+    
+void checkTrigger(Goblin goblin){
+    	
+    	if (goblin.xPos == this.xPos && goblin.yPos == this.yPos){
+    	goblin.damage(1);    	
     	}
     }
     
